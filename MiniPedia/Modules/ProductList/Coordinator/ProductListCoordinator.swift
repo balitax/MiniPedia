@@ -22,8 +22,27 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
         let viewModel               = ProductListViewModel()
         viewController.viewModel    = viewModel
         
+        viewModel.selectedProduct
+            .flatMap( { [unowned self] (product) in
+                return coordinateToProductDetail(with: product)
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        
         return Observable.never()
         
+    }
+    
+    private func coordinateToProductDetail(with productViewModel: ProductListCellViewModel) -> Observable<Void> {
+        //        let holidayDetailCoordinator = HolidayDetailCoordinator(rootViewController: rootViewController)
+        //        holidayDetailCoordinator.viewModel = holidayViewModel
+        print("LALALA ", productViewModel)
+        
+        let productListCoordinator = ProductListCoordinator(rootViewController: self.rootViewController)
+        
+        return coordinate(to: productListCoordinator)
+            .map { _ in () }
     }
     
 }

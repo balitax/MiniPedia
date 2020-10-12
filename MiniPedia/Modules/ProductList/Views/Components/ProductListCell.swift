@@ -28,18 +28,28 @@ class ProductListCell: UICollectionViewCell, Reusable {
         super.awakeFromNib()
         // Initialization code
     }
-    
-    override func prepareForReuse() {
-        self.productImage.image = nil
-        self.productLabel.text = nil
-        self.productPrice.text = nil
-    }
-    
+
     func bindData() {
         self.productLabel.text = viewModel.productName
         self.productPrice.text = viewModel.productPrice
         if let img_url = URL(string: viewModel.productImage) {
             self.productImage.kf.setImage(with: img_url)
+        }
+    }
+    
+    func customUI(_ index: Int, collectionView: UICollectionView) {
+        if collectionView.numberOfItems(inSection: 0) % 2 == 0 {
+            if index == collectionView.numberOfItems(inSection: 0) - 2 || index == collectionView.numberOfItems(inSection: 0) - 1 {
+                self.lineBottom.isHidden = false
+            } else {
+                self.lineBottom.isHidden = true
+            }
+        } else {
+            if index == collectionView.numberOfItems(inSection: 0) - 1 {
+                self.lineBottom.isHidden = false
+            } else {
+                self.lineBottom.isHidden = true
+            }
         }
     }
 

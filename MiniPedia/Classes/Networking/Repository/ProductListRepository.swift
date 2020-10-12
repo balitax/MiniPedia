@@ -10,7 +10,7 @@ import RxSwift
 
 struct ProductListRepository {
     
-    func getProductList(_ query: QueryProduct) -> Observable<Products> {
+    func getProductList(_ query: QueryProduct) -> Single<Products> {
         return APIClient.shared
             .requests(EndPoint.getProducts(query))
     }

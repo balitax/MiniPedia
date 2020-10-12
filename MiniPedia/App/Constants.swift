@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 struct Constants {
     //The API's base URL
@@ -29,6 +28,6 @@ enum ContentType: String {
 }
 
 enum RequestParams {
-    case body(_: Parameters)
-    case url(_: Parameters)
+    case body(_: [String: Any])
+    case url(_: [String: Any])
 }

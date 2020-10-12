@@ -6,21 +6,23 @@
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 
-import Alamofire
+import Foundation
 
 enum EndPoint: APIConfiguration {
     
+    // MARK: - Endpoint API
     case getProducts(_ query: QueryProduct)
     
-    // MARK: Path
-    var path: String {
+    // MARK: -- Path
+    internal var path: String {
         switch self {
         case .getProducts( _):
             return "product"
         }
     }
     
-    var baseURL: URL {
+    // MARK: -- BaseURL with Path Components
+    internal var baseURL: URL {
         switch self {
         case .getProducts( _):
             let url = URL(string: Constants.baseUrl)!
@@ -29,7 +31,8 @@ enum EndPoint: APIConfiguration {
         }
     }
     
-    var queryItems: [URLQueryItem]? {
+    // MARK: -- Query Items / Parameters
+    internal var queryItems: [URLQueryItem]? {
         switch self {
         case .getProducts( _):
             let query = components.queryItems
@@ -37,7 +40,8 @@ enum EndPoint: APIConfiguration {
         }
     }
     
-    var components: URLComponents {
+    // MARK: -- URL Components / Parameters
+    internal var components: URLComponents {
         switch self {
         case .getProducts( let query):
             
@@ -51,6 +55,7 @@ enum EndPoint: APIConfiguration {
         }
     }
     
+    // MARK: -- URL Request
     var urlRequest: URLRequest {
         switch self {
         case .getProducts( _):

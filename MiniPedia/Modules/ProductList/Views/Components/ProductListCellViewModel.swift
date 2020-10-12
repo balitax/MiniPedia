@@ -9,17 +9,17 @@
 import RxSwift
 
 struct ProductListCellViewModel {
+    
     let didClose = PublishSubject<Void>()
     
-    let productName: String
-    let productPrice: String
-    let productImage: String
+    var productName: String
+    var productPrice: String
+    var productImage: String
     
     init(product: DataProducts) {
         self.productName = product.name
         self.productPrice = product.price
         self.productImage = product.imageURI
     }
-    
     
 }

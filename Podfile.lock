@@ -13,14 +13,14 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
-  - SkeletonView (1.10.0)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Kingfisher
   - RxCocoa
   - RxDataSources
   - RxSwift
-  - SkeletonView
+  - SVProgressHUD
 
 SPEC REPOS:
   trunk:
@@ -30,7 +30,7 @@ SPEC REPOS:
     - RxDataSources
     - RxRelay
     - RxSwift
-    - SkeletonView
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
@@ -39,8 +39,8 @@ SPEC CHECKSUMS:
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  SkeletonView: 14fbe9702c7fb5c5f011b44ac3ae99fc73155726
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 34aa2b8099227d2e7a2c169d73680d1ff480860d
+PODFILE CHECKSUM: 845473411f29d3ceb44d5b1211df8d774c31133f
 
 COCOAPODS: 1.9.3

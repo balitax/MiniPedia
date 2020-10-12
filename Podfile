@@ -10,7 +10,7 @@ target 'MiniPedia' do
   pod 'RxCocoa'
   pod 'RxDataSources'
   
-  pod 'SkeletonView'
+  pod 'SVProgressHUD'
   pod 'Kingfisher'
 
   target 'MiniPediaTests' do

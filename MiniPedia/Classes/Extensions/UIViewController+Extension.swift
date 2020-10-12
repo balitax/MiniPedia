@@ -6,18 +6,38 @@
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 
-import PKHUD
+import UIKit
+import SVProgressHUD
+
+extension UITableView {
+    
+    func showSkeleton() {
+    }
+    
+    func removeSkeleton() {
+    }
+    
+}
+
+extension UICollectionView {
+    
+    func showSkeleton() {
+    }
+    
+    func removeSkeleton() {
+    }
+    
+}
+
 
 extension UIViewController {
-    func showProgress() {
-        HUD.show(.progress)
+    
+    func showLoading() {
+        SVProgressHUD.show()
     }
     
-    func hideProgress() {
-        HUD.hide()
+    func hideLoading() {
+        SVProgressHUD.dismiss()
     }
     
-    func showMessage(_ message: String) {
-        HUD.flash(.labeledError(title: nil, subtitle: message), delay: 1.5)
-    }
 }

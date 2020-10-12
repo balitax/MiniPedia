@@ -44,6 +44,8 @@
 		26A13A6A25340DB800A0CD0F /* ProductListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A13A6925340DB800A0CD0F /* ProductListCoordinator.swift */; };
 		26A13A7225340E3B00A0CD0F /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A13A7125340E3B00A0CD0F /* ProductListViewModel.swift */; };
 		26D0606D25346DE600D67C48 /* ProductListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0606C25346DE600D67C48 /* ProductListCellViewModel.swift */; };
+		26D060FF2534A2AC00D67C48 /* FAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D060FD2534A2AC00D67C48 /* FAView.swift */; };
+		26D061002534A2AC00D67C48 /* FAShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D060FE2534A2AC00D67C48 /* FAShimmerView.swift */; };
 		26E9909F253442AC00A5AD98 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E9909E253442AC00A5AD98 /* APIConfiguration.swift */; };
 		26E990A4253442C000A5AD98 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E990A3253442C000A5AD98 /* ApiError.swift */; };
 		5C9E162F9619675A0A65CE56 /* Pods_MiniPedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB443E392430910E3EBB405 /* Pods_MiniPedia.framework */; };
@@ -112,6 +114,8 @@
 		26A13A6925340DB800A0CD0F /* ProductListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCoordinator.swift; sourceTree = "<group>"; };
 		26A13A7125340E3B00A0CD0F /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		26D0606C25346DE600D67C48 /* ProductListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCellViewModel.swift; sourceTree = "<group>"; };
+		26D060FD2534A2AC00D67C48 /* FAView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAView.swift; sourceTree = "<group>"; };
+		26D060FE2534A2AC00D67C48 /* FAShimmerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAShimmerView.swift; sourceTree = "<group>"; };
 		26E9909E253442AC00A5AD98 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		26E990A3253442C000A5AD98 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		273899347C2C624699E56379 /* Pods-MiniPedia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPedia.debug.xcconfig"; path = "Target Support Files/Pods-MiniPedia/Pods-MiniPedia.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 		2653A383253410C600F9F28B /* UI+Custom */ = {
 			isa = PBXGroup;
 			children = (
+				26D060FC2534A29400D67C48 /* FAShimmer */,
 				2653A385253410C600F9F28B /* TagCellLayout */,
 				2653A38A253410C600F9F28B /* UICheckbox.swift */,
 				2653A38B253410C600F9F28B /* Range Slider */,
@@ -369,6 +374,15 @@
 				26A13A7125340E3B00A0CD0F /* ProductListViewModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		26D060FC2534A29400D67C48 /* FAShimmer */ = {
+			isa = PBXGroup;
+			children = (
+				26D060FE2534A2AC00D67C48 /* FAShimmerView.swift */,
+				26D060FD2534A2AC00D67C48 /* FAView.swift */,
+			);
+			path = FAShimmer;
 			sourceTree = "<group>";
 		};
 		CFE719E24D17DCCB6B23618A /* Frameworks */ = {
@@ -655,6 +669,8 @@
 				2653A3C7253412C800F9F28B /* UIViewController+Extension.swift in Sources */,
 				2653A3A1253410C700F9F28B /* UITableView+Extension.swift in Sources */,
 				265F9C882534097800A2FD47 /* AppDelegate.swift in Sources */,
+				26D061002534A2AC00D67C48 /* FAShimmerView.swift in Sources */,
+				26D060FF2534A2AC00D67C48 /* FAView.swift in Sources */,
 				2653A394253410C700F9F28B /* Reusable.swift in Sources */,
 				2653A392253410C700F9F28B /* Double+Extension.swift in Sources */,
 				2653A43325342E3A00F9F28B /* ProductListRepository.swift in Sources */,

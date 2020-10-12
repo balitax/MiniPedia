@@ -7,9 +7,6 @@
 //
 
 import RxSwift
-import RxAlamofire
-import Alamofire
-
 
 class APIClient {
     
@@ -17,22 +14,22 @@ class APIClient {
         APIClient()
     }()
     
-    func requests<T: Codable> (_ endPoint: EndPoint) -> Observable<T> {
+    func requests<T: Codable> (_ endPoint: EndPoint) -> Single<T> {
         
-        return Observable<T>.create { observer in
+        return Single<T>.create { single in
             
             let session = URLSession.shared
             
             let dataTask = session.dataTask(with: endPoint.urlRequest) { (data, response, error ) in
                 
                 guard let httpResponse = response as? HTTPURLResponse else {
-                    observer.onError(ApiError.internalServerError)
+                    single(.error(ApiError.internalServerError))
                     return
                 }
                 
                 if 200..<300 ~= httpResponse.statusCode {
                     guard let data = data else {
-                        observer.onError(ApiError.invalidData)
+                        single(.error(ApiError.invalidData))
                         return
                     }
                     
@@ -41,25 +38,24 @@ class APIClient {
                             T.self, from: data
                         )
                         
-                        observer.onNext(model)
-                        observer.onCompleted()
+                        single(.success(model))
                         
                     } catch let error {
-                        observer.onError(error)
+                        single(.error(error))
                         return
                     }
                 } else {
                     switch httpResponse.statusCode {
                     case 403:
-                        observer.onError(ApiError.forbidden)
+                        single(.error(ApiError.forbidden))
                     case 404:
-                        observer.onError(ApiError.notFound)
+                        single(.error(ApiError.notFound))
                     case 409:
-                        observer.onError(ApiError.conflict)
+                        single(.error(ApiError.conflict))
                     case 500:
-                        observer.onError(ApiError.internalServerError)
+                        single(.error(ApiError.internalServerError))
                     default:
-                        observer.onError(ApiError.internalServerError)
+                        single(.error(ApiError.internalServerError))
                     }
                 }
             }
