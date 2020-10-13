@@ -9,27 +9,6 @@
 import UIKit
 import SVProgressHUD
 
-extension UITableView {
-    
-    func showSkeleton() {
-    }
-    
-    func removeSkeleton() {
-    }
-    
-}
-
-extension UICollectionView {
-    
-    func showSkeleton() {
-    }
-    
-    func removeSkeleton() {
-    }
-    
-}
-
-
 extension UIViewController {
     
     func showLoading() {

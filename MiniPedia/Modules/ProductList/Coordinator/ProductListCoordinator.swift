@@ -35,13 +35,9 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
     }
     
     private func coordinateToProductDetail(with productViewModel: ProductListCellViewModel) -> Observable<Void> {
-        //        let holidayDetailCoordinator = HolidayDetailCoordinator(rootViewController: rootViewController)
-        //        holidayDetailCoordinator.viewModel = holidayViewModel
-        print("LALALA ", productViewModel)
-        
-        let productListCoordinator = ProductListCoordinator(rootViewController: self.rootViewController)
-        
-        return coordinate(to: productListCoordinator)
+        let productDetailCoordinator = ProductDetailCoordinator(rootViewController: rootViewController)
+        productDetailCoordinator.viewModel = productViewModel
+        return coordinate(to: productDetailCoordinator)
             .map { _ in () }
     }
     

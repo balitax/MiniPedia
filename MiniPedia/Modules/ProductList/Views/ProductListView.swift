@@ -18,16 +18,29 @@ enum ListStyle {
 
 class ProductListView: UIViewController {
     
+    init() {
+        super.init(nibName: "ProductListView", bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             self.setupCollectionView()
         }
     }
     
+    @IBOutlet weak var btnFilter: UIButton!
+    @IBOutlet weak var btnFilterMarginBottom: NSLayoutConstraint!
+    
     let disposeBag = DisposeBag()
     var viewModel: ProductListViewModel!
     var layout = GridCollectionViewLayout()
     var listStyle = ListStyle.column
+    lazy var refreshHandler = RefreshHandler(view: collectionView)
     
     lazy var dataSource: RxCollectionViewSectionedReloadDataSource<ProductSection> = {
         let dataSource = RxCollectionViewSectionedReloadDataSource<ProductSection>(configureCell: { (_, collectionView, indexPath, viewModel) -> UICollectionViewCell in
@@ -55,6 +68,7 @@ class ProductListView: UIViewController {
         self.layout.itemSpacing = 0
         self.layout.itemHeightRatio = 1.5/1
         self.collectionView.collectionViewLayout = self.layout
+        self.collectionView.rx.setDelegate(self).disposed(by: disposeBag)
         self.collectionView.reloadData()
     }
     
@@ -71,6 +85,9 @@ class ProductListView: UIViewController {
     }
     
     private func bindViewModel() {
+        
+        viewModel.getProductList()
+        
         viewModel.state
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { state in
@@ -84,12 +101,23 @@ class ProductListView: UIViewController {
                 }
             }).disposed(by: disposeBag)
         
-        viewModel.getProductList()
-        
         viewModel.products
+            .asObserver()
+            .catchErrorJustReturn([])
             .observeOn(MainScheduler.instance)
             .bind(to: collectionView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)
+        
+        viewModel.products
+            .asObserver()
+            .subscribe(onNext: {[unowned self] _ in
+                self.refreshHandler.end()
+            }, onError: { error in
+                self.refreshHandler.end()
+                let alert = ACAlertsView(position: .bottom, direction: .toRight, marginBottom: 120)
+                alert.delay = 5
+                alert.show(error.localizedDescription, style: .error)
+            }).disposed(by: disposeBag)
         
         collectionView.rx.itemSelected
             .observeOn(MainScheduler.instance)
@@ -101,6 +129,14 @@ class ProductListView: UIViewController {
             .observeOn(MainScheduler.instance)
             .bind(to: viewModel.selectedProduct)
             .disposed(by: disposeBag)
+        
+        refreshHandler.refresh
+            .startWith(())
+            .asObservable()
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.getProductList()
+            }).disposed(by: disposeBag)
+        
     }
     
     private func changeListStyle(_ style: ListStyle) {
@@ -118,6 +154,40 @@ class ProductListView: UIViewController {
             self.collectionView.reloadData()
         }, completion: nil)
         
+    }
+    
+}
+
+extension ProductListView: UICollectionViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        setPosition(scrollView)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        setPosition(scrollView)
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        setPosition(scrollView)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        setPosition(scrollView)
+    }
+    
+    func setPosition(_ scrollView: UIScrollView) {
+        if scrollView.isDragging || scrollView.isDecelerating {
+            self.btnFilterMarginBottom.constant = -100
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+        } else {
+            self.btnFilterMarginBottom.constant = 38
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
 }

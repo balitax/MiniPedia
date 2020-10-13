@@ -67,6 +67,26 @@ struct DataProducts: Codable {
     let badges: [Badge]
     let originalPrice, discountExpired, discountStart: String
     let discountPercentage, stock: Int
+    
+    var getStock: NSMutableAttributedString? {
+        var attributedString = NSMutableAttributedString()
+        if stock <= 10 {
+            attributedString = NSMutableAttributedString()
+                .normal("Stok ", fontSize: 12)
+                .bold("tersisa <\(stock), ", fontSize: 12)
+                .normal("beli segera!", fontSize: 12)
+        } else {
+            attributedString = NSMutableAttributedString()
+                .normal("Stok ", fontSize: 12)
+                .bold("tersisa \(stock), ", fontSize: 12)
+                .normal("ayo belanja sekarang!", fontSize: 12)
+        }
+        return attributedString
+    }
+    
+    var getCountSold: String? {
+        return "Terjual \(countSold)"
+    }
 
     enum CodingKeys: String, CodingKey {
         case id, name, uri

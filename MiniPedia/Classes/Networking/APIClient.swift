@@ -23,7 +23,7 @@ class APIClient {
             let dataTask = session.dataTask(with: endPoint.urlRequest) { (data, response, error ) in
                 
                 guard let httpResponse = response as? HTTPURLResponse else {
-                    single(.error(ApiError.internalServerError))
+                    single(.error(ApiError.noInternetConnection))
                     return
                 }
                 
@@ -55,7 +55,7 @@ class APIClient {
                     case 500:
                         single(.error(ApiError.internalServerError))
                     default:
-                        single(.error(ApiError.internalServerError))
+                        single(.error(ApiError.noInternetConnection))
                     }
                 }
             }

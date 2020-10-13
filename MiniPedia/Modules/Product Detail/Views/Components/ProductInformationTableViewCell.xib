@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="211" id="KGk-i7-Jjw" customClass="ProductInformationTableViewCell" customModule="MiniPedia" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="211"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="211"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Informasi produk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fa4-Sv-M1j">
+                        <rect key="frame" x="16" y="16" width="115" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FCH-c3-VUr" customClass="AutomaticDynamicTableView" customModule="MiniPedia" customModuleProvider="target">
+                        <rect key="frame" x="16" y="41" width="288" height="143"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </tableView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="FCH-c3-VUr" firstAttribute="leading" secondItem="fa4-Sv-M1j" secondAttribute="leading" id="2Wt-Zs-767"/>
+                    <constraint firstItem="FCH-c3-VUr" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="9dH-9A-iLj"/>
+                    <constraint firstItem="FCH-c3-VUr" firstAttribute="top" secondItem="fa4-Sv-M1j" secondAttribute="bottom" constant="8" id="ZMx-NE-Q70"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="FCH-c3-VUr" secondAttribute="bottom" constant="16" id="mdn-y4-vs4"/>
+                    <constraint firstItem="fa4-Sv-M1j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="sOZ-w6-o7X"/>
+                    <constraint firstItem="fa4-Sv-M1j" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="zwu-TU-t8T"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="infoTableView" destination="FCH-c3-VUr" id="saa-Ds-Qbq"/>
+            </connections>
+            <point key="canvasLocation" x="82.608695652173921" y="18.415178571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

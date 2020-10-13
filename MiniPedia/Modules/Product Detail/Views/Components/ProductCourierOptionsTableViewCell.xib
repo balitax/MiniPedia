@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="105" id="KGk-i7-Jjw" customClass="ProductCourierOptionsTableViewCell" customModule="MiniPedia" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="423" height="105"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="423" height="105"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kurir" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBJ-oz-kZu">
+                        <rect key="frame" x="16" y="16" width="33" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ongkos kirim mulai dari Rp21.000" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FuK-ll-B4L">
+                        <rect key="frame" x="16" y="37" width="212.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ke Jakarta Selatan" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yO8-ia-9dq">
+                        <rect key="frame" x="16" y="58" width="212.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right" translatesAutoresizingMaskIntoConstraints="NO" id="WwL-TK-3HH">
+                        <rect key="frame" x="386" y="42.5" width="21" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="828-C9-Jaw"/>
+                            <constraint firstAttribute="width" constant="21" id="QpX-Xh-9oa"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="WwL-TK-3HH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FuK-ll-B4L" secondAttribute="trailing" constant="16" id="3Ns-go-45h"/>
+                    <constraint firstItem="FuK-ll-B4L" firstAttribute="leading" secondItem="dBJ-oz-kZu" secondAttribute="leading" id="3Oe-fg-RBs"/>
+                    <constraint firstItem="WwL-TK-3HH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OVn-NY-DTG"/>
+                    <constraint firstItem="FuK-ll-B4L" firstAttribute="top" secondItem="dBJ-oz-kZu" secondAttribute="bottom" constant="4" id="QHC-i0-M5C"/>
+                    <constraint firstItem="yO8-ia-9dq" firstAttribute="trailing" secondItem="FuK-ll-B4L" secondAttribute="trailing" id="TSq-JG-htZ"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yO8-ia-9dq" secondAttribute="bottom" constant="16" id="WUY-To-1Bh"/>
+                    <constraint firstItem="yO8-ia-9dq" firstAttribute="leading" secondItem="FuK-ll-B4L" secondAttribute="leading" id="XVP-bc-uWZ"/>
+                    <constraint firstAttribute="trailing" secondItem="WwL-TK-3HH" secondAttribute="trailing" constant="16" id="ZG8-oZ-92Y"/>
+                    <constraint firstItem="dBJ-oz-kZu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="msD-Rf-kya"/>
+                    <constraint firstItem="dBJ-oz-kZu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="q7j-Nq-rSW"/>
+                    <constraint firstItem="yO8-ia-9dq" firstAttribute="top" secondItem="FuK-ll-B4L" secondAttribute="bottom" constant="4" id="qj0-NM-c2q"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="courierPrice" destination="FuK-ll-B4L" id="90Y-3O-d5Z"/>
+                <outlet property="destination" destination="yO8-ia-9dq" id="rSD-hn-VmW"/>
+            </connections>
+            <point key="canvasLocation" x="125.36231884057972" y="91.40625"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="right" width="21" height="20"/>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

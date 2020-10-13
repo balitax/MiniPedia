@@ -16,33 +16,6 @@ import UIKit
     @IBInspectable open var padding: CGFloat = CGFloat(15)
     
     /*
-     * Variable describes UICheckbox border width
-     */
-    @IBInspectable open var borderWidth: CGFloat = 2.0 {
-        didSet {
-            layer.borderWidth = borderWidth
-        }
-    }
-    
-    /*
-     * Variable stores UICheckbox border color
-     */
-    @IBInspectable open var borderColor: UIColor = UIColor.lightGray {
-        didSet {
-            layer.borderColor = borderColor.cgColor
-        }
-    }
-    
-    /*
-     * Variable stores UICheckbox border radius
-     */
-    @IBInspectable open var cornerRadius: CGFloat = 5.0 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-        }
-    }
-    
-    /*
      * Variable to store current UICheckbox select status
      */
     override open var isSelected: Bool {

@@ -59,6 +59,7 @@ class ProductListViewModel: BaseViewModel {
                 self.state.onNext(.finish)
             }, onError: { error in
                 self.state.onNext(.error)
+                self.products.onError(error)
             }).disposed(by: disposeBag)
     }
     

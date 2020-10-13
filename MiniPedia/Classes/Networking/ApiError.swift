@@ -14,4 +14,5 @@ enum ApiError: Error {
     case conflict               //Status code 409
     case internalServerError    //Status code 500
     case invalidData
+    case noInternetConnection
 }
