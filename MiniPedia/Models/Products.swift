@@ -7,10 +7,9 @@
 
 import Foundation
 
-
 // MARK: - Products
-struct Products: Codable, Identifiable {
-    var id = UUID()
+struct Products: Codable {
+    
     let status: Status
     let header: Header
     let data: [DataProducts]
@@ -27,6 +26,7 @@ struct Products: Codable, Identifiable {
 
 // MARK: - Category
 struct Category: Codable {
+    
     let data: [String: ProductValue]
     let selectedID: String
 
@@ -56,7 +56,7 @@ struct ProductValue: Codable {
 }
 
 // MARK: - DatumElement
-struct DataProducts: Codable {
+struct DataProducts: Codable, Identifiable {
     
     var id: Int?
     var name: String?

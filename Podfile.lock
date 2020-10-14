@@ -21,6 +21,7 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
+  - SkeletonView (1.10.0)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - RxDataSources
   - RxRealm
   - RxSwift
+  - SkeletonView
   - SVProgressHUD
 
 SPEC REPOS:
@@ -42,6 +44,7 @@ SPEC REPOS:
     - RxRealm
     - RxRelay
     - RxSwift
+    - SkeletonView
     - SVProgressHUD
 
 SPEC CHECKSUMS:
@@ -54,8 +57,9 @@ SPEC CHECKSUMS:
   RxRealm: 50e5fe5c1f22518205afbb313fbc5580d73bc586
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SkeletonView: 14fbe9702c7fb5c5f011b44ac3ae99fc73155726
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: dffc70f570e15f0208a77cb661e64c04f83272fe
+PODFILE CHECKSUM: 4a45f33e4118ab072932a373ad76ebb17fa7f6fb
 
 COCOAPODS: 1.9.3

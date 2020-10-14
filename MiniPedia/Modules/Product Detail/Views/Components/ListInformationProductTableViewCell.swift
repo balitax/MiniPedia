@@ -12,6 +12,7 @@ class ListInformationProductTableViewCell: UITableViewCell, Reusable {
     
     @IBOutlet weak var titleInfo: UILabel!
     @IBOutlet weak var descriptionInfo: UILabel!
+//    @IBOutlet weak var stackviewContainer: UIStackView!
     
     var info: InformationProductMock! {
         didSet {
@@ -41,6 +42,8 @@ class ListInformationProductTableViewCell: UITableViewCell, Reusable {
                 self.descriptionInfo.textColor = .systemGray
             }
         }
+        
+//        stackviewContainer.layoutIfNeeded()
         
     }
     

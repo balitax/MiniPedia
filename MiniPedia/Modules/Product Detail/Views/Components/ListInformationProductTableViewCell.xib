@@ -18,32 +18,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="KlB-7e-lMz">
-                        <rect key="frame" x="2" y="2" width="316" height="40"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Berat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOd-YS-VRq">
-                                <rect key="frame" x="0.0" y="0.0" width="35" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 Gram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTW-u8-yhJ">
-                                <rect key="frame" x="251" y="0.0" width="65" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" systemColor="systemGrayColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Berat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOd-YS-VRq">
+                        <rect key="frame" x="2" y="2" width="35" height="40"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 Gram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTW-u8-yhJ">
+                        <rect key="frame" x="253" y="2" width="65" height="40"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="KlB-7e-lMz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="UKF-e8-8TT"/>
-                    <constraint firstItem="KlB-7e-lMz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="fAA-SM-bvc"/>
-                    <constraint firstAttribute="trailing" secondItem="KlB-7e-lMz" secondAttribute="trailing" constant="2" id="jaF-qw-BOi"/>
-                    <constraint firstAttribute="bottom" secondItem="KlB-7e-lMz" secondAttribute="bottom" constant="2" id="k1s-VF-3mM"/>
+                    <constraint firstAttribute="trailing" secondItem="uTW-u8-yhJ" secondAttribute="trailing" constant="2" id="3Bm-X3-CcA"/>
+                    <constraint firstAttribute="bottom" secondItem="hOd-YS-VRq" secondAttribute="bottom" constant="2" id="Apt-ID-Awy"/>
+                    <constraint firstItem="hOd-YS-VRq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="Dcn-Df-dae"/>
+                    <constraint firstAttribute="bottom" secondItem="uTW-u8-yhJ" secondAttribute="bottom" constant="2" id="MPw-Wr-sJy"/>
+                    <constraint firstItem="uTW-u8-yhJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="Xcy-af-t9z"/>
+                    <constraint firstItem="hOd-YS-VRq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="zxp-cs-bbj"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="descriptionInfo" destination="uTW-u8-yhJ" id="n7F-n9-d2D"/>
                 <outlet property="titleInfo" destination="hOd-YS-VRq" id="L7A-nc-dIm"/>

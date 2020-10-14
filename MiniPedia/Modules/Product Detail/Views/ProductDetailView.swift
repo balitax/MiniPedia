@@ -11,8 +11,13 @@ import RxSwift
 import RxDataSources
 import RxCocoa
 import RealmSwift
+import SkeletonView
 
 class ProductDetailView: UIViewController {
+    
+    deinit {
+        print("##\(self)")
+    }
     
     init() {
         super.init(nibName: "ProductDetailView", bundle: nil)
@@ -23,14 +28,10 @@ class ProductDetailView: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            setupTableView()
-        }
-    }
-    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationBar: SecondaryNavigationBar!
     @IBOutlet weak var btnAddKeranjang: UIButton!
+    @IBOutlet weak var btnOpenToko: UIButton!
     
     let disposeBag = DisposeBag()
     var viewModel: ProductDetailViewModel!
@@ -38,35 +39,27 @@ class ProductDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupTableView()
         bindRx()
     }
     
     private func bindRx() {
         
-        self.tableView.rx
-            .contentOffset
-            .subscribe { [unowned self] in
-                let getY = $0.element?.y ?? 0
-                let offset = CGFloat(round(10*getY / 280)/10)
-                self.navigationBar.setOffset = offset
-            }.disposed(by: disposeBag)
+        self.navigationBar.title = self.viewModel.product?.name ?? ""
         
-        DispatchQueue.main.async {
-            self.navigationBar.title = self.viewModel.product?.name ?? ""
-            self.tableView.reloadData()
-            self.tableView.layoutIfNeeded()
-        }
+        viewModel.bindProduct()
         
-//        Observable.changeset(from: ShoppingCart.shared.products)
-//            .subscribe(onNext: { [unowned self] _, changes in
-//                print("PERUBAHAN ", changes)
-//            }).disposed(by: disposeBag)
-//
-//        Observable.collection(from: ShoppingCart.shared.products)
-//            .map { results in "carts: \(results.count)" }
-//            .subscribe { event in
-//                print("EVENT ", event.element)
-//            }.disposed(by: disposeBag)
+        viewModel
+            .state
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] state in
+                switch state {
+                case .finish:
+                    self.onDataReloaded()
+                default:
+                    self.view.showAnimatedSkeleton()
+                }
+            }).disposed(by: disposeBag)
         
         ShoppingCart.shared
             .shoppingState
@@ -82,18 +75,43 @@ class ProductDetailView: UIViewController {
                 }
             }).disposed(by: disposeBag)
         
-
+        
         btnAddKeranjang.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
                 ShoppingCart.shared.addToCart(viewModel.product)
             }).disposed(by: disposeBag)
         
+        btnOpenToko.rx
+            .tap
+            .subscribe(onNext: { [unowned self] _ in
+                guard let merchantURL = try! viewModel.products.value()?.shop?.uri else { return }
+                guard let url = URL(string: merchantURL) else { return }
+                UIApplication.shared.open(url)
+            }).disposed(by: disposeBag)
+
+        
         navigationBar.leftButtonObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] pip in
                 self.navigationController?.popViewController(animated: true)
             }).disposed(by: disposeBag)
+        
+    }
+    
+    private func onDataReloaded() {
+        self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+        self.tableView.performBatchUpdates {
+            self.tableView.layoutIfNeeded()
+        }
+        
+        self.tableView.rx
+            .contentOffset
+            .subscribe { [unowned self] in
+                let getY = $0.element?.y ?? 0
+                let offset = CGFloat(round(10*getY / 280)/10)
+                self.navigationBar.setOffset = offset
+            }.disposed(by: self.disposeBag)
         
     }
     
@@ -113,21 +131,18 @@ class ProductDetailView: UIViewController {
         frame.size.height = .leastNormalMagnitude
         self.tableView.tableHeaderView = UIView(frame: frame)
         self.tableView.tableFooterView = UIView(frame: frame)
-        
-        self.tableView.reloadData()
     }
-    
     
 }
 
 extension ProductDetailView: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : 1
+        section == 0 ? 1 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

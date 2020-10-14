@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import SkeletonView
 
 class ProductInformationTableViewCell: UITableViewCell, Reusable {
-    
     
     @IBOutlet weak var infoTableView: AutomaticDynamicTableView! {
         didSet {
@@ -45,6 +45,7 @@ class ProductInformationTableViewCell: UITableViewCell, Reusable {
         self.infoTableView.backgroundColor = .white
         self.infoTableView.separatorStyle = .none
         self.infoTableView.isScrollEnabled = false
+        self.infoTableView.reloadData()
     }
     
 }
@@ -68,6 +69,22 @@ extension ProductInformationTableViewCell: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 35
+    }
+    
+}
+
+extension ProductInformationTableViewCell: SkeletonTableViewDataSource {
+    
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        1
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        4
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return ListInformationProductTableViewCell.reuseIdentifier
     }
     
 }

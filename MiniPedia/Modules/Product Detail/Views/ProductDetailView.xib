@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailView" customModule="MiniPedia" customModuleProvider="target">
             <connections>
                 <outlet property="btnAddKeranjang" destination="QvP-k2-tnS" id="HOw-a9-Xtt"/>
+                <outlet property="btnOpenToko" destination="gc1-Kb-huK" id="tNy-PW-4Jr"/>
                 <outlet property="navigationBar" destination="GPa-kr-W3h" id="TIB-fo-dMT"/>
                 <outlet property="tableView" destination="uF8-iP-TkH" id="jEe-qb-Seq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -25,6 +26,9 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uF8-iP-TkH">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPa-kr-W3h" userLabel="navigationview" customClass="SecondaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -42,6 +46,9 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="gx0-FC-2Tu"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="azW-ty-5mj">
                             <rect key="frame" x="16" y="16" width="382" height="48"/>
@@ -66,6 +73,7 @@
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                             <color key="value" red="0.01176470588" green="0.67450980390000004" blue="0.054901960780000002" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </button>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvP-k2-tnS">
@@ -82,9 +90,13 @@
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="8"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </button>
                             </subviews>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -104,6 +116,7 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                             <real key="value" value="0.0"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
@@ -121,6 +134,9 @@
                 <constraint firstItem="uF8-iP-TkH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eRv-88-3BR"/>
                 <constraint firstItem="uF8-iP-TkH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="z3N-8D-NVX"/>
             </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="82.608695652173921" y="95.758928571428569"/>
         </view>
     </objects>

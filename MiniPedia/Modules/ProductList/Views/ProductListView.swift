@@ -89,7 +89,7 @@ class ProductListView: UIViewController {
         
         viewModel.state
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { state in
+            .subscribe(onNext: { [unowned self] state in
                 switch state {
                 case .loading:
                     self.showLoading()
@@ -120,7 +120,7 @@ class ProductListView: UIViewController {
         
         collectionView.rx.itemSelected
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { indexPath in
+            .subscribe(onNext: { [unowned self] indexPath in
                 self.collectionView.deselectItem(at: indexPath, animated: true)
             }).disposed(by: disposeBag)
         

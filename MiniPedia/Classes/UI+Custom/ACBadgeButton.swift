@@ -53,15 +53,15 @@ class ACBadgeButton: UIButton {
         let labelText = CATextLayer()
         labelText.contentsScale = UIScreen.main.scale
         labelText.string = self.badgeValue.uppercased()
-        labelText.fontSize = 9.0
-        labelText.font = UIFont.systemFont(ofSize: 9)
+        labelText.fontSize = 12.0
+        labelText.font = UIFont.systemFont(ofSize: 12)
         labelText.alignmentMode = CATextLayerAlignmentMode.center
         labelText.foregroundColor = UIColor.white.cgColor
         let labelString = self.badgeValue.uppercased() as String?
-        let labelFont = UIFont.systemFont(ofSize: 9) as UIFont?
+        let labelFont = UIFont.systemFont(ofSize: 12) as UIFont?
         let attributes = [NSAttributedString.Key.font : labelFont]
         let w = self.frame.size.width
-        let h = CGFloat(10.0)  // fixed height
+        let h = CGFloat(14.0)  // fixed height
         let labelWidth = min(w * 0.8, 10.0)    // Starting point
         let rect = labelString!.boundingRect(with: CGSize(width: labelWidth, height: h), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes as [NSAttributedString.Key : Any], context: nil)
         let textWidth = round(rect.width * UIScreen.main.scale)
@@ -71,7 +71,7 @@ class ACBadgeButton: UIButton {
         let shapeLayer = CAShapeLayer()
         shapeLayer.contentsScale = UIScreen.main.scale
         let frame : CGRect = labelText.frame
-        let cornerRadius = CGFloat(5.0)
+        let cornerRadius = CGFloat(7.0)
         let borderInset = CGFloat(-1.0)
         let aPath = UIBezierPath(roundedRect: frame.insetBy(dx: borderInset, dy: borderInset), cornerRadius: cornerRadius)
         

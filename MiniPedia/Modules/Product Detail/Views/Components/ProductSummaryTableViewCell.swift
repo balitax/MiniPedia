@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
 
 class ProductSummaryTableViewCell: UITableViewCell, Reusable {
     
@@ -24,14 +25,20 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
     @IBOutlet weak var soldCount: UILabel!
     @IBOutlet weak var merchantName: UILabel!
     
+    @IBOutlet weak var stackViewContainer: UIStackView!
+    
     
     let gradient: CAGradientLayer = CAGradientLayer()
     
     var viewModel: ProductDetailViewModel! {
         didSet {
-            self.configureCell()
+            DispatchQueue.main.async {
+                self.configureCell()
+            }
         }
     }
+    
+    private var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +50,20 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
         gradient.colors = colors
         gradient.locations = [0.0, 0.6]
         productImage.layer.insertSublayer(gradient, at: 0)
+        
+        self.productTitle.setLineHeight(lineHeight: 4.0)
+        
+        _ = [
+            self.productTitle,
+            self.productPrice,
+            self.productStock,
+            self.ratingCount,
+            self.reviewsCount,
+            self.soldCount,
+            self.merchantName
+        ].map {
+            $0?.text = "                    "
+        }
     }
     
     override func layoutSubviews() {
@@ -57,19 +78,28 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
     }
     
     private func configureCell() {
-        self.productTitle.text = viewModel.product?.name
-        self.productPrice.text = viewModel.product?.price
         
-        if let imgProduct = viewModel.product?.imageURI700, let imgURL = URL(string: imgProduct) {
-            self.productImage.kf.setImage(with: imgURL)
-        }
+        _ = viewModel.products
+            .asObservable()
+            .subscribe(onNext: {[ weak self ] product in
+                guard let self = self else { return }
+                guard let data = product else { return }
+                
+                self.productTitle.text = data.name
+                self.productPrice.text = data.price
+                if let imgProduct = data.imageURI700, let imgURL = URL(string: imgProduct) {
+                    self.productImage.kf.setImage(with: imgURL)
+                }
+                
+                self.productStock.attributedText = data.getStock
+                self.ratingCount.text = "(\(data.rating ?? 0))"
+                self.reviewsCount.text = "\(data.countReview ?? 0)"
+                self.soldCount.text = data.getCountSold
+                self.merchantName.text = data.shop?.name
+                
+            }).disposed(by: disposeBag)
         
-        self.productStock.attributedText = viewModel.product?.getStock
-        self.ratingCount.text = "(\(viewModel.product?.rating ?? 0))"
-        self.reviewsCount.text = "\(viewModel.product?.countReview ?? 0)"
-        self.soldCount.text = viewModel.product?.getCountSold
-        self.merchantName.text = viewModel.product?.shop?.name
-        
+        self.stackViewContainer.layoutIfNeeded()
     }
     
 }

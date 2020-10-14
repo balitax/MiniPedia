@@ -13,7 +13,24 @@ import RxDataSources
 
 class ProductDetailViewModel: BaseViewModel {
     
+    deinit {
+        print("##\(self)")
+    }
+    
     var product: DataProducts?
+    var products = BehaviorSubject<DataProducts?> (
+        value: nil
+    )
+    
+    func bindProduct() {
+        DispatchQueue.main.async {
+            self.state.onNext(.loading)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.products.onNext(self.product)
+                self.state.onNext(.finish)
+            }
+        }
+    }
     
     
 }

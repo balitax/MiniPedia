@@ -63,4 +63,15 @@ class ShoppingCart {
         }
     }
     
+    //        Observable.changeset(from: ShoppingCart.shared.products)
+    //            .subscribe(onNext: { [unowned self] _, changes in
+    //                print("PERUBAHAN ", changes)
+    //            }).disposed(by: disposeBag)
+    //
+    //        Observable.collection(from: ShoppingCart.shared.products)
+    //            .map { results in "carts: \(results.count)" }
+    //            .subscribe { event in
+    //                print("EVENT ", event.element)
+    //            }.disposed(by: disposeBag)
+    
 }
