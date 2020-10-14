@@ -19,6 +19,7 @@ class AppCoordinator: ReactiveCoordinator<Void> {
     override func start() -> Observable<Void> {
         
         let navigationController = UINavigationController(rootViewController: ProductListView())
+        navigationController.navigationBar.isHidden = true
         
         let productListCoordinator = ProductListCoordinator(rootViewController: navigationController.viewControllers[0])
         

@@ -77,6 +77,8 @@
 		26F8253D2536D93A0016E3C7 /* Realm+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8253C2536D93A0016E3C7 /* Realm+Transaction.swift */; };
 		26F825542536DF560016E3C7 /* SecondaryNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F825532536DF560016E3C7 /* SecondaryNavigationBar.swift */; };
 		26F8255C2536DF600016E3C7 /* SecondaryNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F8255B2536DF600016E3C7 /* SecondaryNavigationBar.xib */; };
+		26F825612536E8D50016E3C7 /* PrimaryNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F825602536E8D50016E3C7 /* PrimaryNavigationBar.swift */; };
+		26F825672536E8E30016E3C7 /* PrimaryNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F825662536E8E30016E3C7 /* PrimaryNavigationBar.xib */; };
 		5C9E162F9619675A0A65CE56 /* Pods_MiniPedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB443E392430910E3EBB405 /* Pods_MiniPedia.framework */; };
 		B5C0B384FD6505704AD45493 /* Pods_MiniPediaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D3CDD3DC85F42CC941A49C /* Pods_MiniPediaTests.framework */; };
 /* End PBXBuildFile section */
@@ -176,6 +178,8 @@
 		26F8253C2536D93A0016E3C7 /* Realm+Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Transaction.swift"; sourceTree = "<group>"; };
 		26F825532536DF560016E3C7 /* SecondaryNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryNavigationBar.swift; sourceTree = "<group>"; };
 		26F8255B2536DF600016E3C7 /* SecondaryNavigationBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryNavigationBar.xib; sourceTree = "<group>"; };
+		26F825602536E8D50016E3C7 /* PrimaryNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryNavigationBar.swift; sourceTree = "<group>"; };
+		26F825662536E8E30016E3C7 /* PrimaryNavigationBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrimaryNavigationBar.xib; sourceTree = "<group>"; };
 		273899347C2C624699E56379 /* Pods-MiniPedia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPedia.debug.xcconfig"; path = "Target Support Files/Pods-MiniPedia/Pods-MiniPedia.debug.xcconfig"; sourceTree = "<group>"; };
 		67D3CDD3DC85F42CC941A49C /* Pods_MiniPediaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniPediaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CB443E392430910E3EBB405 /* Pods_MiniPedia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniPedia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -522,6 +526,7 @@
 		26F825512536DF130016E3C7 /* Custom NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
+				26F825652536E8DA0016E3C7 /* PrimaryNavigationBar */,
 				26F825522536DF210016E3C7 /* DetailNavbar */,
 			);
 			path = "Custom NavigationBar";
@@ -534,6 +539,15 @@
 				26F8255B2536DF600016E3C7 /* SecondaryNavigationBar.xib */,
 			);
 			path = DetailNavbar;
+			sourceTree = "<group>";
+		};
+		26F825652536E8DA0016E3C7 /* PrimaryNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				26F825602536E8D50016E3C7 /* PrimaryNavigationBar.swift */,
+				26F825662536E8E30016E3C7 /* PrimaryNavigationBar.xib */,
+			);
+			path = PrimaryNavigationBar;
 			sourceTree = "<group>";
 		};
 		CFE719E24D17DCCB6B23618A /* Frameworks */ = {
@@ -670,6 +684,7 @@
 			files = (
 				2616489C2535AE7100048425 /* DescriptionProductTableViewCell.xib in Resources */,
 				265F9C942534097D00A2FD47 /* LaunchScreen.storyboard in Resources */,
+				26F825672536E8E30016E3C7 /* PrimaryNavigationBar.xib in Resources */,
 				2616487D2535A25D00048425 /* ProductCourierOptionsTableViewCell.xib in Resources */,
 				261648842535A5B600048425 /* ProductInformationTableViewCell.xib in Resources */,
 				2616488B2535A66200048425 /* ListInformationProductTableViewCell.xib in Resources */,
@@ -842,6 +857,7 @@
 				261648132535724100048425 /* ProductDetailView.swift in Sources */,
 				261648902535A76100048425 /* InformationProductMock.swift in Sources */,
 				2616487C2535A25D00048425 /* ProductCourierOptionsTableViewCell.swift in Sources */,
+				26F825612536E8D50016E3C7 /* PrimaryNavigationBar.swift in Sources */,
 				2653A392253410C700F9F28B /* Double+Extension.swift in Sources */,
 				2653A43325342E3A00F9F28B /* ProductListRepository.swift in Sources */,
 				261648952535AB6500048425 /* AutomaticDynamicTableView.swift in Sources */,

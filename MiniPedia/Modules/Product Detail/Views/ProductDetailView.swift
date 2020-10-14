@@ -29,60 +29,54 @@ class ProductDetailView: UIViewController {
         }
     }
     
-    @IBOutlet weak var navigationView: UIView!
-    @IBOutlet weak var navigationBg: UIView!
-    @IBOutlet weak var navTitle: UILabel!
+    @IBOutlet weak var navigationBar: SecondaryNavigationBar!
     @IBOutlet weak var btnAddKeranjang: UIButton!
     
     let disposeBag = DisposeBag()
     var viewModel: ProductDetailViewModel!
+    lazy var alert = ACAlertsView(position: .bottom, direction: .toRight, marginBottom: 150)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bindRx()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
     private func bindRx() {
         
         self.tableView.rx
             .contentOffset
-            .subscribe {
+            .subscribe { [unowned self] in
                 let getY = $0.element?.y ?? 0
                 let offset = CGFloat(round(10*getY / 280)/10)
-                self.navigationAnimated(offset: offset, enable: offset >= 1.0)
+                self.navigationBar.setOffset = offset
             }.disposed(by: disposeBag)
         
         DispatchQueue.main.async {
-            self.navTitle.text = self.viewModel.product?.name
+            self.navigationBar.title = self.viewModel.product?.name ?? ""
             self.tableView.reloadData()
             self.tableView.layoutIfNeeded()
         }
         
-        Observable.changeset(from: ShoppingCart.shared.products)
-            .subscribe(onNext: { [unowned self] _, changes in
-                print("PERUBAHAN ", changes)
-            }).disposed(by: disposeBag)
-        
-        Observable.collection(from: ShoppingCart.shared.products)
-            .map { results in "carts: \(results.count)" }
-            .subscribe { event in
-                print("EVENT ", event.element)
-            }.disposed(by: disposeBag)
+//        Observable.changeset(from: ShoppingCart.shared.products)
+//            .subscribe(onNext: { [unowned self] _, changes in
+//                print("PERUBAHAN ", changes)
+//            }).disposed(by: disposeBag)
+//
+//        Observable.collection(from: ShoppingCart.shared.products)
+//            .map { results in "carts: \(results.count)" }
+//            .subscribe { event in
+//                print("EVENT ", event.element)
+//            }.disposed(by: disposeBag)
         
         ShoppingCart.shared
             .shoppingState
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { state in
+            .subscribe(onNext: { [unowned self] state in
                 switch state {
                 case .done:
-                    print("DONE SAVED")
+                    self.alert.show("Success! \nThis product has been add to your cart", style: .success)
                 case .error:
-                    print("ERROR SAVED")
+                    self.alert.show("Error! \nThere is an error while add this product to cart", style: .error)
                 default:
                     return
                 }
@@ -93,6 +87,12 @@ class ProductDetailView: UIViewController {
             .tap
             .subscribe(onNext: { [unowned self] _ in
                 ShoppingCart.shared.addToCart(viewModel.product)
+            }).disposed(by: disposeBag)
+        
+        navigationBar.leftButtonObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] pip in
+                self.navigationController?.popViewController(animated: true)
             }).disposed(by: disposeBag)
         
     }
@@ -160,19 +160,6 @@ extension ProductDetailView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         section == 0 ? 0 : 1
     }
-    
-    private func navigationAnimated(offset: CGFloat, enable: Bool) {
-        self.navigationBg.alpha = offset
-        self.navTitle.alpha = offset
-        if enable {
-            self.navTitle.alpha = 1
-            self.navigationBg.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor(hexString: "#ededed"), radius: 2, opacity: 0.8)
-        } else {
-            self.navTitle.alpha = 0
-            self.navigationBg.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
-        }
-    }
-    
     
 }
 

@@ -58,12 +58,6 @@ class ProductListView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        self.navigationItem.rightBarButtonItem = btnListStyle
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.navigationBar.isHidden = false
     }
     
     private func setupCollectionView() {

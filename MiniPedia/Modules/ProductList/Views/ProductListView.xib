@@ -22,8 +22,15 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amC-YX-KDz" customClass="PrimaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="xf2-gk-wej"/>
+                    </constraints>
+                </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9x2-Io-wP7">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="100" width="414" height="796"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LO1-6B-Rah">
                         <size key="itemSize" width="128" height="128"/>
@@ -51,11 +58,14 @@
                 <constraint firstAttribute="bottom" secondItem="9x2-Io-wP7" secondAttribute="bottom" id="Byd-4b-ztS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9x2-Io-wP7" secondAttribute="trailing" id="EQ2-KI-wTI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="LTT-TM-Y5h" secondAttribute="bottom" constant="38" id="KLS-Sr-mQI"/>
+                <constraint firstItem="amC-YX-KDz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QJ3-3a-Kuh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LTT-TM-Y5h" secondAttribute="trailing" constant="24" id="QdE-oz-ggQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="amC-YX-KDz" secondAttribute="trailing" id="UTF-Cn-Ot2"/>
+                <constraint firstItem="amC-YX-KDz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="auK-Gc-WE2"/>
                 <constraint firstItem="LTT-TM-Y5h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="nnd-g4-BgC"/>
-                <constraint firstItem="9x2-Io-wP7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wWY-NK-SgA"/>
+                <constraint firstItem="9x2-Io-wP7" firstAttribute="top" secondItem="amC-YX-KDz" secondAttribute="bottom" id="txt-9S-8Na"/>
             </constraints>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <nil key="simulatedTopBarMetrics"/>
             <point key="canvasLocation" x="82.608695652173921" y="95.758928571428569"/>
         </view>
     </objects>
