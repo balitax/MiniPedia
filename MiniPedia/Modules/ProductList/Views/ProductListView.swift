@@ -61,6 +61,11 @@ class ProductListView: UIViewController {
         self.navigationItem.rightBarButtonItem = btnListStyle
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     private func setupCollectionView() {
         self.navigationItem.title = "My Product"
         self.collectionView.registerReusableCell(ProductListCell.self)

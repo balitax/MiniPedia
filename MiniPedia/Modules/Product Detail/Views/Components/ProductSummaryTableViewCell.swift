@@ -25,20 +25,34 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
     @IBOutlet weak var merchantName: UILabel!
     
     
+    let gradient: CAGradientLayer = CAGradientLayer()
+    
     var viewModel: ProductDetailViewModel! {
         didSet {
             self.configureCell()
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        let colors = [
+            UIColor.darkGray.cgColor,
+            UIColor.clear.cgColor]
+        gradient.frame = bounds
+        gradient.colors = colors
+        gradient.locations = [0.0, 0.6]
+        productImage.layer.insertSublayer(gradient, at: 0)
     }
-
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradient.frame = bounds
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -54,7 +68,7 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
         self.ratingCount.text = "(\(viewModel.product?.rating ?? 0))"
         self.reviewsCount.text = "\(viewModel.product?.countReview ?? 0)"
         self.soldCount.text = viewModel.product?.getCountSold
-        self.merchantName.text = viewModel.product?.shop.name
+        self.merchantName.text = viewModel.product?.shop?.name
         
     }
     

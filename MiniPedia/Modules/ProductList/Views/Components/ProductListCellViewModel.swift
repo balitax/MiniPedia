@@ -18,9 +18,9 @@ struct ProductListCellViewModel {
     var productImage: String
     
     init(product: DataProducts) {
-        self.productName = product.name
-        self.productPrice = product.price
-        self.productImage = product.imageURI
+        self.productName = product.name ?? ""
+        self.productPrice = product.price ?? ""
+        self.productImage = product.imageURI ?? ""
         self.product = product
     }
     

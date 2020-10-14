@@ -24,7 +24,7 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
         
         viewModel.selectedProduct
             .flatMap( { [unowned self] (product) in
-                return coordinateToProductDetail(with: product)
+                return self.coordinateToProductDetail(with: product)
             })
             .subscribe()
             .disposed(by: disposeBag)

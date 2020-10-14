@@ -9,6 +9,7 @@ target 'MiniPedia' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxDataSources'
+  pod 'RxRealm'
   
   pod 'SVProgressHUD'
   pod 'Kingfisher'

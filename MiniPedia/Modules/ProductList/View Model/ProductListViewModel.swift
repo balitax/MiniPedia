@@ -42,7 +42,7 @@ class ProductListViewModel: BaseViewModel {
                 
                 var sections: [ProductSection] = []
                 product.data.forEach({ category in
-                    let header = "\(category.id)"
+                    let header = "\(category.id ?? 0)"
                     
                     if let index = sections.firstIndex(where: { $0.header == header }) {
                         sections[index].items.append(contentsOf: product.data.compactMap { ProductListCellViewModel(product: $0) })

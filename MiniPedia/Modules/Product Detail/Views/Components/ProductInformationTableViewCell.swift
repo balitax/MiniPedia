@@ -37,7 +37,7 @@ class ProductInformationTableViewCell: UITableViewCell, Reusable {
     
     private func setupTableView() {
         self.infoTableView.registerReusableCell(ListInformationProductTableViewCell.self)
-        self.infoTableView.estimatedRowHeight = 44
+        self.infoTableView.estimatedRowHeight = 35
         self.infoTableView.rowHeight = UITableView.automaticDimension
         self.infoTableView.tableFooterView = UIView()
         self.infoTableView.delegate = self
@@ -67,7 +67,7 @@ extension ProductInformationTableViewCell: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return 35
     }
     
 }

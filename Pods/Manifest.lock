@@ -3,12 +3,20 @@ PODS:
   - Kingfisher (5.15.0):
     - Kingfisher/Core (= 5.15.0)
   - Kingfisher/Core (5.15.0)
+  - Realm (5.3.6):
+    - Realm/Headers (= 5.3.6)
+  - Realm/Headers (5.3.6)
+  - RealmSwift (5.3.6):
+    - Realm (= 5.3.6)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
   - RxDataSources (4.0.1):
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRealm (3.1.0):
+    - RealmSwift (~> 5.2)
     - RxSwift (~> 5.0)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
@@ -19,6 +27,7 @@ DEPENDENCIES:
   - Kingfisher
   - RxCocoa
   - RxDataSources
+  - RxRealm
   - RxSwift
   - SVProgressHUD
 
@@ -26,8 +35,11 @@ SPEC REPOS:
   trunk:
     - Differentiator
     - Kingfisher
+    - Realm
+    - RealmSwift
     - RxCocoa
     - RxDataSources
+    - RxRealm
     - RxRelay
     - RxSwift
     - SVProgressHUD
@@ -35,12 +47,15 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Kingfisher: 1acb67597a520c2d0310677e66d6e0af455ef757
+  Realm: cd400dd7e5b5bb5c8ae9842eecd73792369e6ec0
+  RealmSwift: 99a16dbdee5d6dfb3d91d56088a9f8c15c0871d1
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRealm: 50e5fe5c1f22518205afbb313fbc5580d73bc586
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 845473411f29d3ceb44d5b1211df8d774c31133f
+PODFILE CHECKSUM: dffc70f570e15f0208a77cb661e64c04f83272fe
 
 COCOAPODS: 1.9.3

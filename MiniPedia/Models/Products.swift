@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 // MARK: - Products
 struct Products: Codable, Identifiable {
     var id = UUID()
@@ -37,11 +38,12 @@ struct Category: Codable {
 
 // MARK: - DatumValue
 struct ProductValue: Codable {
-    let id: Int
-    let name, totalData: String
-    let parentID: Int
-    let childID: [Int]?
-    let level: Int
+    
+    var id: Int
+    var name, totalData: String
+    var parentID: Int
+    var childID: [Int]?
+    var level: Int
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -50,42 +52,44 @@ struct ProductValue: Codable {
         case childID = "child_id"
         case level
     }
+    
 }
 
 // MARK: - DatumElement
 struct DataProducts: Codable {
-    let id: Int
-    let name: String
-    let uri: String
-    let imageURI, imageURI700: String
-    let price, priceRange, categoryBreadcrumb: String
-    let shop: Shop
-    let wholesalePrice: [WholesalePrice]?
-    let condition, preorder, departmentID, rating: Int
-    let isFeatured, countReview, countTalk, countSold: Int
-    let labels: [Label]?
-    let badges: [Badge]
-    let originalPrice, discountExpired, discountStart: String
-    let discountPercentage, stock: Int
+    
+    var id: Int?
+    var name: String?
+    var uri: String?
+    var imageURI, imageURI700: String?
+    var price, priceRange, categoryBreadcrumb: String?
+    var shop: Shop?
+    var condition, preorder, departmentID, rating: Int?
+    var isFeatured, countReview, countTalk, countSold: Int?
+    var originalPrice, discountExpired, discountStart: String?
+    var discountPercentage, stock: Int?
+    
+    init() {}
     
     var getStock: NSMutableAttributedString? {
         var attributedString = NSMutableAttributedString()
-        if stock <= 10 {
+        let onStock = stock ?? 0
+        if onStock <= 10 {
             attributedString = NSMutableAttributedString()
                 .normal("Stok ", fontSize: 12)
-                .bold("tersisa <\(stock), ", fontSize: 12)
+                .bold("tersisa <\(onStock), ", fontSize: 12)
                 .normal("beli segera!", fontSize: 12)
         } else {
             attributedString = NSMutableAttributedString()
                 .normal("Stok ", fontSize: 12)
-                .bold("tersisa \(stock), ", fontSize: 12)
+                .bold("tersisa \(onStock), ", fontSize: 12)
                 .normal("ayo belanja sekarang!", fontSize: 12)
         }
         return attributedString
     }
     
     var getCountSold: String? {
-        return "Terjual \(countSold)"
+        return "Terjual \(countSold ?? 0)"
     }
 
     enum CodingKeys: String, CodingKey {
@@ -96,7 +100,6 @@ struct DataProducts: Codable {
         case priceRange = "price_range"
         case categoryBreadcrumb = "category_breadcrumb"
         case shop
-        case wholesalePrice = "wholesale_price"
         case condition, preorder
         case departmentID = "department_id"
         case rating
@@ -104,37 +107,26 @@ struct DataProducts: Codable {
         case countReview = "count_review"
         case countTalk = "count_talk"
         case countSold = "count_sold"
-        case labels
-        case badges
         case originalPrice = "original_price"
         case discountExpired = "discount_expired"
         case discountStart = "discount_start"
         case discountPercentage = "discount_percentage"
         case stock
     }
-}
 
-// MARK: - Badge
-struct Badge: Codable {
-    let title: String
-    let imageURL: String
-    let show: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case title
-        case imageURL = "image_url"
-        case show
+    static func primaryKey() -> String? {
+        return "uuid"
     }
+    
+    
 }
 
-//enum BadgeTitle: String, Codable {
-//    case powerBadge = "Power Badge"
-//}
-
-// MARK: - Label
-struct Label: Codable {
-    let title: String
-    let color: Color
+extension DataProducts: Equatable {
+    
+    static func == (lhs: DataProducts, rhs: DataProducts) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
 }
 
 enum Color: String, Codable {
@@ -148,15 +140,21 @@ enum LabelTitle: String, Codable {
 }
 
 // MARK: - Shop
-struct Shop: Codable {
-    let id: Int
-    let name: String
-    let uri: String
-    let isGold: Int
-    let location: String
-    let reputationImageURI, shopLucky: String
-    let city: String
-    let isPowerBadge: Bool
+class Shop: NSObject, Codable {
+    
+    required override init() {
+        
+    }
+    
+    let uuid = UUID().uuidString
+    var id: Int?
+    var name: String?
+    var uri: String?
+    var isGold: Int?
+    var location: String?
+    var reputationImageURI, shopLucky: String?
+    var city: String?
+    var isPowerBadge: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id, name, uri
@@ -167,17 +165,9 @@ struct Shop: Codable {
         case city
         case isPowerBadge = "is_power_badge"
     }
-}
-
-// MARK: - WholesalePrice
-struct WholesalePrice: Codable {
-    let countMin, countMax: Int
-    let price: String
-
-    enum CodingKeys: String, CodingKey {
-        case countMin = "count_min"
-        case countMax = "count_max"
-        case price
+    
+    static func primaryKey() -> String? {
+        return "uuid"
     }
 }
 
