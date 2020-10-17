@@ -8,49 +8,15 @@
 import Foundation
 
 // MARK: - Products
-struct Products: Codable {
+struct Products: Codable, Identifiable {
     
+    var id: String = UUID().uuidString
     let status: Status
-    let header: Header
     let data: [DataProducts]
-    let category: Category
     
     enum CodingKeys: String, CodingKey {
         case status = "status"
-        case header = "header"
         case data = "data"
-        case category = "category"
-    }
-    
-}
-
-// MARK: - Category
-struct Category: Codable {
-    
-    let data: [String: ProductValue]
-    let selectedID: String
-
-    enum CodingKeys: String, CodingKey {
-        case data
-        case selectedID = "selected_id"
-    }
-}
-
-// MARK: - DatumValue
-struct ProductValue: Codable {
-    
-    var id: Int
-    var name, totalData: String
-    var parentID: Int
-    var childID: [Int]?
-    var level: Int
-
-    enum CodingKeys: String, CodingKey {
-        case id, name
-        case totalData = "total_data"
-        case parentID = "parent_id"
-        case childID = "child_id"
-        case level
     }
     
 }
@@ -62,14 +28,11 @@ struct DataProducts: Codable, Identifiable {
     var name: String?
     var uri: String?
     var imageURI, imageURI700: String?
-    var price, priceRange, categoryBreadcrumb: String?
+    var price: String?
     var shop: Shop?
-    var condition, preorder, departmentID, rating: Int?
-    var isFeatured, countReview, countTalk, countSold: Int?
-    var originalPrice, discountExpired, discountStart: String?
+    var rating: Int?
+    var countReview, countSold: Int?
     var discountPercentage, stock: Int?
-    
-    init() {}
     
     var getStock: NSMutableAttributedString? {
         var attributedString = NSMutableAttributedString()
@@ -97,20 +60,10 @@ struct DataProducts: Codable, Identifiable {
         case imageURI = "image_uri"
         case imageURI700 = "image_uri_700"
         case price
-        case priceRange = "price_range"
-        case categoryBreadcrumb = "category_breadcrumb"
         case shop
-        case condition, preorder
-        case departmentID = "department_id"
         case rating
-        case isFeatured = "is_featured"
         case countReview = "count_review"
-        case countTalk = "count_talk"
         case countSold = "count_sold"
-        case originalPrice = "original_price"
-        case discountExpired = "discount_expired"
-        case discountStart = "discount_start"
-        case discountPercentage = "discount_percentage"
         case stock
     }
 
@@ -129,60 +82,19 @@ extension DataProducts: Equatable {
     
 }
 
-enum Color: String, Codable {
-    case ffffff = "#ffffff"
-    case the42B549 = "#42b549"
-}
-
-enum LabelTitle: String, Codable {
-    case gratisOngkir = "Gratis Ongkir"
-    case grosir = "Grosir"
-}
-
 // MARK: - Shop
-class Shop: NSObject, Codable {
-    
-    required override init() {
-        
-    }
+struct Shop: Codable {
     
     let uuid = UUID().uuidString
     var id: Int?
     var name: String?
     var uri: String?
-    var isGold: Int?
     var location: String?
-    var reputationImageURI, shopLucky: String?
-    var city: String?
-    var isPowerBadge: Bool?
-
+    
     enum CodingKeys: String, CodingKey {
-        case id, name, uri
-        case isGold = "is_gold"
-        case location
-        case reputationImageURI = "reputation_image_uri"
-        case shopLucky = "shop_lucky"
-        case city
-        case isPowerBadge = "is_power_badge"
+        case id, name, uri, location
     }
     
-    static func primaryKey() -> String? {
-        return "uuid"
-    }
-}
-
-// MARK: - Header
-struct Header: Codable {
-    let totalData, totalDataNoCategory: Int
-    let additionalParams: String
-    let processTime: Double
-
-    enum CodingKeys: String, CodingKey {
-        case totalData = "total_data"
-        case totalDataNoCategory = "total_data_no_category"
-        case additionalParams = "additional_params"
-        case processTime = "process_time"
-    }
 }
 
 // MARK: - Status

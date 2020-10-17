@@ -45,8 +45,6 @@ class ProductDetailView: UIViewController {
     
     private func bindRx() {
         
-        self.navigationBar.title = self.viewModel.product?.name ?? ""
-        
         viewModel.bindProduct()
         
         viewModel
@@ -61,8 +59,13 @@ class ProductDetailView: UIViewController {
                 }
             }).disposed(by: disposeBag)
         
-        ShoppingCart.shared
-            .shoppingState
+        viewModel.products
+            .asObserver()
+            .subscribe(onNext: { [unowned self] product in
+                self.navigationBar.title = product?.name ?? ""
+            }).disposed(by: disposeBag)
+        
+        viewModel.cartState
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] state in
                 switch state {
@@ -79,17 +82,17 @@ class ProductDetailView: UIViewController {
         btnAddKeranjang.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                ShoppingCart.shared.addToCart(viewModel.product)
+                self.viewModel.addToCart()
             }).disposed(by: disposeBag)
         
         btnOpenToko.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                guard let merchantURL = try! viewModel.products.value()?.shop?.uri else { return }
+                guard let merchantURL = try! viewModel.products.value()?.uri else { return }
                 guard let url = URL(string: merchantURL) else { return }
                 UIApplication.shared.open(url)
             }).disposed(by: disposeBag)
-
+        
         
         navigationBar.leftButtonObservable
             .observeOn(MainScheduler.instance)

@@ -10,7 +10,6 @@ import RxSwift
 
 struct ProductListCellViewModel {
     
-    let didClose = PublishSubject<Void>()
     var product: DataProducts?
     
     var productName: String

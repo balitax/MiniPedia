@@ -86,11 +86,16 @@ final class SecondaryNavigationBar: UIView {
     }
     
     private func setupUI() {
+        
         Observable.collection(from: ShoppingCart.shared.products)
-            .map { results in "\(results.count)" }
-            .subscribe { badge in
-                self.cartButton.badgeValue = badge
-            }
+            .asObservable()
+            .subscribe(onNext: { [unowned self] badge in
+                if (badge.count != 0) {
+                    self.cartButton.badgeValue = "\(badge.count)"
+                } else {
+                    self.cartButton.badgeValue = ""
+                }
+            })
             .disposed(by: disposeBag)
         
         leftButton.rx

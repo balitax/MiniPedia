@@ -21,15 +21,14 @@ class ProductDetailCoordinator: ReactiveCoordinator<Void> {
     
         let viewController          = ProductDetailView()
         let detailViewModel         = ProductDetailViewModel()
-        detailViewModel.product     = viewModel.product
+        
+        detailViewModel.products.onNext(viewModel.product)
         viewController.viewModel    = detailViewModel
         
         rootViewController.navigationController?
             .pushViewController(viewController, animated: true)
         
-        let didClose = viewModel.didClose
-        
-        return didClose.take(1)
+        return Observable.never()
         
     }
     

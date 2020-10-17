@@ -3,13 +3,14 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrimaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="uUo-pS-aLm" id="uFT-Ta-09J"/>
                 <outlet property="cartButton" destination="TUY-Fx-wTh" id="4YN-4Y-qGD"/>
                 <outlet property="navigationView" destination="7jx-jD-TLh" id="Yvx-hJ-HWs"/>
                 <outlet property="primaryContainerView" destination="KXB-8B-GGJ" id="wDw-ld-sJW"/>
@@ -29,36 +30,42 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXB-8B-GGJ" userLabel="primaryNav">
                             <rect key="frame" x="0.0" y="51" width="488" height="49"/>
                             <subviews>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUo-pS-aLm">
+                                    <rect key="frame" x="16" y="14.5" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="bno-qD-mAZ"/>
+                                        <constraint firstAttribute="width" constant="20" id="f3D-hy-j5W"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="arrow"/>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MINIPEDIA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BR4-2e-tkQ" userLabel="title">
-                                    <rect key="frame" x="48" y="12.5" width="392" height="24"/>
+                                    <rect key="frame" x="52" y="12.5" width="384" height="24"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Xw6-U9-eTE" userLabel="rightItems">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUY-Fx-wTh" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
                                     <rect key="frame" x="444" y="14.5" width="20" height="20"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUY-Fx-wTh" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="eGW-5W-siZ"/>
-                                                <constraint firstAttribute="height" constant="20" id="lVJ-W5-IbF"/>
-                                            </constraints>
-                                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" image="cart"/>
-                                        </button>
-                                    </subviews>
-                                </stackView>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="eGW-5W-siZ"/>
+                                        <constraint firstAttribute="height" constant="20" id="lVJ-W5-IbF"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="cart"/>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="BR4-2e-tkQ" firstAttribute="centerY" secondItem="KXB-8B-GGJ" secondAttribute="centerY" id="3ld-e1-pvJ"/>
-                                <constraint firstItem="Xw6-U9-eTE" firstAttribute="centerY" secondItem="KXB-8B-GGJ" secondAttribute="centerY" id="453-ja-y9V"/>
-                                <constraint firstAttribute="trailing" secondItem="BR4-2e-tkQ" secondAttribute="trailing" constant="48" id="4bP-vP-AXr"/>
-                                <constraint firstItem="BR4-2e-tkQ" firstAttribute="leading" secondItem="KXB-8B-GGJ" secondAttribute="leading" constant="48" id="C52-VV-Cct"/>
-                                <constraint firstAttribute="trailing" secondItem="Xw6-U9-eTE" secondAttribute="trailing" constant="24" id="Y1p-Sz-x3h"/>
+                                <constraint firstItem="TUY-Fx-wTh" firstAttribute="centerY" secondItem="KXB-8B-GGJ" secondAttribute="centerY" id="7eM-iD-aKW"/>
+                                <constraint firstItem="BR4-2e-tkQ" firstAttribute="centerX" secondItem="KXB-8B-GGJ" secondAttribute="centerX" id="OTi-3T-XHp"/>
+                                <constraint firstItem="BR4-2e-tkQ" firstAttribute="leading" secondItem="uUo-pS-aLm" secondAttribute="trailing" constant="16" id="UZZ-DK-ntp"/>
+                                <constraint firstAttribute="trailing" secondItem="TUY-Fx-wTh" secondAttribute="trailing" constant="24" id="ca2-Tx-8J0"/>
+                                <constraint firstItem="uUo-pS-aLm" firstAttribute="leading" secondItem="KXB-8B-GGJ" secondAttribute="leading" constant="16" id="eDl-ma-wqj"/>
+                                <constraint firstItem="TUY-Fx-wTh" firstAttribute="leading" relation="lessThanOrEqual" secondItem="BR4-2e-tkQ" secondAttribute="trailing" constant="16" id="ia4-OU-3Eu"/>
                                 <constraint firstAttribute="height" constant="49" id="n83-Cs-SGe"/>
-                                <constraint firstItem="BR4-2e-tkQ" firstAttribute="centerX" secondItem="KXB-8B-GGJ" secondAttribute="centerX" id="zDs-Mn-3Pr"/>
+                                <constraint firstItem="uUo-pS-aLm" firstAttribute="centerY" secondItem="KXB-8B-GGJ" secondAttribute="centerY" id="tkS-Ox-aOJ"/>
                             </constraints>
                         </view>
                         <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJe-lw-3R7" userLabel="containerNav">
@@ -90,6 +97,7 @@
         </view>
     </objects>
     <resources>
+        <image name="arrow" width="20" height="21"/>
         <image name="cart" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

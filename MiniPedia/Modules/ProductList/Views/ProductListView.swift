@@ -27,14 +27,14 @@ class ProductListView: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @IBOutlet weak var collectionView: UICollectionView! {
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var navigationBar: PrimaryNavigationBar! {
         didSet {
-            self.setupCollectionView()
+            navigationBar.title = "MINIPEDIA"
+            navigationBar.enableRightButton = true
+            navigationBar.enableLeftButton = false
         }
     }
-    
-    @IBOutlet weak var btnFilter: UIButton!
-    @IBOutlet weak var btnFilterMarginBottom: NSLayoutConstraint!
     
     let disposeBag = DisposeBag()
     var viewModel: ProductListViewModel!
@@ -52,11 +52,9 @@ class ProductListView: UIViewController {
         return dataSource
     }()
     
-    lazy var btnListStyle = UIBarButtonItem(image: UIImage(systemName: "rectangle.grid.1x2.fill"), style: .done, target: self, action: #selector(self.didChangeListStyle(_:)))
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
         bindViewModel()
     }
     
@@ -67,20 +65,7 @@ class ProductListView: UIViewController {
         self.layout.itemSpacing = 0
         self.layout.itemHeightRatio = 1.5/1
         self.collectionView.collectionViewLayout = self.layout
-        self.collectionView.rx.setDelegate(self).disposed(by: disposeBag)
         self.collectionView.reloadData()
-    }
-    
-    @objc
-    func didChangeListStyle(_ sender: UIBarButtonItem) {
-        if listStyle == .list {
-            btnListStyle.image = UIImage(systemName: "rectangle.grid.1x2.fill")
-            listStyle = .column
-        } else {
-            btnListStyle.image = UIImage(systemName: "rectangle.grid.2x2.fill")
-            listStyle = .list
-        }
-        self.changeListStyle(listStyle)
     }
     
     private func bindViewModel() {
@@ -129,64 +114,19 @@ class ProductListView: UIViewController {
             .bind(to: viewModel.selectedProduct)
             .disposed(by: disposeBag)
         
-        refreshHandler.refresh
-            .startWith(())
-            .asObservable()
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.getProductList()
+//        refreshHandler.refresh
+//            .startWith(())
+//            .asObservable()
+//            .subscribe(onNext: { [unowned self] in
+//                self.viewModel.getProductList()
+//            }).disposed(by: disposeBag)
+        
+        navigationBar.cartButtonObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] pip in
+                viewModel.cartButtonDidTap.onNext(())
             }).disposed(by: disposeBag)
         
-    }
-    
-    private func changeListStyle(_ style: ListStyle) {
-        if style == .list {
-            layout.itemsPerRow = 1
-            layout.itemSpacing = 0
-            layout.itemHeightRatio = 1/1.4
-        } else {
-            layout.itemsPerRow = 2
-            layout.itemSpacing = 0
-            layout.itemHeightRatio = 1.5/1
-        }
-        
-        self.collectionView.performBatchUpdates ({
-            self.collectionView.reloadData()
-        }, completion: nil)
-        
-    }
-    
-}
-
-extension ProductListView: UICollectionViewDelegate {
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        setPosition(scrollView)
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        setPosition(scrollView)
-    }
-    
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        setPosition(scrollView)
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        setPosition(scrollView)
-    }
-    
-    func setPosition(_ scrollView: UIScrollView) {
-        if scrollView.isDragging || scrollView.isDecelerating {
-            self.btnFilterMarginBottom.constant = -100
-            UIView.animate(withDuration: 0.5) {
-                self.view.layoutIfNeeded()
-            }
-        } else {
-            self.btnFilterMarginBottom.constant = 38
-            UIView.animate(withDuration: 0.5) {
-                self.view.layoutIfNeeded()
-            }
-        }
     }
     
 }

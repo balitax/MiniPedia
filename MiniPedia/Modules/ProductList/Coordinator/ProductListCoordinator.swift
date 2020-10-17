@@ -29,6 +29,13 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
             .subscribe()
             .disposed(by: disposeBag)
         
+        viewModel.cartButtonDidTap
+            .flatMapLatest({ [unowned self] _ in
+                return self.coordinateToCart()
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
         
         return Observable.never()
         
@@ -38,6 +45,12 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
         let productDetailCoordinator = ProductDetailCoordinator(rootViewController: rootViewController)
         productDetailCoordinator.viewModel = productViewModel
         return coordinate(to: productDetailCoordinator)
+            .map { _ in () }
+    }
+    
+    private func coordinateToCart() -> Observable<Void> {
+        let cartCoordinator = CartCoordinator(rootViewController: rootViewController)
+        return coordinate(to: cartCoordinator)
             .map { _ in () }
     }
     

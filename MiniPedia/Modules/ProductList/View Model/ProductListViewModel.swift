@@ -28,6 +28,7 @@ class ProductListViewModel: BaseViewModel {
     let repository = ProductListRepository()
     var queryProduct = QueryProduct(query: "baju")
     let selectedProduct = PublishSubject<ProductListCellViewModel>()
+    let cartButtonDidTap = PublishSubject<Void>()
     
     //MARK: - ViewModel DataSource
     var products = BehaviorSubject<[ProductSection]> (
