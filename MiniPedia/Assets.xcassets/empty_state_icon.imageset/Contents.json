@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_check_3x.png",
+      "filename" : "empty_state_icon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "empty_state_icon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "empty_state_icon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -7,8 +7,32 @@
 
 import Foundation
 import UIKit
+import RealmSwift
+import RxRealm
+
 
 public extension UITableView {
+    
+    internal func setEmptyView(stateType: EmptyStateType, delegate: EmptyStateViewDelegate) {
+        let emptyView = EmptyStateView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
+        emptyView.delegate = delegate
+        emptyView.stateType = stateType
+        self.backgroundView = emptyView
+        self.separatorStyle = .none
+    }
+    
+    func restore() {
+        self.backgroundView = nil
+        self.separatorStyle = .singleLine
+    }
+    
+    func applyChangeset(_ changes: RealmChangeset) {
+        beginUpdates()
+        deleteRows(at: changes.deleted.map { IndexPath(row: $0, section: 0) }, with: .fade)
+        insertRows(at: changes.inserted.map { IndexPath(row: $0, section: 0) }, with: .fade)
+        reloadRows(at: changes.updated.map { IndexPath(row: $0, section: 0) }, with: .fade)
+        endUpdates()
+    }
     
     func dequeueReusableCell<T: Reusable>(indexPath: IndexPath) -> T {
         return self.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as! T
@@ -56,6 +80,16 @@ public extension UICollectionView {
     
     func dequeueReusableCell<T: UICollectionViewCell>(indexPath: IndexPath) -> T where T: Reusable {
         return self.dequeueReusableCell(withReuseIdentifier: T.reuseIdentifier, for: indexPath) as! T
+    }
+    
+    internal func setEmptyView(stateType: EmptyStateType) {
+        let emptyView = EmptyStateView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
+        emptyView.stateType = stateType
+        self.backgroundView = emptyView
+    }
+    
+    func restore() {
+        self.backgroundView = nil
     }
     
 }

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		13DB883920485EF16CE17960 /* Pods_MiniPedia_MiniPediaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCFE4C6BF4A956AEED0366E1 /* Pods_MiniPedia_MiniPediaUITests.framework */; };
 		26121D742539B79B00207D23 /* Databaseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26121D732539B79B00207D23 /* Databaseable.swift */; };
+		26121D9D253B0C8500207D23 /* PopupConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26121D9B253B0C8500207D23 /* PopupConfirmationView.swift */; };
+		26121D9E253B0C8500207D23 /* PopupConfirmationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26121D9C253B0C8500207D23 /* PopupConfirmationView.xib */; };
+		26121DA8253B48DC00207D23 /* PopupConfirmationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26121DA7253B48DC00207D23 /* PopupConfirmationCoordinator.swift */; };
+		26121DC0253B558400207D23 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26121DBF253B558400207D23 /* EmptyStateView.swift */; };
+		26121DC8253B558D00207D23 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26121DC7253B558D00207D23 /* EmptyStateView.xib */; };
 		261647F2253569DD00048425 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 261647F1253569DD00048425 /* Media.xcassets */; };
 		261647FD25356A2D00048425 /* ACAlerts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261647F925356A2D00048425 /* ACAlerts+Extensions.swift */; };
 		261647FE25356A2D00048425 /* ACAlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261647FA25356A2D00048425 /* ACAlertsView.swift */; };
@@ -116,6 +121,11 @@
 		0A5C6A142D776AA263597C44 /* Pods-MiniPedia-MiniPediaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPedia-MiniPediaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MiniPedia-MiniPediaUITests/Pods-MiniPedia-MiniPediaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		0B444BDC9086A9C6CCC03E52 /* Pods-MiniPediaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPediaTests.debug.xcconfig"; path = "Target Support Files/Pods-MiniPediaTests/Pods-MiniPediaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		26121D732539B79B00207D23 /* Databaseable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Databaseable.swift; sourceTree = "<group>"; };
+		26121D9B253B0C8500207D23 /* PopupConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupConfirmationView.swift; sourceTree = "<group>"; };
+		26121D9C253B0C8500207D23 /* PopupConfirmationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupConfirmationView.xib; sourceTree = "<group>"; };
+		26121DA7253B48DC00207D23 /* PopupConfirmationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupConfirmationCoordinator.swift; sourceTree = "<group>"; };
+		26121DBF253B558400207D23 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		26121DC7253B558D00207D23 /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
 		261647F1253569DD00048425 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		261647F925356A2D00048425 /* ACAlerts+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ACAlerts+Extensions.swift"; sourceTree = "<group>"; };
 		261647FA25356A2D00048425 /* ACAlertsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACAlertsView.swift; sourceTree = "<group>"; };
@@ -243,6 +253,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26121D98253B0C4D00207D23 /* ReusableUI */ = {
+			isa = PBXGroup;
+			children = (
+				26121DBE253B556E00207D23 /* EmptyState */,
+				26121D99253B0C6600207D23 /* PopupConfirmation */,
+			);
+			path = ReusableUI;
+			sourceTree = "<group>";
+		};
+		26121D99253B0C6600207D23 /* PopupConfirmation */ = {
+			isa = PBXGroup;
+			children = (
+				26121DA6253B48CA00207D23 /* Coordinator */,
+				26121D9A253B0C7000207D23 /* View */,
+			);
+			path = PopupConfirmation;
+			sourceTree = "<group>";
+		};
+		26121D9A253B0C7000207D23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				26121D9B253B0C8500207D23 /* PopupConfirmationView.swift */,
+				26121D9C253B0C8500207D23 /* PopupConfirmationView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		26121DA6253B48CA00207D23 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				26121DA7253B48DC00207D23 /* PopupConfirmationCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		26121DBE253B556E00207D23 /* EmptyState */ = {
+			isa = PBXGroup;
+			children = (
+				26121DBF253B558400207D23 /* EmptyStateView.swift */,
+				26121DC7253B558D00207D23 /* EmptyStateView.xib */,
+			);
+			path = EmptyState;
+			sourceTree = "<group>";
+		};
 		261647E5253569BF00048425 /* ACAlertViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,6 +602,7 @@
 		26A13A5925340D3A00A0CD0F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				26121D98253B0C4D00207D23 /* ReusableUI */,
 				268204B32538962800E3E542 /* Cart */,
 				2616480C2535720300048425 /* Product Detail */,
 				26A13A5B25340D4E00A0CD0F /* ProductList */,
@@ -784,6 +839,7 @@
 				26F825672536E8E30016E3C7 /* PrimaryNavigationBar.xib in Resources */,
 				2616487D2535A25D00048425 /* ProductCourierOptionsTableViewCell.xib in Resources */,
 				261648842535A5B600048425 /* ProductInformationTableViewCell.xib in Resources */,
+				26121D9E253B0C8500207D23 /* PopupConfirmationView.xib in Resources */,
 				268204D52538ADC000E3E542 /* CartItemByMerchantsCell.xib in Resources */,
 				2616488B2535A66200048425 /* ListInformationProductTableViewCell.xib in Resources */,
 				2653A3AD253410F600F9F28B /* ProductListCell.xib in Resources */,
@@ -795,6 +851,7 @@
 				268204EA2538B60E00E3E542 /* CartItemsListOfMerchantsTableViewCell.xib in Resources */,
 				2616480025356A2D00048425 /* ACAlertsView.xib in Resources */,
 				261648142535724100048425 /* ProductDetailView.xib in Resources */,
+				26121DC8253B558D00207D23 /* EmptyStateView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -922,6 +979,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26121DA8253B48DC00207D23 /* PopupConfirmationCoordinator.swift in Sources */,
 				2653A3D02534132B00F9F28B /* EndPoints.swift in Sources */,
 				2653A39B253410C700F9F28B /* UICheckbox.swift in Sources */,
 				26D0606D25346DE600D67C48 /* ProductListCellViewModel.swift in Sources */,
@@ -939,6 +997,7 @@
 				2616483725359C6800048425 /* UIView+Extension.swift in Sources */,
 				2653A398253410C700F9F28B /* TagCellLayout.swift in Sources */,
 				2653A3A0253410C700F9F28B /* GridCollectionViewLayout.swift in Sources */,
+				26121DC0253B558400207D23 /* EmptyStateView.swift in Sources */,
 				2653A39E253410C700F9F28B /* Extensions.swift in Sources */,
 				261647FD25356A2D00048425 /* ACAlerts+Extensions.swift in Sources */,
 				26A13A5525340CD900A0CD0F /* AppCoordinator.swift in Sources */,
@@ -960,6 +1019,7 @@
 				261648132535724100048425 /* ProductDetailView.swift in Sources */,
 				261648902535A76100048425 /* InformationProductMock.swift in Sources */,
 				2616487C2535A25D00048425 /* ProductCourierOptionsTableViewCell.swift in Sources */,
+				26121D9D253B0C8500207D23 /* PopupConfirmationView.swift in Sources */,
 				26F825612536E8D50016E3C7 /* PrimaryNavigationBar.swift in Sources */,
 				2653A392253410C700F9F28B /* Double+Extension.swift in Sources */,
 				268204B92538966300E3E542 /* CartView.swift in Sources */,

@@ -13,6 +13,7 @@ import RxSwift
 protocol CartItemsListOfMerchantsDelegate: class {
     func didRemoveCart(rows: Int)
     func didUpdateQuantity(rows: Int, qty: Int)
+    func didSelectProduct(rows: Int, isSelected: Bool)
 }
 
 class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
@@ -39,11 +40,16 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
     }
     
     var rows: Int = 0
-    
     private var disposeBag = DisposeBag()
-    private var isItemSelected = false
     weak var delegate: CartItemsListOfMerchantsDelegate?
-    private var quantity: Int = 1 {
+    
+    lazy private var isItemSelected = false {
+        didSet {
+            self.btnCheckListItemCart.isCheckboxTapped(self.isItemSelected)
+        }
+    }
+    
+    lazy private var quantity: Int = 1 {
         didSet {
             if quantity == cart.stock  {
                 self.btnAddQuantityItem.disabledButton()
@@ -71,6 +77,7 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
             .subscribe(onNext: { [unowned self] _ in
                 self.isItemSelected.toggle()
                 self.btnCheckListItemCart.isCheckboxTapped(self.isItemSelected)
+                self.delegate?.didSelectProduct(rows: self.rows, isSelected: self.isItemSelected)
             }).disposed(by: disposeBag)
         
         self.btnAddQuantityItem.rx
@@ -132,7 +139,9 @@ extension CartItemsListOfMerchantsTableViewCell {
         }
         self.productStock.attributedText = cart.getStock
         self.textfieldQuantityItem.text = "\(cart.quantity)"
+        
         self.quantity = cart.quantity
+        self.isItemSelected = cart.productSelected
         
     }
     

@@ -114,12 +114,12 @@ class ProductListView: UIViewController {
             .bind(to: viewModel.selectedProduct)
             .disposed(by: disposeBag)
         
-//        refreshHandler.refresh
-//            .startWith(())
-//            .asObservable()
-//            .subscribe(onNext: { [unowned self] in
-//                self.viewModel.getProductList()
-//            }).disposed(by: disposeBag)
+        refreshHandler.refresh
+            .startWith(())
+            .asObservable()
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.getProductList()
+            }).disposed(by: disposeBag)
         
         navigationBar.cartButtonObservable
             .observeOn(MainScheduler.instance)

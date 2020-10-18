@@ -19,16 +19,18 @@ class CartViewModel: BaseViewModel {
         print("##\(self)")
     }
     
-//    private let realm = try! Realm()
-    
     var cart: Results<CartStorage> {
         let cart = Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false)
         return cart
     }
     
     let backButtonDidTap = PublishSubject<Void>()
+    let cartSelectObservable = BehaviorSubject<Bool>(value: false)
+    let cartCountSelectObservable = BehaviorSubject<String>(value: "")
+    let deleteAllCartObservable = PublishSubject<Void>()
+    let buyNowObservable = PublishSubject<Void>()
     
-    
+    private var selectAllCart = false
     
     func getCartData() {
         self.state.onNext(.loading)
@@ -37,11 +39,31 @@ class CartViewModel: BaseViewModel {
             Observable.collection(from: self.cart)
                 .map { $0 }
                 .subscribe { event in
+                    
+                    self.checkCartSelectable()
+                    
                     self.state.onNext(.finish)
                 }
                 .disposed(by: self.disposeBag)
         }
         
+    }
+    
+    private func checkCartSelectable() {
+        // cek, apa semua cart terpilih
+        let allCartSelected = self.cart.filter {
+            $0.merchantSelected == true
+        }
+        
+        if allCartSelected.count == self.cart.count {
+            self.selectAllCart = true
+        }
+    }
+    
+    func countCartSelectable(){
+        let counts = Array(cart.filter { $0.products.filter { $0.productSelected == true }.count > 0 }).count
+        let selected = "Pilih semua barang (\(counts))"
+        self.cartCountSelectObservable.onNext(selected)
     }
     
     func deleteCartByProductMerchant(section: Int, rows: Int) {
@@ -64,12 +86,56 @@ class CartViewModel: BaseViewModel {
     }
     
     func updateProductQuantity(section: Int, rows: Int, qty: Int) {
-        print("QTY ", qty)
         try! Database.shared.database.write {
             self.cart[section].products[rows].quantity = qty
         }
-        
-        print("KE UPDATE G ?", self.cart)
+    }
+    
+    func didSelectProductItem(section: Int, rows: Int, isSelected: Bool) {
+        try! Database.shared.database.write {
+            /*
+             * cek, apakah semua product terpilih,
+             * jika YA, update select juga di merchants,
+             * JIKA TIDAK, update product saja
+             */
+            
+            self.cart[section].products[rows].productSelected = isSelected
+            
+            let allProductSelected = self.cart[section].products.filter {
+                $0.productSelected == isSelected
+            }
+            
+            if allProductSelected.count == self.cart[section].products.count {
+                self.cart[section].merchantSelected = isSelected
+            }
+            
+        }
+    }
+    
+    func didSelectAllProductMerchant(section: Int, selected: Bool) {
+        try! Database.shared.database.write {
+            self.cart[section].merchantSelected = selected
+            self.cart[section].products.forEach { $0.productSelected = selected }
+        }
+    }
+    
+    func didSelectAllCart() {
+        self.selectAllCart.toggle()
+        try! Database.shared.database.write {
+            self.cart.forEach {
+                $0.merchantSelected = selectAllCart
+                $0.products.forEach {
+                    $0.productSelected = selectAllCart
+                }
+            }
+            self.cartSelectObservable.onNext(selectAllCart)
+        }
+    }
+    
+    func didDeleteAllCart() {
+        Observable.from([self.cart])
+            .subscribe(Realm.rx.delete())
+            .disposed(by: self.disposeBag)
     }
     
 }

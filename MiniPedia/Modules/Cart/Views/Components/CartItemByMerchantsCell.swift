@@ -14,6 +14,8 @@ import RxCocoa
 protocol CartItemByMerchantsDelegate: class {
     func didRemoveCartItem(section: Int, rows: Int)
     func didUpdateQuantity(section: Int, rows: Int, qty: Int)
+    func didSelectProductItem(section: Int, rows: Int, isSelected: Bool)
+    func didSelectProductAllMerchant(section: Int, selected: Bool)
 }
 
 class CartItemByMerchantsCell: UITableViewCell, Reusable {
@@ -25,6 +27,9 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
     
     var merchant: CartStorage? {
         didSet {
+            if let selected = self.merchant?.merchantSelected {
+                self.isMerchantSelected = selected
+            }
             self.cartTableView.reloadData()
             self.bindCell()
         }
@@ -33,7 +38,11 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
     var section: Int = 0
     
     private var disposeBag = DisposeBag()
-    private var isMerchantSelected = false
+    lazy private var isMerchantSelected = false {
+        didSet {
+            self.btnCheckListMerchant.isCheckboxTapped(self.isMerchantSelected)
+        }
+    }
     weak var delegate: CartItemByMerchantsDelegate?
 
     override func awakeFromNib() {
@@ -48,7 +57,9 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
             .tap
             .subscribe(onNext: { [unowned self] _ in
                 self.isMerchantSelected.toggle()
-                self.btnCheckListMerchant.isCheckboxTapped(self.isMerchantSelected)
+                self.delegate?.didSelectProductAllMerchant(
+                    section: self.section,
+                    selected: isMerchantSelected)
             }).disposed(by: disposeBag)
     }
     
@@ -95,6 +106,9 @@ extension CartItemByMerchantsCell: CartItemsListOfMerchantsDelegate {
         self.delegate?.didRemoveCartItem(section: section, rows: rows)
     }
     
+    func didSelectProduct(rows: Int, isSelected: Bool) {
+        self.delegate?.didSelectProductItem(section: section, rows: rows, isSelected: isSelected)
+    }
     
 }
 

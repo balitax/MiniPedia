@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="btnDeleteAll" destination="T5K-JM-0kF" id="pw9-Qr-CZj"/>
                 <outlet property="btnSelectAll" destination="qx4-VK-Oko" id="gIF-fS-pQx"/>
+                <outlet property="heightAllCartSelectContainer" destination="x3q-aR-Pt9" id="m33-ci-yrD"/>
                 <outlet property="navigationBar" destination="UjQ-5d-HHJ" id="0eY-yO-msN"/>
                 <outlet property="selectedCart" destination="gYQ-DU-pYk" id="Hsb-0v-TxP"/>
                 <outlet property="tableView" destination="GCV-zb-c5h" id="5kx-Po-F9Z"/>
@@ -31,18 +32,21 @@
                         <constraint firstAttribute="height" constant="100" id="gBI-qs-8Uy"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIt-B5-i5C">
-                    <rect key="frame" x="0.0" y="100" width="414" height="34"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIt-B5-i5C">
+                    <rect key="frame" x="0.0" y="100" width="414" height="0.0"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLy-QJ-wsY">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLy-QJ-wsY">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
                             <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="HHg-91-C7O"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qx4-VK-Oko">
-                            <rect key="frame" x="16" y="8" width="18" height="18"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qx4-VK-Oko">
+                            <rect key="frame" x="16" y="-9" width="18" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="18" id="C1T-DI-QFF"/>
                                 <constraint firstAttribute="height" constant="18" id="Qu0-TC-rGi"/>
@@ -53,18 +57,24 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isCheckBoxButton" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pilih semua barang (4)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYQ-DU-pYk">
-                            <rect key="frame" x="42" y="8.5" width="143" height="17"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pilih semua barang (4)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYQ-DU-pYk">
+                            <rect key="frame" x="42" y="-8.5" width="143" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5K-JM-0kF">
-                            <rect key="frame" x="360" y="3.5" width="38" height="27"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5K-JM-0kF">
+                            <rect key="frame" x="360" y="-13.5" width="38" height="27"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                             <state key="normal" title="Hapus">
                                 <color key="titleColor" red="0.30119308830000002" green="0.66300469640000004" blue="0.19985920190000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,15 +84,15 @@
                         <constraint firstItem="VLy-QJ-wsY" firstAttribute="top" secondItem="fIt-B5-i5C" secondAttribute="top" id="6xV-KK-Yek"/>
                         <constraint firstItem="qx4-VK-Oko" firstAttribute="leading" secondItem="fIt-B5-i5C" secondAttribute="leading" constant="16" id="RDW-WD-Ec4"/>
                         <constraint firstItem="gYQ-DU-pYk" firstAttribute="centerY" secondItem="qx4-VK-Oko" secondAttribute="centerY" id="Rz5-cK-z40"/>
-                        <constraint firstItem="qx4-VK-Oko" firstAttribute="top" secondItem="fIt-B5-i5C" secondAttribute="top" constant="8" id="VN9-GM-14s"/>
+                        <constraint firstItem="qx4-VK-Oko" firstAttribute="centerY" secondItem="fIt-B5-i5C" secondAttribute="centerY" id="Wit-mr-ZOb"/>
                         <constraint firstItem="VLy-QJ-wsY" firstAttribute="leading" secondItem="fIt-B5-i5C" secondAttribute="leading" id="bl8-wf-TGk"/>
                         <constraint firstItem="T5K-JM-0kF" firstAttribute="centerY" secondItem="fIt-B5-i5C" secondAttribute="centerY" id="dwf-MJ-YMG"/>
-                        <constraint firstAttribute="bottom" secondItem="qx4-VK-Oko" secondAttribute="bottom" constant="8" id="jQ0-KN-yoU"/>
                         <constraint firstItem="gYQ-DU-pYk" firstAttribute="leading" secondItem="qx4-VK-Oko" secondAttribute="trailing" constant="8" id="qQa-Vd-wMU"/>
+                        <constraint firstAttribute="height" id="x3q-aR-Pt9"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="GCV-zb-c5h" customClass="AutomaticDynamicTableView" customModule="MiniPedia" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="136" width="414" height="760"/>
+                    <rect key="frame" x="0.0" y="102" width="414" height="794"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>

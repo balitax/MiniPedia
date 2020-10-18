@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 extension UIButton {
     
@@ -24,8 +26,19 @@ extension UIButton {
         }
     }
     
+    var isCheckBoxSelected: Bool {
+        get { return self.isSelected }
+        set {
+            if newValue {
+                self.setImage(UIImage.init(named: "icn_checkbox"), for: .normal)
+            } else {
+                self.setImage(UIImage.init(named: "icn_uncheckbox"), for: .normal)
+            }
+        }
+    }
+    
     func isCheckboxTapped(_ status: Bool) {
-        status ? self.setImage(UIImage.init(named: "icn_checkbox"), for: .normal) : self.setImage(UIImage.init(named: "icn_uncheckbox"), for: .normal)
+        status ?  self.setImage(UIImage.init(named: "icn_checkbox"), for: .normal) : self.setImage(UIImage.init(named: "icn_uncheckbox"), for: .normal)
     }
     
     func disabledButton() {
@@ -39,5 +52,20 @@ extension UIButton {
         self.titleLabel?.textColor = .white
         self.backgroundColor = UIColor(hexString: "#03ac0e")
     }
+    
+}
+
+extension Reactive where Base: UIButton {
+    
+    var isCheckBoxSelected: Binder<Bool> {
+        return Binder(self.base) { button, selected in
+            if selected {
+                button.setImage(UIImage.init(named: "icn_checkbox"), for: .normal)
+            } else {
+                button.setImage(UIImage.init(named: "icn_uncheckbox"), for: .normal)
+            }
+        }
+    }
+    
     
 }

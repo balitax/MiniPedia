@@ -40,6 +40,7 @@ class CartView: UIViewController {
     @IBOutlet weak var selectedCart: UILabel!
     @IBOutlet weak var btnDeleteAll: UIButton!
     @IBOutlet weak var btnSelectAll: UIButton!
+    @IBOutlet weak var heightAllCartSelectContainer: NSLayoutConstraint!
     
     let disposeBag = DisposeBag()
     var viewModel: CartViewModel!
@@ -78,9 +79,34 @@ class CartView: UIViewController {
                 } else {
                     self.tableView.reloadData()
                 }
+                if data.count != 0 {
+                    self.heightAllCartSelectContainer.constant = 36
+                } else {
+                    self.heightAllCartSelectContainer.constant = 0
+                }
+                viewModel.countCartSelectable()
             })
             .disposed(by: disposeBag)
         
+        viewModel.cartSelectObservable
+            .bind(to: btnSelectAll.rx.isCheckBoxSelected)
+            .disposed(by: disposeBag)
+        
+        viewModel.cartCountSelectObservable
+            .bind(to: self.selectedCart.rx.text)
+            .disposed(by: disposeBag)
+        
+        btnSelectAll.rx
+            .tap
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.didSelectAllCart()
+            }).disposed(by: disposeBag)
+        
+        btnDeleteAll.rx
+            .tap
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.deleteAllCartObservable.onNext(())
+            }).disposed(by: disposeBag)
         
     }
     
@@ -122,16 +148,35 @@ extension CartView: CartItemByMerchantsDelegate {
         viewModel.deleteCartByProductMerchant(section: section, rows: rows)
     }
     
+    func didSelectProductItem(section: Int, rows: Int, isSelected: Bool) {
+        viewModel.didSelectProductItem(section: section, rows: rows, isSelected: isSelected)
+    }
+    
+    func didSelectProductAllMerchant(section: Int, selected: Bool) {
+        viewModel.didSelectAllProductMerchant(section: section, selected: selected)
+    }
+    
 }
 
-extension CartView: UITableViewDataSource, UITableViewDelegate {
+extension CartView: UITableViewDataSource, UITableViewDelegate, EmptyStateViewDelegate {
+    
+    func didTapState() {
+        // belanja sekarang
+        viewModel.buyNowObservable.onNext(())
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.cart.count
+        if viewModel.cart.count == 0 {
+            tableView.setEmptyView(stateType: .cart, delegate: self)
+        }
+        else {
+            tableView.restore()
+        }
+        return viewModel.cart.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -162,14 +207,4 @@ extension CartView: SkeletonTableViewDataSource {
         CartItemByMerchantsCell.reuseIdentifier
     }
     
-}
-
-extension UITableView {
-    func applyChangeset(_ changes: RealmChangeset) {
-        beginUpdates()
-        deleteRows(at: changes.deleted.map { IndexPath(row: $0, section: 0) }, with: .fade)
-        insertRows(at: changes.inserted.map { IndexPath(row: $0, section: 0) }, with: .fade)
-        reloadRows(at: changes.updated.map { IndexPath(row: $0, section: 0) }, with: .fade)
-        endUpdates()
-    }
 }

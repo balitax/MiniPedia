@@ -14,6 +14,7 @@ target 'MiniPedia' do
   pod 'SVProgressHUD'
   pod 'Kingfisher'
   pod 'SkeletonView'
+  pod 'BottomPopup'
   
   target 'MiniPediaTests' do
     inherit! :search_paths

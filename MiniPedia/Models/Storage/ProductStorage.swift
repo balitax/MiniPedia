@@ -60,7 +60,7 @@ final class ProductStorage: Object {
         if stock <= 10 {
             attributedString = NSMutableAttributedString()
                 .normal("Stok ", fontSize: 12)
-                .bold("tersisa < \(stock), ", fontSize: 12)
+                .bold("tersisa < \(stock) ", fontSize: 12)
         } else {
             attributedString = NSMutableAttributedString()
                 .normal("Stok ", fontSize: 12)
