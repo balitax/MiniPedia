@@ -19,28 +19,15 @@ enum ShoppingState {
     case initial
     case error
     case done
+    case update
 }
 
 class ShoppingCart {
     
     static let shared = ShoppingCart()
     
-    private let realm = try! Realm()
-    private let disposeBag = DisposeBag()
-    
-    public lazy var carts: BehaviorSubject<[ProductStorage]> = {
-        let result = realm.objects(ProductStorage.self)
-        return .init(value: Array(result))
-    }()
-    
     var products: Results<CartStorage> {
-        let cart = realm.objects(CartStorage.self).sorted(byKeyPath: "id", ascending: false)
-        return cart
+        return Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false)
     }
-    
-    var shoppingState = PublishSubject<ShoppingState>()
-    
-    private init() {}
-    
     
 }

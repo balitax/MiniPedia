@@ -65,6 +65,22 @@ public extension UITableView {
 }
 
 public extension UICollectionView {
+    enum SupplementaryViewKind {
+        case header
+        case footer
+        
+        var rawValue: String {
+            switch self {
+            case .header:
+                return UICollectionView.elementKindSectionHeader
+            case .footer:
+                return UICollectionView.elementKindSectionFooter
+            }
+        }
+    }
+}
+
+public extension UICollectionView {
     
     func dequeueReusableCell<T: Reusable>(indexPath: IndexPath) -> T {
         return self.dequeueReusableCell(withReuseIdentifier: T.reuseIdentifier, for: indexPath) as! T
@@ -80,6 +96,18 @@ public extension UICollectionView {
     
     func dequeueReusableCell<T: UICollectionViewCell>(indexPath: IndexPath) -> T where T: Reusable {
         return self.dequeueReusableCell(withReuseIdentifier: T.reuseIdentifier, for: indexPath) as! T
+    }
+    
+    func register<T: UICollectionReusableView>(view: T.Type, asSupplementaryViewKind kind: SupplementaryViewKind) where T: Reusable {
+        let nib = UINib(nibName: T.nibName, bundle: Bundle(for: T.self))
+        register(nib, forSupplementaryViewOfKind: kind.rawValue, withReuseIdentifier: T.reuseIdentifier)
+    }
+    
+    func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind kind: SupplementaryViewKind, forIndexPath indexPath: IndexPath) -> T where T: Reusable {
+        guard let view = dequeueReusableSupplementaryView(ofKind: kind.rawValue, withReuseIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
+            fatalError("Could not dequeue view with identifier: \(T.reuseIdentifier)")
+        }
+        return view
     }
     
     internal func setEmptyView(stateType: EmptyStateType) {

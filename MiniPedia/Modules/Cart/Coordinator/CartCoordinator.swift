@@ -14,7 +14,7 @@ class CartCoordinator: ReactiveCoordinator<Void> {
     private let viewModel = CartViewModel()
     
     init(rootViewController: UIViewController) {
-        self.rootViewController = rootViewController
+        self.rootViewController = CartView()
     }
     
     override func start() -> Observable<Void> {

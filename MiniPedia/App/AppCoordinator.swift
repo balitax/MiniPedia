@@ -18,15 +18,15 @@ class AppCoordinator: ReactiveCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         
-        let navigationController = UINavigationController(rootViewController: ProductListView())
+        let navigationController = UINavigationController(rootViewController: HomeView())
         navigationController.navigationBar.isHidden = true
         
-        let productListCoordinator = ProductListCoordinator(rootViewController: navigationController.viewControllers[0])
+        let mainPageCoordinator = HomeViewCoordinator(rootViewController: navigationController.viewControllers[0])
         
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
-        return coordinate(to: productListCoordinator)
+        return coordinate(to: mainPageCoordinator)
         
     }
     

@@ -6,11 +6,15 @@
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Constants {
     //The API's base URL
     static let baseUrl = "https://ace.tokopedia.com/search/v2.5/"
+}
+
+struct Colors {
+    static let greenColor = UIColor(hexString: "#03ac0e")
 }
 
 enum HTTPHeaderField: String {

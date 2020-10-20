@@ -27,6 +27,8 @@ final class SecondaryNavigationBar: UIView {
     private let disposeBag = DisposeBag()
     
     public let leftButtonObservable = PublishSubject<Void>()
+    public let cartButtonObservable = PublishSubject<Void>()
+    public let shareButtonObservable = PublishSubject<Void>()
     
     var title: String = "" {
         didSet {
@@ -98,10 +100,22 @@ final class SecondaryNavigationBar: UIView {
             })
             .disposed(by: disposeBag)
         
+        cartButton.rx
+            .tap
+            .bind {
+                self.cartButtonObservable.onNext(())
+            }.disposed(by: disposeBag)
+        
         leftButton.rx
             .tap
             .bind {
                 self.leftButtonObservable.onNext(())
+            }.disposed(by: disposeBag)
+        
+        shareButton.rx
+            .tap
+            .bind {
+                self.shareButtonObservable.onNext(())
             }.disposed(by: disposeBag)
     }
     

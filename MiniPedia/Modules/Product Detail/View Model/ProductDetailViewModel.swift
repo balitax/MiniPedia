@@ -21,10 +21,11 @@ class ProductDetailViewModel: BaseViewModel {
     }
     
     var cartState = PublishSubject<ShoppingState>()
-    
-    var products = BehaviorSubject<DataProducts?> (
-        value: nil
-    )
+    let cartButtonDidTap = PublishSubject<Void>()
+    let backButtonDidTap = PublishSubject<Void>()
+    let urlToko = PublishSubject<URL>()
+    let shareThisProduct = PublishSubject<URL>()
+    var products = BehaviorSubject<DataProducts?> (value: nil)
     
     func bindProduct() {
         DispatchQueue.main.async {
@@ -35,7 +36,29 @@ class ProductDetailViewModel: BaseViewModel {
         }
     }
     
-    func addToCart() {
+    func saveCart() {
+        products
+            .compactMap { $0?.id }
+            .asObservable()
+            .subscribe(onNext: { [unowned self] idProduct in
+                isProductAlreadyOnCart(id: idProduct) ? updateQuantityCart(idProduct) : addToCart()
+            }).disposed(by: disposeBag)
+        
+    }
+    
+    func openTokopedia() {
+        if let merchantURL = try! self.products.value()?.uri, let url = URL(string: merchantURL) {
+            urlToko.onNext(url)
+        }
+    }
+    
+    func shareProduct() {
+        if let merchantURL = try! self.products.value()?.uri, let url = URL(string: merchantURL) {
+            shareThisProduct.onNext(url)
+        }
+    }
+    
+    private func addToCart() {
         self.cartState.onNext(.initial)
         products
             .observeOn(MainScheduler.instance)
@@ -54,7 +77,7 @@ class ProductDetailViewModel: BaseViewModel {
             } onError: { [unowned self] error in
                 self.cartState.onNext(.error)
             }.disposed(by: disposeBag)
-
+        
     }
     
     private func saveCarts(_ merchant: Shop, product: DataProducts) -> CartStorage {
@@ -83,6 +106,19 @@ class ProductDetailViewModel: BaseViewModel {
         
         return getMerchant
         
+    }
+    
+    private func isProductAlreadyOnCart(id: Int) -> Bool {
+        let cart = Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false)
+        return Array(cart.filter { $0.products.filter { $0.id == id }.count > 0 }).count != 0
+    }
+    
+    private func updateQuantityCart(_ idProduct: Int) {
+        let cart = Database.shared.get(type: ProductStorage.self).filter("id == \(idProduct)").first
+        try! Database.shared.database.write {
+            cart?.quantity += 1
+        }
+        self.cartState.onNext(.update)
     }
     
     

@@ -35,7 +35,7 @@ class ProductDetailView: UIViewController {
     
     let disposeBag = DisposeBag()
     var viewModel: ProductDetailViewModel!
-    lazy var alert = ACAlertsView(position: .bottom, direction: .toRight, marginBottom: 150)
+    lazy var alert = ACAlertsView(position: .top, direction: .toRight, marginTop: 50)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,9 +70,11 @@ class ProductDetailView: UIViewController {
             .subscribe(onNext: { [unowned self] state in
                 switch state {
                 case .done:
-                    self.alert.show("Success! \nThis product has been add to your cart", style: .success)
+                    self.alert.show("Produk berhasil ditambahkan ke keranjang Anda", style: .success)
                 case .error:
-                    self.alert.show("Error! \nThere is an error while add this product to cart", style: .error)
+                    self.alert.show("Terjadi kesalahan saat menambah ke keranjang", style: .error)
+                case .update:
+                    self.alert.show("Jumlah produk berhasil di perbarui di keranjang Anda", style: .success)
                 default:
                     return
                 }
@@ -82,22 +84,32 @@ class ProductDetailView: UIViewController {
         btnAddKeranjang.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                self.viewModel.addToCart()
+                self.viewModel.saveCart()
             }).disposed(by: disposeBag)
         
         btnOpenToko.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                guard let merchantURL = try! viewModel.products.value()?.uri else { return }
-                guard let url = URL(string: merchantURL) else { return }
-                UIApplication.shared.open(url)
+                viewModel.openTokopedia()
             }).disposed(by: disposeBag)
         
         
         navigationBar.leftButtonObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] pip in
-                self.navigationController?.popViewController(animated: true)
+                viewModel.backButtonDidTap.onNext(())
+            }).disposed(by: disposeBag)
+        
+        navigationBar.cartButtonObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] pip in
+                viewModel.cartButtonDidTap.onNext(())
+            }).disposed(by: disposeBag)
+        
+        navigationBar.shareButtonObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] pip in
+                viewModel.shareProduct()
             }).disposed(by: disposeBag)
         
     }
