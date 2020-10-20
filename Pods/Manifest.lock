@@ -1,4 +1,5 @@
 PODS:
+  - BottomPopup (0.6.0)
   - Differentiator (4.0.1)
   - Kingfisher (5.15.0):
     - Kingfisher/Core (= 5.15.0)
@@ -25,6 +26,7 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - BottomPopup
   - Kingfisher
   - RxCocoa
   - RxDataSources
@@ -35,6 +37,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - BottomPopup
     - Differentiator
     - Kingfisher
     - Realm
@@ -48,6 +51,7 @@ SPEC REPOS:
     - SVProgressHUD
 
 SPEC CHECKSUMS:
+  BottomPopup: 1d5649a3b29396238f0e8f3c82075a7bfcf37ba7
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Kingfisher: 1acb67597a520c2d0310677e66d6e0af455ef757
   Realm: cd400dd7e5b5bb5c8ae9842eecd73792369e6ec0
@@ -60,6 +64,6 @@ SPEC CHECKSUMS:
   SkeletonView: 14fbe9702c7fb5c5f011b44ac3ae99fc73155726
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 4a45f33e4118ab072932a373ad76ebb17fa7f6fb
+PODFILE CHECKSUM: 1035df11bd63dc4ff338bfe76418980775c9b5e7
 
 COCOAPODS: 1.9.3

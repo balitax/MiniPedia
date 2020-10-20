@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,9 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductListView" customModule="MiniPedia" customModuleProvider="target">
             <connections>
-                <outlet property="btnFilter" destination="LTT-TM-Y5h" id="vKu-4b-bLv"/>
-                <outlet property="btnFilterMarginBottom" destination="KLS-Sr-mQI" id="dTl-dO-AA3"/>
                 <outlet property="collectionView" destination="9x2-Io-wP7" id="FpQ-LC-SPB"/>
+                <outlet property="navigationBar" destination="amC-YX-KDz" id="ehO-5F-hxu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,16 +39,6 @@
                     </collectionViewFlowLayout>
                     <cells/>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTT-TM-Y5h">
-                    <rect key="frame" x="24" y="776" width="366" height="48"/>
-                    <color key="backgroundColor" red="0.0" green="0.54901960780000003" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="Jyj-Ub-9oh"/>
-                    </constraints>
-                    <state key="normal" title="FILTER">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -57,12 +46,9 @@
                 <constraint firstItem="9x2-Io-wP7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3fc-Ua-ayc"/>
                 <constraint firstAttribute="bottom" secondItem="9x2-Io-wP7" secondAttribute="bottom" id="Byd-4b-ztS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9x2-Io-wP7" secondAttribute="trailing" id="EQ2-KI-wTI"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="LTT-TM-Y5h" secondAttribute="bottom" constant="38" id="KLS-Sr-mQI"/>
                 <constraint firstItem="amC-YX-KDz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QJ3-3a-Kuh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LTT-TM-Y5h" secondAttribute="trailing" constant="24" id="QdE-oz-ggQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="amC-YX-KDz" secondAttribute="trailing" id="UTF-Cn-Ot2"/>
                 <constraint firstItem="amC-YX-KDz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="auK-Gc-WE2"/>
-                <constraint firstItem="LTT-TM-Y5h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="nnd-g4-BgC"/>
                 <constraint firstItem="9x2-Io-wP7" firstAttribute="top" secondItem="amC-YX-KDz" secondAttribute="bottom" id="txt-9S-8Na"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

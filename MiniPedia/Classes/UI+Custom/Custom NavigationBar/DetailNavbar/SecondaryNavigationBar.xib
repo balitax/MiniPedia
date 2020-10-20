@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -41,6 +41,10 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Lx-Zg-ffl" userLabel="backButton">
                             <rect key="frame" x="16" y="64.5" width="20" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="ap9-TB-NKx"/>
+                                <constraint firstAttribute="width" constant="20" id="vAQ-S1-aRg"/>
+                            </constraints>
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" image="arrow"/>
                             <userDefinedRuntimeAttributes>
@@ -49,14 +53,14 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxG-Ye-JTj" userLabel="title">
-                            <rect key="frame" x="52" y="75.5" width="0.0" height="0.0"/>
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Angola Gantungan Rak Baju Setelan Almari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxG-Ye-JTj" userLabel="title">
+                            <rect key="frame" x="52" y="66" width="274" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="iby-xj-Cwq" userLabel="rightItems">
-                            <rect key="frame" x="298" y="65.5" width="92" height="20"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="iby-xj-Cwq" userLabel="rightItems">
+                            <rect key="frame" x="342" y="65.5" width="56" height="20"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZu-Rz-TfJ">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -68,7 +72,7 @@
                                     <state key="normal" image="share"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMZ-MR-vGZ" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                                    <rect key="frame" x="44" y="0.0" width="20" height="20"/>
+                                    <rect key="frame" x="36" y="0.0" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="RVZ-UA-zPW"/>
                                         <constraint firstAttribute="width" constant="20" id="sHp-gu-jdm"/>
@@ -76,8 +80,8 @@
                                     <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="cart"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvV-oZ-6Qm">
-                                    <rect key="frame" x="88" y="0.0" width="4" height="20"/>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvV-oZ-6Qm">
+                                    <rect key="frame" x="56" y="0.0" width="0.0" height="20"/>
                                     <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="icMore"/>
                                 </button>
@@ -92,7 +96,7 @@
                         <constraint firstItem="LIu-Ou-IML" firstAttribute="leading" secondItem="CDj-gR-Egz" secondAttribute="leading" id="DeK-K7-Fb9"/>
                         <constraint firstItem="85p-kq-bLq" firstAttribute="bottom" secondItem="LIu-Ou-IML" secondAttribute="bottom" id="Dsj-Zj-0Mx"/>
                         <constraint firstItem="kxG-Ye-JTj" firstAttribute="centerY" secondItem="3Lx-Zg-ffl" secondAttribute="centerY" id="EhH-6C-9Bo"/>
-                        <constraint firstAttribute="trailing" secondItem="iby-xj-Cwq" secondAttribute="trailing" constant="24" id="M4f-jN-bH0"/>
+                        <constraint firstAttribute="trailing" secondItem="iby-xj-Cwq" secondAttribute="trailing" constant="16" id="M4f-jN-bH0"/>
                         <constraint firstItem="3Lx-Zg-ffl" firstAttribute="leading" secondItem="CDj-gR-Egz" secondAttribute="leading" constant="16" id="M9x-yd-QaF"/>
                         <constraint firstItem="85p-kq-bLq" firstAttribute="leading" secondItem="CDj-gR-Egz" secondAttribute="leading" id="TRP-ap-hX9"/>
                         <constraint firstAttribute="trailing" secondItem="85p-kq-bLq" secondAttribute="trailing" id="V0e-q2-nrs"/>

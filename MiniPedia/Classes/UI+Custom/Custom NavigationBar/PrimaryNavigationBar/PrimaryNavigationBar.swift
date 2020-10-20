@@ -8,6 +8,9 @@
 
 import UIKit
 import RxSwift
+import RxRealm
+import RealmSwift
+import RxCocoa
 
 final class PrimaryNavigationBar: UIView {
     
@@ -19,12 +22,32 @@ final class PrimaryNavigationBar: UIView {
     @IBOutlet private var secondaryContainerView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var cartButton: ACBadgeButton!
+    @IBOutlet private weak var backButton: UIButton!
     
     private let disposeBag = DisposeBag()
+    public let cartButtonObservable = PublishSubject<Void>()
+    public let backButtonObservable = PublishSubject<Void>()
     
     var title: String = "" {
         didSet {
-            titleLabel.text = title
+            DispatchQueue.main.async {
+                self.titleLabel.text = self.title.isEmpty ? "" : self.title
+            }
+        }
+    }
+    var enableRightButton: Bool = true {
+        didSet {
+            DispatchQueue.main.async {
+                self.cartButton.isHidden = !self.enableRightButton
+            }
+        }
+    }
+    
+    var enableLeftButton: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.backButton.isHidden = !self.enableLeftButton
+            }
         }
     }
     
@@ -44,11 +67,27 @@ final class PrimaryNavigationBar: UIView {
         self.navigationView.addShadow(offset: CGSize(width: 0, height: 3), color: UIColor(hexString: "#ededed"), borderColor: UIColor(hexString: "#ededed"), radius: 4, opacity: 0.8)
         
         Observable.collection(from: ShoppingCart.shared.products)
-            .map { results in "\(results.count)" }
-            .subscribe { badge in
-                self.cartButton.badgeValue = badge
-            }
+            .asObservable()
+            .subscribe(onNext: { [unowned self] badge in
+                if (badge.count != 0) {
+                    self.cartButton.badgeValue = "\(badge.count)"
+                } else {
+                    self.cartButton.badgeValue = ""
+                }
+            })
             .disposed(by: disposeBag)
+        
+        cartButton.rx
+            .tap
+            .bind {
+                self.cartButtonObservable.onNext(())
+            }.disposed(by: disposeBag)
+        
+        backButton.rx
+            .tap
+            .bind {
+                self.backButtonObservable.onNext(())
+            }.disposed(by: disposeBag)
         
     }
     
