@@ -11,22 +11,16 @@ import RxSwift
 class CartCoordinator: ReactiveCoordinator<Void> {
     
     public let rootViewController: UIViewController
-    private let viewModel = CartViewModel()
+    public var viewModel = CartViewModel()
     
     init(rootViewController: UIViewController) {
-        self.rootViewController = CartView()
+        self.rootViewController = rootViewController
     }
     
     override func start() -> Observable<Void> {
         
-        let viewController          = CartView()
+        let viewController          = self.rootViewController as! CartView
         viewController.viewModel    = viewModel
-        
-        viewModel.backButtonDidTap
-            .subscribe(onNext: { [unowned self] _ in
-                rootViewController.navigationController?.popViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
         
         viewModel.deleteAllCartObservable
             .flatMapLatest({ [unowned self] _ in
@@ -40,9 +34,6 @@ class CartCoordinator: ReactiveCoordinator<Void> {
                 rootViewController.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
-        
-        rootViewController.navigationController?
-            .pushViewController(viewController, animated: true)
         
         return Observable.never()
         

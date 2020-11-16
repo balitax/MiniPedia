@@ -130,6 +130,7 @@ class ProductDetailView: UIViewController {
         
     }
     
+    
     private func setupTableView() {
         self.tableView.registerReusableCell(ProductSummaryTableViewCell.self)
         self.tableView.registerReusableCell(ProductCourierOptionsTableViewCell.self)

@@ -10,7 +10,8 @@ import RxSwift
 
 class HomeViewCoordinator: ReactiveCoordinator<Void> {
     
-    let rootController: UIViewController!
+    public let rootController: UIViewController
+    public var viewModel = HomeViewViewModel()
     
     init(rootViewController: UIViewController) {
         self.rootController = rootViewController
@@ -18,7 +19,7 @@ class HomeViewCoordinator: ReactiveCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         let viewController = rootController as! HomeView
-        viewController.viewModel = HomeViewViewModel()
+        viewController.viewModel = viewModel
         return Observable.never()
     }
     

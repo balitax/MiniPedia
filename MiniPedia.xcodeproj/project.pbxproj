@@ -105,6 +105,8 @@
 		26C45AA225397B0600EB82E0 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C45AA125397B0500EB82E0 /* UIButton+Extension.swift */; };
 		26C45AA8253993C400EB82E0 /* Product+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C45AA7253993C400EB82E0 /* Product+Extension.swift */; };
 		26D0606D25346DE600D67C48 /* ProductListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0606C25346DE600D67C48 /* ProductListCellViewModel.swift */; };
+		26D0C6D825627A8F00BA86FE /* AppRootBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0C6D725627A8F00BA86FE /* AppRootBarViewController.swift */; };
+		26D0C6DD25627A9500BA86FE /* AppRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0C6DC25627A9500BA86FE /* AppRootCoordinator.swift */; };
 		26E9909F253442AC00A5AD98 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E9909E253442AC00A5AD98 /* APIConfiguration.swift */; };
 		26E990A4253442C000A5AD98 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E990A3253442C000A5AD98 /* ApiError.swift */; };
 		26F8252B2536C3380016E3C7 /* ShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8252A2536C3380016E3C7 /* ShoppingCart.swift */; };
@@ -244,6 +246,8 @@
 		26C45AA125397B0500EB82E0 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		26C45AA7253993C400EB82E0 /* Product+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+Extension.swift"; sourceTree = "<group>"; };
 		26D0606C25346DE600D67C48 /* ProductListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCellViewModel.swift; sourceTree = "<group>"; };
+		26D0C6D725627A8F00BA86FE /* AppRootBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRootBarViewController.swift; sourceTree = "<group>"; };
+		26D0C6DC25627A9500BA86FE /* AppRootCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRootCoordinator.swift; sourceTree = "<group>"; };
 		26E9909E253442AC00A5AD98 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		26E990A3253442C000A5AD98 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		26F8252A2536C3380016E3C7 /* ShoppingCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCart.swift; sourceTree = "<group>"; };
@@ -714,8 +718,9 @@
 		26A13A5925340D3A00A0CD0F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				26121DDE253D4E2300207D23 /* Home */,
+				26D0C6D425627A7E00BA86FE /* AppRoot */,
 				26121D98253B0C4D00207D23 /* ReusableUI */,
+				26121DDE253D4E2300207D23 /* Home */,
 				268204B32538962800E3E542 /* Cart */,
 				2616480C2535720300048425 /* Product Detail */,
 				26A13A5B25340D4E00A0CD0F /* ProductList */,
@@ -774,6 +779,31 @@
 				26F825322536D3030016E3C7 /* ProductStorage.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		26D0C6D425627A7E00BA86FE /* AppRoot */ = {
+			isa = PBXGroup;
+			children = (
+				26D0C6D525627A8500BA86FE /* Coordinator */,
+				26D0C6D625627A8500BA86FE /* Views */,
+			);
+			path = AppRoot;
+			sourceTree = "<group>";
+		};
+		26D0C6D525627A8500BA86FE /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				26D0C6DC25627A9500BA86FE /* AppRootCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		26D0C6D625627A8500BA86FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26D0C6D725627A8F00BA86FE /* AppRootBarViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		26F825292536C3220016E3C7 /* Helpers */ = {
@@ -1100,6 +1130,7 @@
 				26121DA8253B48DC00207D23 /* PopupConfirmationCoordinator.swift in Sources */,
 				26121DF2253D530F00207D23 /* HomeViewViewModel.swift in Sources */,
 				2653A3D02534132B00F9F28B /* EndPoints.swift in Sources */,
+				26D0C6DD25627A9500BA86FE /* AppRootCoordinator.swift in Sources */,
 				26121E01253DB09D00207D23 /* FlashBannerView.swift in Sources */,
 				26D0606D25346DE600D67C48 /* ProductListCellViewModel.swift in Sources */,
 				2653A393253410C700F9F28B /* StoryboardLoadable.swift in Sources */,
@@ -1161,6 +1192,7 @@
 				26714D83253715B700E61961 /* ProductDetailView+SkeletonView.swift in Sources */,
 				26121E0C253DB0D300207D23 /* ZCycleViewCell.swift in Sources */,
 				2616483C25359D0B00048425 /* NSMutableAttributedString+Extension.swift in Sources */,
+				26D0C6D825627A8F00BA86FE /* AppRootBarViewController.swift in Sources */,
 				2653A399253410C700F9F28B /* LayoutInfo.swift in Sources */,
 				26121E16253DB90B00207D23 /* UIImageView+Extension.swift in Sources */,
 				2616480525356CA400048425 /* Refreshable.swift in Sources */,

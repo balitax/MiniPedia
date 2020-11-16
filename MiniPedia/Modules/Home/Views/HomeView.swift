@@ -34,6 +34,13 @@ class HomeView: UIViewController {
         return product
     }()
     
+    lazy var promoSection: ProductListSections = {
+        var product = ProductListSections()
+        product.viewModel = self.viewModel
+        product.category = .promo
+        return product
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +56,10 @@ class HomeView: UIViewController {
         self.sections = [
             self.dompetSection,
             self.gadgetSection,
-            self.fashionSection
+            self.fashionSection,
+            self.promoSection
         ]
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.viewModel.loaded.onNext(true)
             self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
         }
@@ -61,6 +69,7 @@ class HomeView: UIViewController {
     
     fileprivate func setupCollectionView() {
         collectionView.collectionViewLayout = self.collectionViewLayout()
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         collectionView.backgroundColor = .white
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.delegate = self

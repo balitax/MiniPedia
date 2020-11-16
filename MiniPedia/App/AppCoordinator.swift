@@ -18,15 +18,14 @@ class AppCoordinator: ReactiveCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         
-        let navigationController = UINavigationController(rootViewController: HomeView())
-        navigationController.navigationBar.isHidden = true
+        // HOME
+        let tabBarController = AppRootBarViewController()
+        let tabbarCoordinator = AppRootCoordinator(rootViewController: tabBarController)
         
-        let mainPageCoordinator = HomeViewCoordinator(rootViewController: navigationController.viewControllers[0])
-        
-        window.rootViewController = navigationController
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         
-        return coordinate(to: mainPageCoordinator)
+        return coordinate(to: tabbarCoordinator).take(1)
         
     }
     

@@ -24,7 +24,6 @@ class CartViewModel: BaseViewModel {
         return cart
     }
     
-    let backButtonDidTap = PublishSubject<Void>()
     let cartSelectObservable = BehaviorSubject<Bool>(value: false)
     let cartCountSelectObservable = BehaviorSubject<String>(value: "")
     let deleteAllCartObservable = PublishSubject<Void>()

@@ -12,11 +12,13 @@ import RxSwift
 enum ProductCategory: String, CaseIterable {
     case gadget
     case fashion
+    case promo
     
     func getDescription() -> String {
         switch self {
         case .gadget: return "Gadget Terlaris"
         case .fashion: return "Fashion Paling Dicari"
+        case .promo: return "Promo 11.11"
         }
     }
     
@@ -41,12 +43,12 @@ class ProductListSections: Sections {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.4),
-            heightDimension: .estimated(300))
+            widthDimension: .fractionalWidth(0.38),
+            heightDimension: .estimated(290))
         
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 2, bottom: 0, trailing: 2)
         
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),

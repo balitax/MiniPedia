@@ -33,7 +33,7 @@ class CartView: UIViewController {
         didSet {
             navigationBar.title = "Keranjang"
             navigationBar.enableRightButton = false
-            navigationBar.enableLeftButton = true
+            navigationBar.enableLeftButton = false
         }
     }
     @IBOutlet weak var tableView: AutomaticDynamicTableView!
@@ -52,12 +52,6 @@ class CartView: UIViewController {
     }
     
     private func bindRx() {
-        
-        navigationBar.backButtonObservable
-            .asObserver()
-            .subscribe(onNext: { [unowned self] _ in
-                viewModel.backButtonDidTap.onNext(())
-            }).disposed(by: disposeBag)
         
         viewModel.getCartData()
         
