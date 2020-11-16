@@ -14,27 +14,11 @@ class HeaderSectionTitleReusableView: UICollectionReusableView {
     @IBOutlet weak var sectionTitle: UILabel!
     @IBOutlet weak var btnSeeAll: UIButton!
     
-    var viewModel: HomeViewViewModel! {
-        didSet {
-            configureCell()
-        }
-    }
-    
     private var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.showAnimatedSkeleton()
-    }
-    
-    private func configureCell() {
-        
-        viewModel.loaded.asObserver()
-            .subscribe(onNext: { [unowned self] loaded in
-                loaded ? self.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5)) : self.showAnimatedSkeleton()
-            }).disposed(by: self.disposeBag)
-        
     }
     
 }

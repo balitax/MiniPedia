@@ -31,9 +31,7 @@ class CartView: UIViewController {
     
     @IBOutlet weak var navigationBar: PrimaryNavigationBar! {
         didSet {
-            navigationBar.title = "Keranjang"
             navigationBar.enableRightButton = false
-            navigationBar.enableLeftButton = false
         }
     }
     @IBOutlet weak var tableView: AutomaticDynamicTableView!

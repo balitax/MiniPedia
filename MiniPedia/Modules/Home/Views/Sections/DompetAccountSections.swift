@@ -11,12 +11,14 @@ import RxSwift
 
 class DompetAccountSections: Sections {
     
-    var numberOfItems: Int = 1
-    var viewModel: HomeViewViewModel!
+    internal var numberOfItems: Int = 1
+    private var viewModel: HomeViewViewModel!
     private var disposeBag = DisposeBag()
     
     init(viewModel: HomeViewViewModel) {
         self.viewModel = viewModel
+        self.viewModel.getAccountInfo()
+        self.viewModel.fetchFakeBanner()
     }
     
     func layoutSection() -> NSCollectionLayoutSection {
@@ -54,14 +56,20 @@ class DompetAccountSections: Sections {
     func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
         let cell: DompetAccountInfoCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         
-        cell.viewModel = viewModel
+        if let account = viewModel.bindInfoCell() {
+            cell.configureCell(account)
+        }
         
         return cell
     }
     
     func configureHeaderView(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView {
         let header: FlashBannerView = collectionView.dequeueReusableSupplementaryView(ofKind: .header, forIndexPath: indexPath)
-        header.viewModel = self.viewModel
+        
+        if let banner = viewModel.bindFakeBanner() {
+            header.bindFakeBanner(banner)
+        }
+        
         return header
     }
     

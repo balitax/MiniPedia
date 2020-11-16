@@ -54,6 +54,10 @@ struct DataProducts: Codable, Identifiable {
     var getCountSold: String? {
         return "Terjual \(countSold ?? 0)"
     }
+    
+    var getCountStar: String? {
+        return "\(rating ?? 0)"
+    }
 
     enum CodingKeys: String, CodingKey {
         case id, name, uri

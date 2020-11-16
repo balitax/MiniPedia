@@ -25,16 +25,19 @@ class ProductDetailCoordinator: ReactiveCoordinator<Void> {
         detailViewModel.products.onNext(viewModel.product)
         viewController.viewModel    = detailViewModel
         
+        viewController.hidesBottomBarWhenPushed = true
+        rootViewController.navigationController?
+            .pushViewController(viewController, animated: true)
         
         detailViewModel.cartButtonDidTap
-            .flatMapLatest({ [unowned self] _ in
-                return self.coordinateToCart()
+            .subscribe(onNext: { [unowned self] _ in
+                self.coordinateToCart()
             })
-            .subscribe()
             .disposed(by: disposeBag)
         
         detailViewModel.urlToko
             .subscribe(onNext: { [unowned self] url in
+                self.`self`()
                 UIApplication.shared.open(url)
             }).disposed(by: disposeBag)
         
@@ -52,17 +55,15 @@ class ProductDetailCoordinator: ReactiveCoordinator<Void> {
             })
             .disposed(by: disposeBag)
         
-        rootViewController.navigationController?
-            .pushViewController(viewController, animated: true)
-        
         return Observable.never()
         
     }
     
-    private func coordinateToCart() -> Observable<Void> {
-        let cartCoordinator = CartCoordinator(rootViewController: rootViewController)
-        return coordinate(to: cartCoordinator)
-            .map { _ in () }
+    private func coordinateToCart() {
+        rootViewController.navigationController?.popViewController(animated: true)
+        Delay.wait(delay: 1) {
+            self.rootViewController.tabBarController?.selectedIndex = 1
+        }
     }
     
 }

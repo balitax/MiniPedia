@@ -20,33 +20,17 @@ final class PrimaryNavigationBar: UIView {
     @IBOutlet private var navigationView: UIView!
     @IBOutlet private var primaryContainerView: UIView!
     @IBOutlet private var secondaryContainerView: UIView!
-    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var cartButton: ACBadgeButton!
-    @IBOutlet private weak var backButton: UIButton!
     
     private let disposeBag = DisposeBag()
     public let cartButtonObservable = PublishSubject<Void>()
     public let backButtonObservable = PublishSubject<Void>()
     
-    var title: String = "" {
-        didSet {
-            DispatchQueue.main.async {
-                self.titleLabel.text = self.title.isEmpty ? "" : self.title
-            }
-        }
-    }
+    
     var enableRightButton: Bool = true {
         didSet {
             DispatchQueue.main.async {
                 self.cartButton.isHidden = !self.enableRightButton
-            }
-        }
-    }
-    
-    var enableLeftButton: Bool = false {
-        didSet {
-            DispatchQueue.main.async {
-                self.backButton.isHidden = !self.enableLeftButton
             }
         }
     }
@@ -83,11 +67,6 @@ final class PrimaryNavigationBar: UIView {
                 self.cartButtonObservable.onNext(())
             }.disposed(by: disposeBag)
         
-        backButton.rx
-            .tap
-            .bind {
-                self.backButtonObservable.onNext(())
-            }.disposed(by: disposeBag)
         
     }
     
@@ -101,6 +80,12 @@ final class PrimaryNavigationBar: UIView {
             ]
         )
     }
+    
+    public func buttonTintColor(_ offset: CGFloat) {
+            _ = [cartButton].map {
+                $0?.tintColor = UIColor(red: 1 - (offset / 2), green: 1 - (offset / 2), blue: 1 - (offset / 2), alpha: 1)
+            }
+        }
     
     
 }

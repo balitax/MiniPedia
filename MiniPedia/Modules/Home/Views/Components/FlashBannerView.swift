@@ -13,41 +13,21 @@ class FlashBannerView: UICollectionReusableView {
     
     @IBOutlet weak var bannerSlide: ZCycleView!
     
-    private var disposeBag = DisposeBag()
-    
-    var viewModel: HomeViewViewModel! {
-        didSet {
-            viewModel.loaded.asObserver()
-                .subscribe(onNext: { [unowned self] loaded in
-                    loaded ? self.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5)) : self.showAnimatedSkeleton()
-                }).disposed(by: self.disposeBag)
-        }
-    }
-    
-    private var urlImageBanner = [
-        "https://ecs7-p.tokopedia.net/img/cache/800/VxWOnu/2020/10/18/dce6af24-8978-48fc-a379-50cf9136c1ff.jpg",
-        "https://ecs7-p.tokopedia.net/img/cache/800/VxWOnu/2020/10/18/61f648ff-9913-4109-811a-43521a40926b.jpg",
-        "https://ecs7-p.tokopedia.net/img/cache/800/VxWOnu/2020/10/19/dde94860-7ac9-46b7-baeb-2c659b66ce86.jpg",
-        "https://ecs7-p.tokopedia.net/img/cache/800/VxWOnu/2020/10/19/0ccc364c-77ea-4da3-b14c-11f2cb55cb08.jpg",
-        "https://ecs7-p.tokopedia.net/img/cache/800/VxWOnu/2020/10/18/dce6af24-8978-48fc-a379-50cf9136c1ff.jpg",
-        "https://ecs7-p.tokopedia.net/img/cache/800/VxWOnu/2020/10/18/61f648ff-9913-4109-811a-43521a40926b.jpg",
-        "https://ecs7-p.tokopedia.net/img/cache/800/VxWOnu/2020/10/19/dde94860-7ac9-46b7-baeb-2c659b66ce86.jpg",
-        "https://ecs7-p.tokopedia.net/img/cache/800/VxWOnu/2020/10/19/0ccc364c-77ea-4da3-b14c-11f2cb55cb08.jpg"
-    ]
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.showAnimatedSkeleton()
         bannerSetup()
     }
     
     private func bannerSetup() {
         bannerSlide.delegate = self
-        bannerSlide.placeholderImage = #imageLiteral(resourceName: "Apple")
-        bannerSlide.setUrlsGroup(urlImageBanner)
+        bannerSlide.backgroundColor = .lightGray
         bannerSlide.itemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 300)
         bannerSlide.itemSpacing = 0
         bannerSlide.timeInterval = 4
+    }
+    
+    func bindFakeBanner(_ data: [String]) {
+        bannerSlide.setUrlsGroup(data)
     }
     
 }

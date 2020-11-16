@@ -27,11 +27,20 @@ enum ProductCategory: String, CaseIterable {
 
 class ProductListSections: Sections {
     
-    var numberOfItems: Int = 10
-    var viewModel: HomeViewViewModel!
+    internal var numberOfItems: Int = 10
+    private var viewModel: HomeViewViewModel!
     var category: ProductCategory!
     
     private var disposeBag = DisposeBag()
+    
+    init(viewModel: HomeViewViewModel) {
+        self.viewModel = viewModel
+        
+        self.viewModel.getPopularFashionProductList()
+        self.viewModel.getGadgetProductList()
+        self.viewModel.getPromoProductList()
+    }
+    
     
     func layoutSection() -> NSCollectionLayoutSection {
         
@@ -44,7 +53,7 @@ class ProductListSections: Sections {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.38),
-            heightDimension: .estimated(290))
+            heightDimension: .estimated(280))
         
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -75,13 +84,28 @@ class ProductListSections: Sections {
     
     func configureCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ProductCategoryCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        cell.viewModel = viewModel
+        
+        switch self.category {
+        case .fashion:
+            if let fashion = viewModel.fashionProduct(at: indexPath) {
+                cell.bindProductData(fashion)
+            }
+        case .gadget:
+            if let gadget = viewModel.gadgetProduct(at: indexPath) {
+                cell.bindProductData(gadget)
+            }
+        case .promo:
+            if let promo = viewModel.discountProduct(at: indexPath) {
+                cell.bindProductData(promo)
+            }
+        default: break
+        }
+        
         return cell
     }
     
     func configureHeaderView(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView {
         let header: HeaderSectionTitleReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: .header, forIndexPath: indexPath)
-        header.viewModel = self.viewModel
         header.sectionTitle.text = category.getDescription()
         return header
     }

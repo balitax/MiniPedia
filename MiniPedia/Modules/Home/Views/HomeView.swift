@@ -12,31 +12,29 @@ import RxSwift
 
 class HomeView: UIViewController {
     
-    @IBOutlet weak var navigationBar: UIView!
+    @IBOutlet weak var navigationBar: PrimaryNavigationBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: - Variables
     var viewModel: HomeViewViewModel!
     var disposeBag = DisposeBag()
     var sections : [Sections] = []
     lazy var dompetSection = DompetAccountSections(viewModel: self.viewModel)
     
     lazy var gadgetSection:  ProductListSections = {
-        var product = ProductListSections()
-        product.viewModel = self.viewModel
+        var product = ProductListSections(viewModel: self.viewModel)
         product.category = .fashion
         return product
     }()
     
     lazy var fashionSection: ProductListSections = {
-        var product = ProductListSections()
-        product.viewModel = self.viewModel
+        var product = ProductListSections(viewModel: self.viewModel)
         product.category = .gadget
         return product
     }()
     
     lazy var promoSection: ProductListSections = {
-        var product = ProductListSections()
-        product.viewModel = self.viewModel
+        var product = ProductListSections(viewModel: self.viewModel)
         product.category = .promo
         return product
     }()
@@ -44,26 +42,39 @@ class HomeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupCollectionView()
         self.bindViewModel()
     }
     
     func bindViewModel() {
         
-        self.collectionView.reloadData()
-        self.view.showAnimatedSkeleton()
+        viewModel
+            .state
+            .asObserver()
+            .subscribe (onNext: { load in
+                switch load {
+                case .loading: return
+                case .finish:
+                    self.collectionView.reloadData()
+                default:
+                    return
+                }
+            }).disposed(by: disposeBag)
         
-        self.viewModel.loaded.onNext(false)
-        self.sections = [
-            self.dompetSection,
-            self.gadgetSection,
-            self.fashionSection,
-            self.promoSection
-        ]
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.viewModel.loaded.onNext(true)
-            self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
-        }
-        self.setupCollectionView()
+        collectionView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] indexPath in
+                self.viewModel.getDetailProduct(indexPath: indexPath)
+            }).disposed(by: disposeBag)
+        
+        collectionView.rx.contentOffset
+            .subscribe(onNext: { offset in
+                
+                let getY = offset.y
+                let offset = CGFloat(round(10*getY / 280)/10)
+                self.navigationBar.alpha = offset
+                self.navigationBar.buttonTintColor(offset)
+                
+            }).disposed(by: disposeBag)
         
     }
     
@@ -72,13 +83,21 @@ class HomeView: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         collectionView.backgroundColor = .white
         collectionView.contentInsetAdjustmentBehavior = .never
-        collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.registerReusableCell(DompetAccountInfoCollectionViewCell.self)
         collectionView.registerReusableCell(ProductCategoryCollectionViewCell.self)
         collectionView.register(view: FlashBannerView.self, asSupplementaryViewKind: .header)
         collectionView.register(view: HeaderSectionTitleReusableView.self, asSupplementaryViewKind: .header)
+        collectionView.reloadData()
+        
+        self.sections = [
+            self.dompetSection,
+            self.gadgetSection,
+            self.fashionSection,
+            self.promoSection
+        ]
+        
     }
     
     fileprivate func collectionViewLayout() -> UICollectionViewCompositionalLayout {
@@ -117,24 +136,6 @@ extension HomeView: UICollectionViewDataSource {
     // HEADER FLASH BANNER
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         sections[indexPath.section].configureHeaderView(collectionView, indexPath: indexPath)
-    }
-    
-}
-
-extension HomeView: UICollectionViewDelegate,  UICollectionViewDelegateFlowLayout { }
-
-extension HomeView: SkeletonCollectionViewDataSource {
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func numSections(in collectionSkeletonView: UICollectionView) -> Int {
-        return 4
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return DompetAccountInfoCollectionViewCell.reuseIdentifier
     }
     
 }

@@ -30,9 +30,7 @@ class ProductListView: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var navigationBar: PrimaryNavigationBar! {
         didSet {
-            navigationBar.title = "MINIPEDIA"
             navigationBar.enableRightButton = true
-            navigationBar.enableLeftButton = false
         }
     }
     

@@ -12,15 +12,19 @@ struct ProductListCellViewModel {
     
     var product: DataProducts?
     
-    var productName: String
-    var productPrice: String
-    var productImage: String
+    var productName: String?
+    var productPrice: String?
+    var productImage: String?
     
     init(product: DataProducts) {
         self.productName = product.name ?? ""
         self.productPrice = product.price ?? ""
         self.productImage = product.imageURI ?? ""
         self.product = product
+    }
+    
+    init() {
+     
     }
     
 }

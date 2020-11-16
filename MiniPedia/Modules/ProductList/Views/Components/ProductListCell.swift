@@ -32,7 +32,7 @@ class ProductListCell: UICollectionViewCell, Reusable {
     func bindData() {
         self.productLabel.text = viewModel.productName
         self.productPrice.text = viewModel.productPrice
-        if let img_url = URL(string: viewModel.productImage) {
+        if let img_url = URL(string: viewModel.productImage ?? "") {
             self.productImage.kf.setImage(with: img_url)
         }
     }

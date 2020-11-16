@@ -520,8 +520,8 @@
 				2653A385253410C600F9F28B /* TagCellLayout */,
 				2653A38B253410C600F9F28B /* Range Slider */,
 				2653A390253410C600F9F28B /* GridCollectionViewLayout.swift */,
-				261648942535AB6500048425 /* AutomaticDynamicTableView.swift */,
 				261648A0253629D100048425 /* ACBadgeButton.swift */,
+				261648942535AB6500048425 /* AutomaticDynamicTableView.swift */,
 			);
 			path = "UI+Custom";
 			sourceTree = "<group>";

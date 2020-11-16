@@ -14,12 +14,8 @@ class ProductCategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var productTitle: UILabel!
-    
-    var viewModel: HomeViewViewModel! {
-        didSet {
-            configureCell()
-        }
-    }
+    @IBOutlet weak var productPrice: UILabel!
+    @IBOutlet weak var productStarCount: UILabel!
     
     private var disposeBag = DisposeBag()
     
@@ -34,7 +30,7 @@ class ProductCategoryCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         self.containerView.layoutIfNeeded()
         
-        self.showAnimatedSkeleton()
+        self.showAnimatedGradientSkeleton()
         
         self.containerView.clipsToBounds = true
         self.containerView.cornerRadius = 8
@@ -42,17 +38,18 @@ class ProductCategoryCollectionViewCell: UICollectionViewCell {
         
     }
     
-    private func configureCell() {
-        viewModel.loaded.asObserver()
-            .subscribe(onNext: { [unowned self] loaded in
-                if loaded {
-                    self.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
-                    self.productTitle.text = "OVJ : Eps. Kabayan Pengen Ngetop ( 20 Feb 2013 )"
-                } else {
-                    self.showAnimatedSkeleton()
-                }
-            }).disposed(by: self.disposeBag)
+    func bindProductData(_ data: DataProducts) {
         
+        Delay.wait(delay: 2) {
+            self.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+        }
+        
+        self.productTitle.text = data.name
+        self.productPrice.text = data.price
+        if let img_url = URL(string: data.imageURI ?? "") {
+            self.productImage.kf.setImage(with: img_url)
+        }
+        self.productStarCount.text = data.getCountStar
     }
     
 }
