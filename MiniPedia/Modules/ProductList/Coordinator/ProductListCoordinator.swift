@@ -11,6 +11,7 @@ import RxSwift
 class ProductListCoordinator: ReactiveCoordinator<Void> {
     
     let rootViewController: UIViewController
+    public var viewModel = ProductListViewModel()
     
     init(rootViewController: UIViewController) {
         self.rootViewController = rootViewController
@@ -18,9 +19,11 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         
-        let viewController          = rootViewController as! ProductListView
-        let viewModel               = ProductListViewModel()
+        let viewController          = ProductListView()
         viewController.viewModel    = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        rootViewController.navigationController?
+            .pushViewController(viewController, animated: true)
         
         viewModel.selectedProduct
             .flatMap( { [unowned self] (product) in

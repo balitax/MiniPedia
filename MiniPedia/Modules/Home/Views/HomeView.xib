@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,16 +13,17 @@
             <connections>
                 <outlet property="collectionView" destination="5Xy-iF-Njq" id="4q7-6J-zY4"/>
                 <outlet property="navigationBar" destination="Adt-Ce-5ow" id="ZIj-8K-udP"/>
+                <outlet property="navigationBarHeight" destination="nZn-c8-AUO" id="HbW-Tc-SIc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5Xy-iF-Njq">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pva-z7-vSG">
                         <size key="itemSize" width="128" height="128"/>
@@ -34,11 +35,11 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </collectionView>
-                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adt-Ce-5ow" customClass="PrimaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adt-Ce-5ow" customClass="PrimaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="84" id="qiq-FA-n2a"/>
+                        <constraint firstAttribute="height" constant="50" id="nZn-c8-AUO"/>
                     </constraints>
                 </view>
             </subviews>
@@ -50,13 +51,13 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Adt-Ce-5ow" secondAttribute="trailing" id="6VS-Fi-iAH"/>
                 <constraint firstItem="Adt-Ce-5ow" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DmE-vI-ofM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5Xy-iF-Njq" secondAttribute="trailing" id="Q4x-fi-Zwu"/>
-                <constraint firstItem="Adt-Ce-5ow" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bYz-rX-MiP"/>
+                <constraint firstItem="Adt-Ce-5ow" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wP5-1m-Got"/>
                 <constraint firstItem="5Xy-iF-Njq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yRm-NZ-2pg"/>
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="42.028985507246382" y="95.758928571428569"/>
+            <point key="canvasLocation" x="40.799999999999997" y="95.320197044334975"/>
         </view>
     </objects>
     <resources>

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,11 +34,6 @@
 		26121E0D253DB0D300207D23 /* ZCycleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26121E09253DB0D300207D23 /* ZCycleLayout.swift */; };
 		26121E0E253DB0D300207D23 /* ZPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26121E0A253DB0D300207D23 /* ZPageControl.swift */; };
 		26121E16253DB90B00207D23 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26121E15253DB90B00207D23 /* UIImageView+Extension.swift */; };
-		261647F2253569DD00048425 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 261647F1253569DD00048425 /* Media.xcassets */; };
-		261647FD25356A2D00048425 /* ACAlerts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261647F925356A2D00048425 /* ACAlerts+Extensions.swift */; };
-		261647FE25356A2D00048425 /* ACAlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261647FA25356A2D00048425 /* ACAlertsView.swift */; };
-		261647FF25356A2D00048425 /* ACAlertsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261647FB25356A2D00048425 /* ACAlertsEnum.swift */; };
-		2616480025356A2D00048425 /* ACAlertsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 261647FC25356A2D00048425 /* ACAlertsView.xib */; };
 		2616480525356CA400048425 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2616480425356CA400048425 /* Refreshable.swift */; };
 		261648132535724100048425 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261648112535724100048425 /* ProductDetailView.swift */; };
 		261648142535724100048425 /* ProductDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 261648122535724100048425 /* ProductDetailView.xib */; };
@@ -102,6 +97,7 @@
 		26A13A5F25340D6C00A0CD0F /* ProductListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A13A5D25340D6C00A0CD0F /* ProductListView.xib */; };
 		26A13A6A25340DB800A0CD0F /* ProductListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A13A6925340DB800A0CD0F /* ProductListCoordinator.swift */; };
 		26A13A7225340E3B00A0CD0F /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A13A7125340E3B00A0CD0F /* ProductListViewModel.swift */; };
+		26B165782563DC79003ADCEF /* Bauletto in Frameworks */ = {isa = PBXBuildFile; productRef = 26B165772563DC79003ADCEF /* Bauletto */; };
 		26C45AA225397B0600EB82E0 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C45AA125397B0500EB82E0 /* UIButton+Extension.swift */; };
 		26C45AA8253993C400EB82E0 /* Product+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C45AA7253993C400EB82E0 /* Product+Extension.swift */; };
 		26D0606D25346DE600D67C48 /* ProductListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0606C25346DE600D67C48 /* ProductListCellViewModel.swift */; };
@@ -167,11 +163,6 @@
 		26121E09253DB0D300207D23 /* ZCycleLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZCycleLayout.swift; sourceTree = "<group>"; };
 		26121E0A253DB0D300207D23 /* ZPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZPageControl.swift; sourceTree = "<group>"; };
 		26121E15253DB90B00207D23 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		261647F1253569DD00048425 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		261647F925356A2D00048425 /* ACAlerts+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ACAlerts+Extensions.swift"; sourceTree = "<group>"; };
-		261647FA25356A2D00048425 /* ACAlertsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACAlertsView.swift; sourceTree = "<group>"; };
-		261647FB25356A2D00048425 /* ACAlertsEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACAlertsEnum.swift; sourceTree = "<group>"; };
-		261647FC25356A2D00048425 /* ACAlertsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACAlertsView.xib; sourceTree = "<group>"; };
 		2616480425356CA400048425 /* Refreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
 		261648112535724100048425 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		261648122535724100048425 /* ProductDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailView.xib; sourceTree = "<group>"; };
@@ -272,6 +263,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26B165782563DC79003ADCEF /* Bauletto in Frameworks */,
 				5C9E162F9619675A0A65CE56 /* Pods_MiniPedia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,18 +403,6 @@
 			path = ZCycleView;
 			sourceTree = "<group>";
 		};
-		261647E5253569BF00048425 /* ACAlertViews */ = {
-			isa = PBXGroup;
-			children = (
-				261647F925356A2D00048425 /* ACAlerts+Extensions.swift */,
-				261647FB25356A2D00048425 /* ACAlertsEnum.swift */,
-				261647FA25356A2D00048425 /* ACAlertsView.swift */,
-				261647FC25356A2D00048425 /* ACAlertsView.xib */,
-				261647F1253569DD00048425 /* Media.xcassets */,
-			);
-			path = ACAlertViews;
-			sourceTree = "<group>";
-		};
 		2616480C2535720300048425 /* Product Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,7 +496,6 @@
 			children = (
 				26121E06253DB0D300207D23 /* ZCycleView */,
 				26F825512536DF130016E3C7 /* Custom NavigationBar */,
-				261647E5253569BF00048425 /* ACAlertViews */,
 				2653A385253410C600F9F28B /* TagCellLayout */,
 				2653A38B253410C600F9F28B /* Range Slider */,
 				2653A390253410C600F9F28B /* GridCollectionViewLayout.swift */,
@@ -885,6 +864,9 @@
 			dependencies = (
 			);
 			name = MiniPedia;
+			packageProductDependencies = (
+				26B165772563DC79003ADCEF /* Bauletto */,
+			);
 			productName = MiniPedia;
 			productReference = 265F9C842534097800A2FD47 /* MiniPedia.app */;
 			productType = "com.apple.product-type.application";
@@ -960,6 +942,9 @@
 				Base,
 			);
 			mainGroup = 265F9C7B2534097800A2FD47;
+			packageReferences = (
+				26B165762563DC79003ADCEF /* XCRemoteSwiftPackageReference "Bauletto" */,
+			);
 			productRefGroup = 265F9C852534097800A2FD47 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -992,11 +977,9 @@
 				2616483225358C6E00048425 /* ProductSummaryTableViewCell.xib in Resources */,
 				26A13A5F25340D6C00A0CD0F /* ProductListView.xib in Resources */,
 				26F8255C2536DF600016E3C7 /* SecondaryNavigationBar.xib in Resources */,
-				261647F2253569DD00048425 /* Media.xcassets in Resources */,
 				265F9C912534097D00A2FD47 /* Assets.xcassets in Resources */,
 				260E45D9253EC24F00F76FBF /* DompetAccountInfoCollectionViewCell.xib in Resources */,
 				268204EA2538B60E00E3E542 /* CartItemsListOfMerchantsTableViewCell.xib in Resources */,
-				2616480025356A2D00048425 /* ACAlertsView.xib in Resources */,
 				260E45F5253F1A8E00F76FBF /* HeaderSectionTitleReusableView.xib in Resources */,
 				261648142535724100048425 /* ProductDetailView.xib in Resources */,
 				26121DC8253B558D00207D23 /* EmptyStateView.xib in Resources */,
@@ -1151,7 +1134,6 @@
 				260E45E8253F134E00F76FBF /* ProductCategoryCollectionViewCell.swift in Sources */,
 				26121DC0253B558400207D23 /* EmptyStateView.swift in Sources */,
 				2653A39E253410C700F9F28B /* Extensions.swift in Sources */,
-				261647FD25356A2D00048425 /* ACAlerts+Extensions.swift in Sources */,
 				26121DE1253D4E3100207D23 /* HomeView.swift in Sources */,
 				26A13A5525340CD900A0CD0F /* AppCoordinator.swift in Sources */,
 				2653A396253410C700F9F28B /* UIColor+Extension.swift in Sources */,
@@ -1197,13 +1179,11 @@
 				26121E16253DB90B00207D23 /* UIImageView+Extension.swift in Sources */,
 				2616480525356CA400048425 /* Refreshable.swift in Sources */,
 				26A13A5025340B3D00A0CD0F /* ReactiveCoordinator.swift in Sources */,
-				261647FE25356A2D00048425 /* ACAlertsView.swift in Sources */,
 				2653A397253410C700F9F28B /* LayoutAlignment.swift in Sources */,
 				2653A39F253410C700F9F28B /* RubberTrackLayer.swift in Sources */,
 				26A13A6A25340DB800A0CD0F /* ProductListCoordinator.swift in Sources */,
 				26F8252B2536C3380016E3C7 /* ShoppingCart.swift in Sources */,
 				268204D42538ADC000E3E542 /* CartItemByMerchantsCell.swift in Sources */,
-				261647FF25356A2D00048425 /* ACAlertsEnum.swift in Sources */,
 				260E45F4253F1A8E00F76FBF /* HeaderSectionTitleReusableView.swift in Sources */,
 				26121E0E253DB0D300207D23 /* ZPageControl.swift in Sources */,
 				2616488A2535A66200048425 /* ListInformationProductTableViewCell.swift in Sources */,
@@ -1540,6 +1520,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		26B165762563DC79003ADCEF /* XCRemoteSwiftPackageReference "Bauletto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gianpispi/Bauletto";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		26B165772563DC79003ADCEF /* Bauletto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26B165762563DC79003ADCEF /* XCRemoteSwiftPackageReference "Bauletto" */;
+			productName = Bauletto;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 265F9C7C2534097800A2FD47 /* Project object */;
 }

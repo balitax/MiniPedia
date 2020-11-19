@@ -1,102 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrimaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
             <connections>
-                <outlet property="cartButton" destination="TUY-Fx-wTh" id="4YN-4Y-qGD"/>
+                <outlet property="cartButton" destination="6e0-Vm-Gma" id="3Ao-b9-jsu"/>
                 <outlet property="navigationView" destination="7jx-jD-TLh" id="Yvx-hJ-HWs"/>
+                <outlet property="notificationButton" destination="TUY-Fx-wTh" id="TyW-Fk-qsA"/>
                 <outlet property="primaryContainerView" destination="KXB-8B-GGJ" id="wDw-ld-sJW"/>
-                <outlet property="secondaryContainerView" destination="jJe-lw-3R7" id="ipu-jy-HTP"/>
                 <outlet property="view" destination="iN0-l3-epB" id="oK4-nE-nkH"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="488" height="100"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="488" height="109"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7jx-jD-TLh" userLabel="navigationview">
-                    <rect key="frame" x="0.0" y="0.0" width="488" height="100"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7jx-jD-TLh" userLabel="navigationview">
+                    <rect key="frame" x="0.0" y="44" width="488" height="63"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXB-8B-GGJ" userLabel="primaryNav">
-                            <rect key="frame" x="0.0" y="51" width="488" height="49"/>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXB-8B-GGJ" userLabel="primaryNav">
+                            <rect key="frame" x="0.0" y="0.0" width="488" height="63"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="MqG-6X-Hrt">
-                                    <rect key="frame" x="16" y="0.0" width="456" height="49"/>
-                                    <subviews>
-                                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Cari iPhone 12 Disini" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMk-My-Rd3">
-                                            <rect key="frame" x="0.0" y="0.0" width="430" height="49"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </searchBar>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JR6-XO-Ce7">
-                                            <rect key="frame" x="436" y="0.0" width="20" height="49"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUY-Fx-wTh" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="14.5" width="20" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="bR2-bS-isY"/>
-                                                        <constraint firstAttribute="width" constant="20" id="d0Z-Si-TkP"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" image="cart"/>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstItem="TUY-Fx-wTh" firstAttribute="centerY" secondItem="JR6-XO-Ce7" secondAttribute="centerY" id="E0e-jz-P0L"/>
-                                                <constraint firstItem="TUY-Fx-wTh" firstAttribute="leading" secondItem="JR6-XO-Ce7" secondAttribute="leading" id="dJf-bS-XnP"/>
-                                                <constraint firstAttribute="trailing" secondItem="TUY-Fx-wTh" secondAttribute="trailing" id="t2i-EF-cms"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                </stackView>
+                                <searchBar clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="redraw" searchBarStyle="minimal" placeholder="Cari iPhone 12 Disini" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMk-My-Rd3">
+                                    <rect key="frame" x="16" y="0.0" width="368" height="56"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUY-Fx-wTh" userLabel="notifBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                                    <rect key="frame" x="392" y="10" width="36" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="36" id="j6j-zk-PyR"/>
+                                        <constraint firstAttribute="height" constant="36" id="zYK-mm-70i"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="app.fill" catalog="system" symbolScale="large" renderingMode="template"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6e0-Vm-Gma" userLabel="cartBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                                    <rect key="frame" x="436" y="10" width="36" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="36" id="3Zr-Gy-K0l"/>
+                                        <constraint firstAttribute="height" constant="36" id="Rs5-6b-RsN"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="cart.fill" catalog="system" symbolScale="large" renderingMode="template"/>
+                                    </state>
+                                </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="MqG-6X-Hrt" firstAttribute="top" secondItem="KXB-8B-GGJ" secondAttribute="top" id="DcL-Cu-ZMl"/>
-                                <constraint firstItem="MqG-6X-Hrt" firstAttribute="leading" secondItem="KXB-8B-GGJ" secondAttribute="leading" constant="16" id="cGm-nB-cpb"/>
-                                <constraint firstAttribute="bottom" secondItem="MqG-6X-Hrt" secondAttribute="bottom" id="cyy-kn-7dW"/>
-                                <constraint firstAttribute="trailing" secondItem="MqG-6X-Hrt" secondAttribute="trailing" constant="16" id="kcn-V4-A32"/>
-                                <constraint firstAttribute="height" constant="49" id="n83-Cs-SGe"/>
+                                <constraint firstItem="TUY-Fx-wTh" firstAttribute="leading" secondItem="RMk-My-Rd3" secondAttribute="trailing" constant="8" id="B7c-aI-Yhv"/>
+                                <constraint firstItem="RMk-My-Rd3" firstAttribute="top" secondItem="KXB-8B-GGJ" secondAttribute="top" id="VkY-cf-XsK"/>
+                                <constraint firstItem="TUY-Fx-wTh" firstAttribute="centerY" secondItem="RMk-My-Rd3" secondAttribute="centerY" id="WQ3-BQ-UNS"/>
+                                <constraint firstItem="6e0-Vm-Gma" firstAttribute="leading" secondItem="TUY-Fx-wTh" secondAttribute="trailing" constant="8" id="eoV-yS-Hch"/>
+                                <constraint firstItem="RMk-My-Rd3" firstAttribute="leading" secondItem="KXB-8B-GGJ" secondAttribute="leading" constant="16" id="irq-rf-cCj"/>
+                                <constraint firstItem="6e0-Vm-Gma" firstAttribute="centerY" secondItem="TUY-Fx-wTh" secondAttribute="centerY" id="kmr-pH-zwu"/>
+                                <constraint firstAttribute="trailing" secondItem="6e0-Vm-Gma" secondAttribute="trailing" constant="16" id="pec-jL-Svh"/>
                             </constraints>
                         </view>
-                        <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJe-lw-3R7" userLabel="containerNav">
-                            <rect key="frame" x="0.0" y="0.0" width="488" height="100"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="KXB-8B-GGJ" firstAttribute="centerY" secondItem="7jx-jD-TLh" secondAttribute="centerY" id="BlS-AK-Kld"/>
                         <constraint firstAttribute="trailing" secondItem="KXB-8B-GGJ" secondAttribute="trailing" id="FMC-n5-mQk"/>
-                        <constraint firstItem="jJe-lw-3R7" firstAttribute="top" secondItem="7jx-jD-TLh" secondAttribute="top" id="ViS-ku-2FM"/>
+                        <constraint firstAttribute="bottom" secondItem="KXB-8B-GGJ" secondAttribute="bottom" id="QFH-6p-wjD"/>
+                        <constraint firstItem="KXB-8B-GGJ" firstAttribute="top" secondItem="7jx-jD-TLh" secondAttribute="top" id="V7d-ZK-nzS"/>
                         <constraint firstItem="KXB-8B-GGJ" firstAttribute="leading" secondItem="7jx-jD-TLh" secondAttribute="leading" id="khy-Uo-0Kk"/>
-                        <constraint firstItem="jJe-lw-3R7" firstAttribute="bottom" secondItem="KXB-8B-GGJ" secondAttribute="bottom" id="l53-Qz-9eb"/>
-                        <constraint firstAttribute="trailing" secondItem="jJe-lw-3R7" secondAttribute="trailing" id="mzR-2I-fVr"/>
-                        <constraint firstItem="jJe-lw-3R7" firstAttribute="leading" secondItem="7jx-jD-TLh" secondAttribute="leading" id="yPw-fW-4z2"/>
-                        <constraint firstAttribute="bottom" secondItem="KXB-8B-GGJ" secondAttribute="bottom" id="zYb-2h-U27"/>
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="n2f-V6-Nv9"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="n2f-V6-Nv9" firstAttribute="top" secondItem="7jx-jD-TLh" secondAttribute="top" id="8wz-XO-MhM"/>
                 <constraint firstAttribute="trailing" secondItem="7jx-jD-TLh" secondAttribute="trailing" id="SfM-dY-aXE"/>
-                <constraint firstAttribute="bottom" secondItem="7jx-jD-TLh" secondAttribute="bottom" id="Spj-lB-A79"/>
-                <constraint firstItem="7jx-jD-TLh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dRJ-9e-0qS"/>
+                <constraint firstAttribute="bottom" secondItem="7jx-jD-TLh" secondAttribute="bottom" constant="2" id="Spj-lB-A79"/>
                 <constraint firstItem="7jx-jD-TLh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mfO-jR-suc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="98.550724637681171" y="95.758928571428569"/>
+            <point key="canvasLocation" x="98.550724637681171" y="108.81696428571428"/>
         </view>
     </objects>
     <resources>
-        <image name="cart" width="32" height="32"/>
+        <image name="app.fill" catalog="system" width="128" height="114"/>
+        <image name="cart.fill" catalog="system" width="128" height="102"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

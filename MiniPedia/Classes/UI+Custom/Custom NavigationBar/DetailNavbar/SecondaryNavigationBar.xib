@@ -1,127 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecondaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
             <connections>
-                <outlet property="cartButton" destination="eMZ-MR-vGZ" id="joq-4E-Q8n"/>
-                <outlet property="leftButton" destination="3Lx-Zg-ffl" id="med-Wc-2hN"/>
-                <outlet property="moreButton" destination="gvV-oZ-6Qm" id="1iZ-G4-9fe"/>
-                <outlet property="navigationView" destination="CDj-gR-Egz" id="6zg-Yz-xDE"/>
-                <outlet property="primaryContainerView" destination="LIu-Ou-IML" id="7pT-KW-mmW"/>
-                <outlet property="secondaryContainerView" destination="85p-kq-bLq" id="65C-vV-YXT"/>
-                <outlet property="shareButton" destination="uZu-Rz-TfJ" id="n3Q-NB-9RR"/>
-                <outlet property="titleLabel" destination="kxG-Ye-JTj" id="5h2-Zd-9mn"/>
+                <outlet property="cartButton" destination="BNv-Da-uWN" id="cqE-6D-f3o"/>
+                <outlet property="leftButton" destination="cdp-bo-TSc" id="vuM-qd-mT2"/>
+                <outlet property="navigationView" destination="FWO-wV-BS3" id="Y1p-0s-sWb"/>
+                <outlet property="primaryContainerView" destination="61P-yf-q4x" id="Ka2-p8-cg5"/>
+                <outlet property="shareButton" destination="Kpx-3Q-5nb" id="QDb-r2-wRT"/>
+                <outlet property="titleLabel" destination="tl4-Qo-fur" id="Yz9-tk-ph2"/>
                 <outlet property="view" destination="iN0-l3-epB" id="pgf-rG-d62"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="491" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDj-gR-Egz" userLabel="navigationview">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FWO-wV-BS3" userLabel="navigationview">
+                    <rect key="frame" x="0.0" y="44" width="491" height="56"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="61P-yf-q4x" userLabel="primaryNav">
+                    <rect key="frame" x="0.0" y="22" width="491" height="56"/>
                     <subviews>
-                        <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIu-Ou-IML" userLabel="primaryNav">
-                            <rect key="frame" x="0.0" y="51" width="414" height="49"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdp-bo-TSc" userLabel="backBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                            <rect key="frame" x="16" y="10" width="36" height="36"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="49" id="LZD-vb-bdk"/>
+                                <constraint firstAttribute="width" constant="36" id="HpR-LN-SVe"/>
+                                <constraint firstAttribute="height" constant="36" id="rtE-UC-5ut"/>
                             </constraints>
-                        </view>
-                        <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85p-kq-bLq" userLabel="containerNav">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Lx-Zg-ffl" userLabel="backButton">
-                            <rect key="frame" x="16" y="64.5" width="20" height="22"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="22" id="ap9-TB-NKx"/>
-                                <constraint firstAttribute="width" constant="20" id="vAQ-S1-aRg"/>
-                            </constraints>
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="arrow"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal">
+                                <imageReference key="image" image="arrow" symbolScale="large" renderingMode="template"/>
+                            </state>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Angola Gantungan Rak Baju Setelan Almari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxG-Ye-JTj" userLabel="title">
-                            <rect key="frame" x="52" y="66" width="274" height="19.5"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Produk yang sedang di lihat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tl4-Qo-fur">
+                            <rect key="frame" x="56" y="18" width="200.5" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="iby-xj-Cwq" userLabel="rightItems">
-                            <rect key="frame" x="342" y="65.5" width="56" height="20"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZu-Rz-TfJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="XeB-TF-MHB"/>
-                                        <constraint firstAttribute="width" constant="20" id="sMS-DH-3fT"/>
-                                    </constraints>
-                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" image="share"/>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMZ-MR-vGZ" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                                    <rect key="frame" x="36" y="0.0" width="20" height="20"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="RVZ-UA-zPW"/>
-                                        <constraint firstAttribute="width" constant="20" id="sHp-gu-jdm"/>
-                                    </constraints>
-                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" image="cart"/>
-                                </button>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvV-oZ-6Qm">
-                                    <rect key="frame" x="56" y="0.0" width="0.0" height="20"/>
-                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" image="icMore"/>
-                                </button>
-                            </subviews>
-                        </stackView>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-3Q-5nb" userLabel="shareBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                            <rect key="frame" x="260.5" y="8" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="SkQ-RB-cdO"/>
+                                <constraint firstAttribute="height" constant="36" id="qrv-9V-QpR"/>
+                            </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal">
+                                <imageReference key="image" image="square.and.arrow.up.fill" catalog="system" symbolScale="large" renderingMode="template"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNv-Da-uWN" userLabel="cartBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                            <rect key="frame" x="296.5" y="10" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="8rZ-19-69x"/>
+                                <constraint firstAttribute="width" constant="36" id="feh-Yw-5G7"/>
+                            </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal">
+                                <imageReference key="image" image="cart.fill" catalog="system" symbolScale="large" renderingMode="template"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="85p-kq-bLq" firstAttribute="top" secondItem="CDj-gR-Egz" secondAttribute="top" id="6AD-GF-8Ia"/>
-                        <constraint firstAttribute="trailing" secondItem="LIu-Ou-IML" secondAttribute="trailing" id="6Ew-qf-2NL"/>
-                        <constraint firstItem="iby-xj-Cwq" firstAttribute="centerY" secondItem="LIu-Ou-IML" secondAttribute="centerY" id="CLN-wX-aOR"/>
-                        <constraint firstItem="LIu-Ou-IML" firstAttribute="leading" secondItem="CDj-gR-Egz" secondAttribute="leading" id="DeK-K7-Fb9"/>
-                        <constraint firstItem="85p-kq-bLq" firstAttribute="bottom" secondItem="LIu-Ou-IML" secondAttribute="bottom" id="Dsj-Zj-0Mx"/>
-                        <constraint firstItem="kxG-Ye-JTj" firstAttribute="centerY" secondItem="3Lx-Zg-ffl" secondAttribute="centerY" id="EhH-6C-9Bo"/>
-                        <constraint firstAttribute="trailing" secondItem="iby-xj-Cwq" secondAttribute="trailing" constant="16" id="M4f-jN-bH0"/>
-                        <constraint firstItem="3Lx-Zg-ffl" firstAttribute="leading" secondItem="CDj-gR-Egz" secondAttribute="leading" constant="16" id="M9x-yd-QaF"/>
-                        <constraint firstItem="85p-kq-bLq" firstAttribute="leading" secondItem="CDj-gR-Egz" secondAttribute="leading" id="TRP-ap-hX9"/>
-                        <constraint firstAttribute="trailing" secondItem="85p-kq-bLq" secondAttribute="trailing" id="V0e-q2-nrs"/>
-                        <constraint firstAttribute="bottom" secondItem="LIu-Ou-IML" secondAttribute="bottom" id="ccg-NJ-g1r"/>
-                        <constraint firstItem="iby-xj-Cwq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kxG-Ye-JTj" secondAttribute="trailing" constant="16" id="jTD-pO-n9y"/>
-                        <constraint firstItem="kxG-Ye-JTj" firstAttribute="leading" secondItem="3Lx-Zg-ffl" secondAttribute="trailing" constant="16" id="x5G-3W-NHT"/>
-                        <constraint firstItem="3Lx-Zg-ffl" firstAttribute="centerY" secondItem="LIu-Ou-IML" secondAttribute="centerY" id="ydS-Dz-Ysv"/>
+                        <constraint firstAttribute="trailing" secondItem="BNv-Da-uWN" secondAttribute="trailing" constant="16" id="1dU-bV-AIH"/>
+                        <constraint firstItem="BNv-Da-uWN" firstAttribute="centerY" secondItem="cdp-bo-TSc" secondAttribute="centerY" id="2My-Du-AOz"/>
+                        <constraint firstItem="tl4-Qo-fur" firstAttribute="centerY" secondItem="cdp-bo-TSc" secondAttribute="centerY" id="2Pv-84-esU"/>
+                        <constraint firstItem="cdp-bo-TSc" firstAttribute="leading" secondItem="61P-yf-q4x" secondAttribute="leading" constant="16" id="NCy-2X-DvS"/>
+                        <constraint firstItem="BNv-Da-uWN" firstAttribute="leading" secondItem="Kpx-3Q-5nb" secondAttribute="trailing" id="NXn-TW-eTw"/>
+                        <constraint firstItem="cdp-bo-TSc" firstAttribute="centerY" secondItem="61P-yf-q4x" secondAttribute="centerY" id="PVe-in-YGa"/>
+                        <constraint firstItem="Kpx-3Q-5nb" firstAttribute="centerY" secondItem="BNv-Da-uWN" secondAttribute="centerY" constant="-2" id="XS2-Ib-Bbq"/>
+                        <constraint firstItem="Kpx-3Q-5nb" firstAttribute="leading" secondItem="tl4-Qo-fur" secondAttribute="trailing" constant="4" id="bk9-r8-HIg"/>
+                        <constraint firstItem="tl4-Qo-fur" firstAttribute="leading" secondItem="cdp-bo-TSc" secondAttribute="trailing" constant="4" id="e9R-i3-Kn5"/>
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="VXb-zn-epk"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="CDj-gR-Egz" secondAttribute="trailing" id="1Fp-zS-Q80"/>
-                <constraint firstItem="CDj-gR-Egz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7xO-aT-tBB"/>
-                <constraint firstItem="CDj-gR-Egz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EqQ-xH-XQV"/>
-                <constraint firstAttribute="bottom" secondItem="CDj-gR-Egz" secondAttribute="bottom" id="OXt-Yy-Mjm"/>
+                <constraint firstAttribute="bottom" secondItem="FWO-wV-BS3" secondAttribute="bottom" id="Ges-vR-25H"/>
+                <constraint firstItem="FWO-wV-BS3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OL3-7X-gwV"/>
+                <constraint firstAttribute="trailing" secondItem="FWO-wV-BS3" secondAttribute="trailing" id="Qqb-rM-rEn"/>
+                <constraint firstItem="VXb-zn-epk" firstAttribute="top" secondItem="FWO-wV-BS3" secondAttribute="top" id="SsC-g7-oRU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="45" y="96"/>
+            <point key="canvasLocation" x="100.72463768115942" y="95.758928571428569"/>
         </view>
     </objects>
     <resources>
         <image name="arrow" width="20" height="21"/>
-        <image name="cart" width="32" height="32"/>
-        <image name="icMore" width="4" height="16"/>
-        <image name="share" width="32" height="32"/>
+        <image name="cart.fill" catalog="system" width="128" height="102"/>
+        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
     </resources>
 </document>

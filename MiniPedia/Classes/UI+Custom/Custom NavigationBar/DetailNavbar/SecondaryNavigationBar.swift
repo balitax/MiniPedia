@@ -16,13 +16,11 @@ final class SecondaryNavigationBar: UIView {
     @IBOutlet private var view: UIView!
     @IBOutlet private var navigationView: UIView!
     @IBOutlet private var primaryContainerView: UIView!
-    @IBOutlet private var secondaryContainerView: UIView!
     @IBOutlet private weak var leftButton: UIButton!
     @IBOutlet private weak var titleLabel: UILabel!
     
     @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var cartButton: ACBadgeButton!
-    @IBOutlet private weak var moreButton: UIButton!
     
     private let disposeBag = DisposeBag()
     
@@ -36,27 +34,6 @@ final class SecondaryNavigationBar: UIView {
         }
     }
     
-    // MARK: -- Offset Follow ScrollView
-    var setOffset: CGFloat = 1 {
-        didSet {
-            
-            self.secondaryContainerView.alpha = setOffset
-            
-            if setOffset >= 1.0 {
-                self.titleLabel.alpha = 1
-                self.navigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor(hexString: "#ededed"), radius: 2, opacity: 0.8)
-            } else if setOffset >= 0.5 && setOffset <= 1.0 {
-                self.buttonTintColor(setOffset)
-            } else {
-                self.buttonTintColor(0)
-                self.titleLabel.alpha = 0
-                self.navigationView.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
-            }
-            
-        }
-    }
-    
-    
     var isLeftButtonHidden: Bool {
         set {
             leftButton.isHidden = newValue
@@ -68,7 +45,7 @@ final class SecondaryNavigationBar: UIView {
     
     var enableRightButtonItems: Bool {
         set {
-            _ = [shareButton, cartButton, moreButton].map { $0?.isHidden = newValue }
+            _ = [shareButton, cartButton].map { $0?.isHidden = newValue }
         }
         get {
             return true
@@ -93,9 +70,7 @@ final class SecondaryNavigationBar: UIView {
             .asObservable()
             .subscribe(onNext: { [unowned self] badge in
                 if (badge.count != 0) {
-                    self.cartButton.badgeValue = "\(badge.count)"
-                } else {
-                    self.cartButton.badgeValue = ""
+                    self.cartButton.badgeCount = badge.count
                 }
             })
             .disposed(by: disposeBag)
@@ -130,10 +105,22 @@ final class SecondaryNavigationBar: UIView {
         )
     }
     
-    private func buttonTintColor(_ offset: CGFloat) {
-        _ = [leftButton, shareButton, cartButton, moreButton].map {
+    public func alpaOffset(_ offset: CGFloat) {
+        
+        self.view.backgroundColor = UIColor(white: 1, alpha: offset)
+        
+        if offset >= 1.0 {
+            self.navigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor.clear, radius: 4, opacity: 0.8)
+            self.navigationView.backgroundColor = .white
+        }  else {
+            self.navigationView.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
+        }
+        
+        _ = [leftButton, shareButton, cartButton].map {
             $0?.tintColor = UIColor(red: 1 - (offset / 2), green: 1 - (offset / 2), blue: 1 - (offset / 2), alpha: 1)
         }
+        
+        titleLabel.textColor = UIColor(red: 1 - (offset / 2), green: 1 - (offset / 2), blue: 1 - (offset / 2), alpha: 1)
     }
     
 }

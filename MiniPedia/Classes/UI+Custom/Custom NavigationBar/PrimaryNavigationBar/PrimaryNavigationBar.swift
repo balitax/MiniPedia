@@ -19,21 +19,13 @@ final class PrimaryNavigationBar: UIView {
     @IBOutlet private var view: UIView!
     @IBOutlet private var navigationView: UIView!
     @IBOutlet private var primaryContainerView: UIView!
-    @IBOutlet private var secondaryContainerView: UIView!
     @IBOutlet private weak var cartButton: ACBadgeButton!
+    @IBOutlet private weak var notificationButton: ACBadgeButton!
     
     private let disposeBag = DisposeBag()
     public let cartButtonObservable = PublishSubject<Void>()
-    public let backButtonObservable = PublishSubject<Void>()
+    public let notifButtonObservable = PublishSubject<Void>()
     
-    
-    var enableRightButton: Bool = true {
-        didSet {
-            DispatchQueue.main.async {
-                self.cartButton.isHidden = !self.enableRightButton
-            }
-        }
-    }
     
     override func awakeFromNib() {
         initWithNib()
@@ -48,23 +40,29 @@ final class PrimaryNavigationBar: UIView {
     }
     
     private func setupUI() {
-        self.navigationView.addShadow(offset: CGSize(width: 0, height: 3), color: UIColor(hexString: "#ededed"), borderColor: UIColor(hexString: "#ededed"), radius: 4, opacity: 0.8)
-        
         Observable.collection(from: ShoppingCart.shared.products)
             .asObservable()
             .subscribe(onNext: { [unowned self] badge in
                 if (badge.count != 0) {
-                    self.cartButton.badgeValue = "\(badge.count)"
+                    self.cartButton.badgeCount = badge.count
                 } else {
-                    self.cartButton.badgeValue = ""
+                    self.cartButton.badgeCount = 0
                 }
             })
             .disposed(by: disposeBag)
+        
+        notificationButton.badgeCount = 8
         
         cartButton.rx
             .tap
             .bind {
                 self.cartButtonObservable.onNext(())
+            }.disposed(by: disposeBag)
+        
+        notificationButton.rx
+            .tap
+            .bind {
+                self.notifButtonObservable.onNext(())
             }.disposed(by: disposeBag)
         
         
@@ -81,11 +79,19 @@ final class PrimaryNavigationBar: UIView {
         )
     }
     
-    public func buttonTintColor(_ offset: CGFloat) {
-            _ = [cartButton].map {
-                $0?.tintColor = UIColor(red: 1 - (offset / 2), green: 1 - (offset / 2), blue: 1 - (offset / 2), alpha: 1)
-            }
+    public func alpaOffset(_ offset: CGFloat) {
+        self.view.alpha = offset
+        
+        if offset >= 1.0 {
+            self.navigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor.clear, radius: 4, opacity: 0.8)
+        } else {
+            self.navigationView.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
         }
+        
+        _ = [cartButton, notificationButton].map {
+            $0?.tintColor = UIColor(red: 1 - (offset / 2), green: 1 - (offset / 2), blue: 1 - (offset / 2), alpha: 1)
+        }
+    }
     
     
 }

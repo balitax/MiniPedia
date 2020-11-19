@@ -14,6 +14,20 @@ struct AnchoredConstraints {
 
 extension UIView {
     
+    func addShadow(offset: CGSize, color: UIColor, borderColor: UIColor, radius: CGFloat, opacity: Float) {
+        layer.masksToBounds = false
+        layer.shadowOffset = offset
+        layer.shadowColor = color.cgColor
+        layer.shadowRadius = radius
+        layer.shadowOpacity = opacity
+        layer.borderColor = borderColor.cgColor
+        layer.borderWidth = 0.6
+        
+        let backgroundCGColor = backgroundColor?.cgColor
+        backgroundColor = nil
+        layer.backgroundColor =  backgroundCGColor
+    }
+    
     @IBInspectable var borderColor: UIColor? {
         get { return layer.borderColor.map(UIColor.init) }
         set { layer.borderColor = newValue?.cgColor }

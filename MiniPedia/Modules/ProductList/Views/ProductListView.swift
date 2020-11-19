@@ -28,12 +28,7 @@ class ProductListView: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var navigationBar: PrimaryNavigationBar! {
-        didSet {
-            navigationBar.enableRightButton = true
-        }
-    }
-    
+    @IBOutlet weak var navigationBar: PrimaryNavigationBar!
     let disposeBag = DisposeBag()
     var viewModel: ProductListViewModel!
     var layout = GridCollectionViewLayout()
@@ -96,9 +91,7 @@ class ProductListView: UIViewController {
                 self.refreshHandler.end()
             }, onError: { error in
                 self.refreshHandler.end()
-                let alert = ACAlertsView(position: .bottom, direction: .toRight, marginBottom: 120)
-                alert.delay = 5
-                alert.show(error.localizedDescription, style: .error)
+                self.showAlert(error.localizedDescription, type: .error)
             }).disposed(by: disposeBag)
         
         collectionView.rx.itemSelected

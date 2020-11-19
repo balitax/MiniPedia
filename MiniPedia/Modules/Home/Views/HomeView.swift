@@ -13,6 +13,13 @@ import RxSwift
 class HomeView: UIViewController {
     
     @IBOutlet weak var navigationBar: PrimaryNavigationBar!
+    @IBOutlet weak var navigationBarHeight: NSLayoutConstraint! {
+        didSet {
+            if let height = self.navigationController?.navigationBar.frame.height {
+                self.navigationBarHeight.constant = height + 60
+            }
+        }
+    }
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Variables
@@ -71,8 +78,7 @@ class HomeView: UIViewController {
                 
                 let getY = offset.y
                 let offset = CGFloat(round(10*getY / 280)/10)
-                self.navigationBar.alpha = offset
-                self.navigationBar.buttonTintColor(offset)
+                self.navigationBar.alpaOffset(offset)
                 
             }).disposed(by: disposeBag)
         

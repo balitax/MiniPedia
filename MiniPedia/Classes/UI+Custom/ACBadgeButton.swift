@@ -6,94 +6,103 @@
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 
+import ObjectiveC
 import UIKit
 
-class ACBadgeButton: UIButton {
+private struct BadgableAssociatedKeys {
+    static var badgeCount = "dadgableBadgeCount"
+    static var badgeLabel = "badgeLabel"
+}
+
+public protocol Badgeable {
     
-    @IBInspectable
-    var badgeValue : String! = "" {
-        didSet {
-            self.layoutSubviews()
+    var badgeCount: Int { get set }
+    
+}
+
+public extension Badgeable {
+    
+    /// Badge count. Can display badge by setting this variable.
+    var badgeCount: Int {
+        get {
+            return objc_getAssociatedObject(self, &BadgableAssociatedKeys.badgeCount) as? Int ?? 0
+        }
+        set {
+            objc_setAssociatedObject(self, &BadgableAssociatedKeys.badgeCount, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            presentBadge()
         }
     }
     
-    override init(frame :CGRect)  {
-        // Initialize the UIView
-        super.init(frame : frame)
-        
-        self.awakeFromNib()
-    }
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.awakeFromNib()
-    }
-    
-    
-    override func awakeFromNib()
-    {
-        self.drawBadgeLayer()
-    }
-    
-    var badgeLayer :CAShapeLayer!
-    func drawBadgeLayer() {
-        
-        if self.badgeLayer != nil {
-            self.badgeLayer.removeFromSuperlayer()
+    /// Computed badgeLabel.
+    /// If it's nil it will create one.
+    private var badgeLabel: UILabel {
+        mutating get {
+            guard let badgeLabel = objc_getAssociatedObject(self, &BadgableAssociatedKeys.badgeLabel) as? UILabel else {
+                let badgeLabel = labelForBadge()
+                self.badgeLabel = badgeLabel
+                return badgeLabel
+            }
+            return badgeLabel
         }
-        
-        // Omit layer if text is nil
-        if self.badgeValue == nil || self.badgeValue.count == 0 {
-            return
+        set {
+            objc_setAssociatedObject(self, &BadgableAssociatedKeys.badgeLabel, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
-        
-        //! Initial label text layer
-        let labelText = CATextLayer()
-        labelText.contentsScale = UIScreen.main.scale
-        labelText.string = self.badgeValue.uppercased()
-        labelText.fontSize = 12.0
-        labelText.font = UIFont.systemFont(ofSize: 12)
-        labelText.alignmentMode = CATextLayerAlignmentMode.center
-        labelText.foregroundColor = UIColor.white.cgColor
-        let labelString = self.badgeValue.uppercased() as String?
-        let labelFont = UIFont.systemFont(ofSize: 12) as UIFont?
-        let attributes = [NSAttributedString.Key.font : labelFont]
-        let w = self.frame.size.width
-        let h = CGFloat(14.0)  // fixed height
-        let labelWidth = min(w * 0.8, 10.0)    // Starting point
-        let rect = labelString!.boundingRect(with: CGSize(width: labelWidth, height: h), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes as [NSAttributedString.Key : Any], context: nil)
-        let textWidth = round(rect.width * UIScreen.main.scale)
-        labelText.frame = CGRect(x: 0, y: 0, width: textWidth, height: h)
-        
-        //! Initialize outline, set frame and color
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.contentsScale = UIScreen.main.scale
-        let frame : CGRect = labelText.frame
-        let cornerRadius = CGFloat(7.0)
-        let borderInset = CGFloat(-1.0)
-        let aPath = UIBezierPath(roundedRect: frame.insetBy(dx: borderInset, dy: borderInset), cornerRadius: cornerRadius)
-        
-        shapeLayer.path = aPath.cgPath
-        shapeLayer.fillColor = UIColor.red.cgColor
-        shapeLayer.strokeColor = UIColor.red.cgColor
-        shapeLayer.lineWidth = 0.5
-        
-        shapeLayer.insertSublayer(labelText, at: 0)
-        
-        shapeLayer.frame = shapeLayer.frame.offsetBy(dx: w*0.5, dy: 0.0)
-        
-        self.layer.insertSublayer(shapeLayer, at: 999)
-        self.layer.masksToBounds = false
-        self.badgeLayer = shapeLayer
-        
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.drawBadgeLayer()
-        self.setNeedsDisplay()
+    /// Display badge label into super view.
+    /// It supports subclass of UIView and UIBarButtonItem only.
+    /// If badge being displayed in UIBarButtonItem then it uses customView for superview.
+    /// Badgable will work only if UIBarButtonItem uses customView.
+    private mutating func presentBadge() {
+        // Configure badge label
+        badgeLabel.text = "\(badgeCount)"
+        badgeLabel.sizeToFit()
+        var labelFrame = badgeLabel.frame
+        labelFrame.size.width += 4
+        labelFrame.size.height += 4
+        if labelFrame.size.width < labelFrame.size.height {
+            labelFrame.size.width = labelFrame.size.height
+        }
+        badgeLabel.frame = labelFrame
+        badgeLabel.layer.cornerRadius = labelFrame.size.height / 2.0
+        badgeLabel.isHidden = badgeCount == 0
+        
+        // Add to super view, adjust frame
+        if let barButtonItem = self as? UIBarButtonItem {
+            if let customView = barButtonItem.customView {
+                badgeLabel.frame = positionedFrame(badgeLabel: badgeLabel, to: customView)
+                customView.clipsToBounds = false
+                customView.addSubview(badgeLabel)
+            }
+        } else if let view = self as? UIView {
+            badgeLabel.frame = positionedFrame(badgeLabel: badgeLabel, to: view)
+            view.clipsToBounds = false
+            view.addSubview(badgeLabel)
+        }
     }
+    
+    /// Calculate frame badgelabel sit top right side of super view.
+    /// Returns calculated CGRect.
+    private func positionedFrame(badgeLabel: UILabel, to superView: UIView) -> CGRect {
+        var frame = badgeLabel.frame
+        frame.origin.x = superView.frame.size.width - frame.size.width / 2.0
+        frame.origin.y = -frame.size.height / 2.0
+        return frame
+    }
+    
+    /// Instantiate UILabel for badge.
+    private func labelForBadge() -> UILabel {
+        let label = UILabel()
+        label.clipsToBounds = true
+        label.font = UIFont.systemFont(ofSize: 8.0)
+        label.backgroundColor = UIColor.red
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        return label
+    }
+    
+}
+
+class ACBadgeButton: UIButton , Badgeable {
     
 }

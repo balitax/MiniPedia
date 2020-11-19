@@ -30,12 +30,18 @@ class ProductDetailView: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationBar: SecondaryNavigationBar!
+    @IBOutlet weak var navigationBarHeight: NSLayoutConstraint! {
+        didSet {
+            if let height = self.navigationController?.navigationBar.frame.height {
+                self.navigationBarHeight.constant = height + 60
+            }
+        }
+    }
     @IBOutlet weak var btnAddKeranjang: UIButton!
     @IBOutlet weak var btnOpenToko: UIButton!
     
     let disposeBag = DisposeBag()
     var viewModel: ProductDetailViewModel!
-    lazy var alert = ACAlertsView(position: .top, direction: .toRight, marginTop: 50)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,11 +76,11 @@ class ProductDetailView: UIViewController {
             .subscribe(onNext: { [unowned self] state in
                 switch state {
                 case .done:
-                    self.alert.show("Produk berhasil ditambahkan ke keranjang Anda", style: .success)
+                    self.showAlert("Produk ditambahkan ke keranjang Anda")
                 case .error:
-                    self.alert.show("Terjadi kesalahan saat menambah ke keranjang", style: .error)
+                    self.showAlert("Terjadi kesalahan!", type: .error)
                 case .update:
-                    self.alert.show("Jumlah produk berhasil di perbarui di keranjang Anda", style: .success)
+                    self.showAlert("Jumlah produk di perbarui", type: .success)
                 default:
                     return
                 }
@@ -125,7 +131,7 @@ class ProductDetailView: UIViewController {
             .subscribe { [unowned self] in
                 let getY = $0.element?.y ?? 0
                 let offset = CGFloat(round(10*getY / 280)/10)
-                self.navigationBar.setOffset = offset
+                self.navigationBar.alpaOffset(offset)
             }.disposed(by: self.disposeBag)
         
     }

@@ -29,11 +29,7 @@ class CartView: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @IBOutlet weak var navigationBar: PrimaryNavigationBar! {
-        didSet {
-            navigationBar.enableRightButton = false
-        }
-    }
+    @IBOutlet weak var navigationBar: PrimaryNavigationBar!
     @IBOutlet weak var tableView: AutomaticDynamicTableView!
     @IBOutlet weak var selectedCart: UILabel!
     @IBOutlet weak var btnDeleteAll: UIButton!

@@ -107,6 +107,22 @@ class ProductListSections: Sections {
     func configureHeaderView(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView {
         let header: HeaderSectionTitleReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: .header, forIndexPath: indexPath)
         header.sectionTitle.text = category.getDescription()
+        
+        header.btnSeeAll
+            .rx
+            .tap
+            .subscribe(onNext: { [unowned self] _ in
+                switch self.category {
+                case .fashion:
+                    viewModel.showAllFashionProduct.onNext(viewModel.fashionQueryProduct)
+                case .gadget:
+                    break
+                case .promo:
+                    break
+                default: break
+                }
+            }).disposed(by: disposeBag)
+        
         return header
     }
     

@@ -13,14 +13,15 @@ import RxCocoa
 
 class HomeViewViewModel: BaseViewModel {
     
-    private  let repository = ProductListRepository()
-    private var fashionQueryProduct = QueryProduct(query: "fashion wanita")
+    private let repository = ProductListRepository()
+    var fashionQueryProduct = QueryProduct(query: "fashion wanita")
     private var gadgetQueryProduct = QueryProduct(query: "gadget")
     private var promoQueryProduct = QueryProduct(query: "diskon")
     private var infoAccountFakeRequest: Bool?
    
     
     var getDetailProduct = PublishSubject<ProductListCellViewModel>()
+    var showAllFashionProduct = PublishSubject<QueryProduct>()
     
     //MARK: - ViewModel DataSource
     private var popularFashion = BehaviorRelay<[DataProducts]> (
@@ -95,6 +96,7 @@ class HomeViewViewModel: BaseViewModel {
     }
     
 }
+
 
 // MARK: -- Product Info
 extension HomeViewViewModel {
