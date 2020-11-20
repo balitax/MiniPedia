@@ -12,20 +12,35 @@ import RxRealm
 import RealmSwift
 import RxCocoa
 
+extension UISearchBar {
+    func getTextField() -> UITextField? { return value(forKey: "searchField") as? UITextField }
+    func setTextField(color: UIColor) {
+        guard let textField = getTextField() else { return }
+        switch searchBarStyle {
+        case .minimal:
+            textField.layer.backgroundColor = color.cgColor
+            textField.layer.cornerRadius = 10
+        case .prominent, .default: textField.backgroundColor = color
+        @unknown default: break
+        }
+    }
+}
+
 final class PrimaryNavigationBar: UIView {
     
     private static let NIB_NAME = "PrimaryNavigationBar"
     
     @IBOutlet private var view: UIView!
+    @IBOutlet private var mainNavigationView: UIView!
     @IBOutlet private var navigationView: UIView!
     @IBOutlet private var primaryContainerView: UIView!
     @IBOutlet private weak var cartButton: ACBadgeButton!
-    @IBOutlet private weak var notificationButton: ACBadgeButton!
+    @IBOutlet private weak var whishlistButton: ACBadgeButton!
     @IBOutlet private weak var searchBar: UISearchBar!
     
     private let disposeBag = DisposeBag()
     public let cartButtonObservable = PublishSubject<Void>()
-    public let notifButtonObservable = PublishSubject<Void>()
+    public let whishlistButtonObservable = PublishSubject<Void>()
     public let searchBarButtonObservable = PublishSubject<Void>()
     
     override func awakeFromNib() {
@@ -41,6 +56,8 @@ final class PrimaryNavigationBar: UIView {
     }
     
     private func setupUI() {
+        
+        searchBar.setTextField(color: UIColor.white)
        
         Observable.collection(from: ShoppingCart.shared.products)
             .asObservable()
@@ -57,18 +74,16 @@ final class PrimaryNavigationBar: UIView {
             })
             .disposed(by: disposeBag)
         
-        notificationButton.badgeCount = 8
-        
         cartButton.rx
             .tap
             .bind {
                 self.cartButtonObservable.onNext(())
             }.disposed(by: disposeBag)
         
-        notificationButton.rx
+        whishlistButton.rx
             .tap
             .bind {
-                self.notifButtonObservable.onNext(())
+                self.whishlistButtonObservable.onNext(())
             }.disposed(by: disposeBag)
         
         searchBar.delegate = self
@@ -87,7 +102,7 @@ final class PrimaryNavigationBar: UIView {
     }
     
     public func alpaOffset(_ offset: CGFloat) {
-        self.view.alpha = offset
+        self.mainNavigationView.alpha = offset
         
         if offset >= 1.0 {
             self.navigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor.clear, radius: 4, opacity: 0.8)
@@ -95,7 +110,7 @@ final class PrimaryNavigationBar: UIView {
             self.navigationView.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
         }
         
-        _ = [cartButton, notificationButton].map {
+        _ = [cartButton, whishlistButton].map {
             $0?.tintColor = UIColor(red: 1 - (offset / 2), green: 1 - (offset / 2), blue: 1 - (offset / 2), alpha: 1)
         }
     }

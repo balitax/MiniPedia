@@ -108,6 +108,7 @@ class CartView: UIViewController {
         navigationBar.title = "Cart"
         navigationBar.fontFize(20)
         navigationBar.isLeftButtonHidden = true
+        navigationBar.isEnableShadow = false
         
     }
     

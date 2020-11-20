@@ -61,7 +61,7 @@ final class SecondaryNavigationBar: UIView {
     
     var enableRightButtonItems: Bool {
         set {
-            _ = [shareButton, cartButton].map { $0?.isHidden = newValue }
+            _ = [shareButton, cartButton].map { $0?.isHidden = !newValue }
         }
         get {
             return true
@@ -74,6 +74,12 @@ final class SecondaryNavigationBar: UIView {
         }
         get {
             return true
+        }
+    }
+    
+    var isEnableShadow: Bool = true {
+        didSet {
+            self.navigationView.addShadow(offset: CGSize(width: 0, height: 2), color: isEnableShadow ? UIColor(hexString: "#ededed") : UIColor.clear, borderColor: UIColor.clear, radius: 4, opacity: 0.8)
         }
     }
     

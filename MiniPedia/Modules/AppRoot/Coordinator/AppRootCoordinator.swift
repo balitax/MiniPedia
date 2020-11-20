@@ -21,27 +21,24 @@ class AppRootCoordinator: ReactiveCoordinator<Void> {
         let tabBarController = self.rootController
         tabBarController?.coordinator = self
         
-        let homeViewController = homeView()
-        let cartViewController = cartView()
+        let homeCoordinator = HomeViewCoordinator(rootViewController: homeView.viewControllers[0])
+        let cartCoordinator = CartCoordinator(rootViewController: cartView.viewControllers[0])
+        let profileCoordinator = ProfileViewCoordinator(rootViewController: profileView.viewControllers[0])
         
-        let homeCoordinator = HomeViewCoordinator(rootViewController: homeViewController.viewControllers[0])
-        coordinate(to: homeCoordinator)
-        
-        let cartCoordinator = CartCoordinator(rootViewController: cartViewController.viewControllers[0])
-        coordinate(to: cartCoordinator)
+        _ = [homeCoordinator, cartCoordinator, profileCoordinator].map {
+            coordinate(to: $0)
+        }
         
         tabBarController?.viewControllers = [
-            homeViewController,
-            cartViewController,
-            profileView()
+            homeView,
+            cartView,
+            profileView
         ]
         
         return Observable.never()
     }
     
-    func showScreen(_ screen: AppRootCoordinator.Screen) {}
-    
-    private func homeView() -> UINavigationController {
+    private var homeView: UINavigationController = {
         let controller = HomeView()
         let coordinator = HomeViewCoordinator(rootViewController: controller)
         coordinator.viewModel = HomeViewViewModel()
@@ -49,9 +46,9 @@ class AppRootCoordinator: ReactiveCoordinator<Void> {
         navigationController.tabBarItem =  UITabBarItem(title: "Home", image: UIImage(systemName: "dollarsign.circle.fill"), tag: 0)
         navigationController.navigationBar.isHidden = true
         return navigationController
-    }
+    }()
     
-    private func cartView() -> UINavigationController {
+    private var cartView: UINavigationController = {
         let controller = CartView()
         let coordinator = CartCoordinator(rootViewController: controller)
         coordinator.viewModel = CartViewModel()
@@ -59,25 +56,16 @@ class AppRootCoordinator: ReactiveCoordinator<Void> {
         navigationController.tabBarItem = UITabBarItem(title: "Cart", image: UIImage(systemName: "bag.fill"), tag: 1)
         navigationController.navigationBar.isHidden = true
         return navigationController
-    }
+    }()
     
-    private func profileView() -> UINavigationController {
-        let controller = UIViewController()
-        //        let coordinator = CartCoordinator(rootViewController: controller)
-        //        coordinator.viewModel = CartViewModel()
+    private var profileView: UINavigationController = {
+        let controller = ProfileView()
+        let coordinator = ProfileViewCoordinator(rootViewController: controller)
+        coordinator.viewModel = ProfileViewModel()
         let navigationController = UINavigationController(rootViewController: controller)
         navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle.fill"), tag: 2)
+        navigationController.navigationBar.isHidden = true
         return navigationController
-    }
+    }()
     
-}
-
-
-// MARK: - Screen
-extension AppRootCoordinator {
-    enum Screen {
-        case home
-        case cart
-        case profile
-    }
 }

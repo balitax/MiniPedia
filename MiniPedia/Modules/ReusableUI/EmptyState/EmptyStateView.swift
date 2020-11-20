@@ -12,6 +12,7 @@ import RxSwift
 enum EmptyStateType {
     case cart
     case whishlist
+    case profile
 }
 
 protocol EmptyStateViewDelegate: class {
@@ -30,7 +31,11 @@ class EmptyStateView: UIView {
     @IBOutlet weak var messageState: UILabel!
     @IBOutlet weak var btnState: UIButton!
     
-    var stateType = EmptyStateType.cart
+    var stateType = EmptyStateType.cart {
+        didSet {
+            self.bindUI()
+        }
+    }
     unowned var delegate: EmptyStateViewDelegate?
     
     private var disposeBag = DisposeBag()
@@ -53,7 +58,6 @@ class EmptyStateView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = true
         addSubview(view)
         
-        bindUI()
     }
     
     private func loadViewFromNib() -> UIView {
@@ -68,7 +72,6 @@ class EmptyStateView: UIView {
         btnState.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                print("KLIKEN")
                 self.delegate?.didTapState()
             }).disposed(by: self.disposeBag)
         
@@ -77,6 +80,11 @@ class EmptyStateView: UIView {
             self.titleState.text = "Wah, keranjang belanjamu kosong"
             self.messageState.text = "Daripada dianggurin, mending isi dengan barang-barang impianmu. Yuk, cek sekarang!"
             self.btnState.setTitle("Mulai Belanja", for: .normal)
+        } else if stateType == .profile {
+            self.imgIconState.image = #imageLiteral(resourceName: "empty_state_icon")
+            self.titleState.text = "Oops, Terjadi kesalahan saat mendapatkan data profil kamu"
+            self.messageState.text = "Coba lagi nanti, mungkin kamu butuh istirahat dan liburan, jangan belanja terus!"
+            self.btnState.setTitle("Coba Lagi", for: .normal)
         } else {
             self.imgIconState.image = #imageLiteral(resourceName: "empty_state_icon")
             self.titleState.text = "Wah, whishlist kamu kosong"

@@ -56,6 +56,19 @@ class HomeViewCoordinator: ReactiveCoordinator<Void> {
             .subscribe()
             .disposed(by: disposeBag)
         
+        viewModel.whishlistObservable
+            .flatMap( { [unowned self] _ in
+                return self.coordinateToWhishlist()
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        viewModel.cartObservable
+            .subscribe(onNext: { [unowned self] _ in
+                self.rootController.tabBarController?.selectedIndex = 1
+            })
+            .disposed(by: disposeBag)
+        
         return Observable.never()
     }
     
@@ -69,6 +82,12 @@ class HomeViewCoordinator: ReactiveCoordinator<Void> {
     private func coordinateToProductList(with query: QueryProduct?) -> Observable<Void> {
         let productListCoordinator = ProductListCoordinator(rootViewController: rootController, query: query)
         return coordinate(to: productListCoordinator)
+            .map { _ in () }
+    }
+    
+    private func coordinateToWhishlist() -> Observable<Void> {
+        let whishlistCoordinator = WhishlistViewCoordinator(rootViewController: rootController)
+        return coordinate(to: whishlistCoordinator)
             .map { _ in () }
     }
     

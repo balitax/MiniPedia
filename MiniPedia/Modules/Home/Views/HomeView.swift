@@ -87,6 +87,16 @@ class HomeView: UIViewController {
                 
             }).disposed(by: disposeBag)
         
+        navigationBar.whishlistButtonObservable
+            .subscribe(onNext: { [unowned self] _ in
+                self.viewModel.whishlistObservable.onNext(())
+            }).disposed(by: disposeBag)
+        
+        navigationBar.cartButtonObservable
+            .subscribe(onNext: { [unowned self] _ in
+                self.viewModel.cartObservable.onNext(())
+            }).disposed(by: disposeBag)
+        
     }
     
     fileprivate func setupCollectionView() {

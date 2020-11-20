@@ -113,6 +113,14 @@
 		26F8255C2536DF600016E3C7 /* SecondaryNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F8255B2536DF600016E3C7 /* SecondaryNavigationBar.xib */; };
 		26F825612536E8D50016E3C7 /* PrimaryNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F825602536E8D50016E3C7 /* PrimaryNavigationBar.swift */; };
 		26F825672536E8E30016E3C7 /* PrimaryNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F825662536E8E30016E3C7 /* PrimaryNavigationBar.xib */; };
+		26F8F4CB25679E3200FC4AAC /* ProfileViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4CA25679E3200FC4AAC /* ProfileViewCoordinator.swift */; };
+		26F8F4D025679E4300FC4AAC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4CF25679E4300FC4AAC /* ProfileViewModel.swift */; };
+		26F8F4D625679E5500FC4AAC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4D425679E5500FC4AAC /* ProfileView.swift */; };
+		26F8F4D725679E5500FC4AAC /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F8F4D525679E5500FC4AAC /* ProfileView.xib */; };
+		26F8F4E52567ACFF00FC4AAC /* WhishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4E32567ACFF00FC4AAC /* WhishlistView.swift */; };
+		26F8F4E62567ACFF00FC4AAC /* WhishlistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F8F4E42567ACFF00FC4AAC /* WhishlistView.xib */; };
+		26F8F4EB2567AD0900FC4AAC /* WhishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4EA2567AD0900FC4AAC /* WhishlistViewModel.swift */; };
+		26F8F4F02567AD1300FC4AAC /* WhishlistViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4EF2567AD1300FC4AAC /* WhishlistViewCoordinator.swift */; };
 		5C9E162F9619675A0A65CE56 /* Pods_MiniPedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB443E392430910E3EBB405 /* Pods_MiniPedia.framework */; };
 		B5C0B384FD6505704AD45493 /* Pods_MiniPediaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D3CDD3DC85F42CC941A49C /* Pods_MiniPediaTests.framework */; };
 /* End PBXBuildFile section */
@@ -249,6 +257,14 @@
 		26F8255B2536DF600016E3C7 /* SecondaryNavigationBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryNavigationBar.xib; sourceTree = "<group>"; };
 		26F825602536E8D50016E3C7 /* PrimaryNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryNavigationBar.swift; sourceTree = "<group>"; };
 		26F825662536E8E30016E3C7 /* PrimaryNavigationBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrimaryNavigationBar.xib; sourceTree = "<group>"; };
+		26F8F4CA25679E3200FC4AAC /* ProfileViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCoordinator.swift; sourceTree = "<group>"; };
+		26F8F4CF25679E4300FC4AAC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		26F8F4D425679E5500FC4AAC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		26F8F4D525679E5500FC4AAC /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		26F8F4E32567ACFF00FC4AAC /* WhishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhishlistView.swift; sourceTree = "<group>"; };
+		26F8F4E42567ACFF00FC4AAC /* WhishlistView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WhishlistView.xib; sourceTree = "<group>"; };
+		26F8F4EA2567AD0900FC4AAC /* WhishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhishlistViewModel.swift; sourceTree = "<group>"; };
+		26F8F4EF2567AD1300FC4AAC /* WhishlistViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhishlistViewCoordinator.swift; sourceTree = "<group>"; };
 		273899347C2C624699E56379 /* Pods-MiniPedia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPedia.debug.xcconfig"; path = "Target Support Files/Pods-MiniPedia/Pods-MiniPedia.debug.xcconfig"; sourceTree = "<group>"; };
 		67D3CDD3DC85F42CC941A49C /* Pods_MiniPediaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniPediaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CB443E392430910E3EBB405 /* Pods_MiniPedia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniPedia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -697,12 +713,14 @@
 		26A13A5925340D3A00A0CD0F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				26D0C6D425627A7E00BA86FE /* AppRoot */,
 				26121D98253B0C4D00207D23 /* ReusableUI */,
+				26D0C6D425627A7E00BA86FE /* AppRoot */,
 				26121DDE253D4E2300207D23 /* Home */,
 				268204B32538962800E3E542 /* Cart */,
 				2616480C2535720300048425 /* Product Detail */,
 				26A13A5B25340D4E00A0CD0F /* ProductList */,
+				26F8F4C625679E0800FC4AAC /* Profile */,
+				26F8F4DF2567ACD100FC4AAC /* Whishlist */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -819,6 +837,84 @@
 				26F825662536E8E30016E3C7 /* PrimaryNavigationBar.xib */,
 			);
 			path = PrimaryNavigationBar;
+			sourceTree = "<group>";
+		};
+		26F8F4C625679E0800FC4AAC /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				26F8F4C925679E2300FC4AAC /* Coordinator */,
+				26F8F4C825679E1C00FC4AAC /* View Model */,
+				26F8F4C725679E1100FC4AAC /* Views */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		26F8F4C725679E1100FC4AAC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26F8F4DB2567A38700FC4AAC /* Components */,
+				26F8F4D425679E5500FC4AAC /* ProfileView.swift */,
+				26F8F4D525679E5500FC4AAC /* ProfileView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		26F8F4C825679E1C00FC4AAC /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				26F8F4CF25679E4300FC4AAC /* ProfileViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		26F8F4C925679E2300FC4AAC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				26F8F4CA25679E3200FC4AAC /* ProfileViewCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		26F8F4DB2567A38700FC4AAC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		26F8F4DF2567ACD100FC4AAC /* Whishlist */ = {
+			isa = PBXGroup;
+			children = (
+				26F8F4E22567ACE800FC4AAC /* Coordinator */,
+				26F8F4E12567ACE300FC4AAC /* View Model */,
+				26F8F4E02567ACDF00FC4AAC /* Views */,
+			);
+			path = Whishlist;
+			sourceTree = "<group>";
+		};
+		26F8F4E02567ACDF00FC4AAC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26F8F4E32567ACFF00FC4AAC /* WhishlistView.swift */,
+				26F8F4E42567ACFF00FC4AAC /* WhishlistView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		26F8F4E12567ACE300FC4AAC /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				26F8F4EA2567AD0900FC4AAC /* WhishlistViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		26F8F4E22567ACE800FC4AAC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				26F8F4EF2567AD1300FC4AAC /* WhishlistViewCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		CFE719E24D17DCCB6B23618A /* Frameworks */ = {
@@ -977,9 +1073,11 @@
 				2616483225358C6E00048425 /* ProductSummaryTableViewCell.xib in Resources */,
 				26A13A5F25340D6C00A0CD0F /* ProductListView.xib in Resources */,
 				26F8255C2536DF600016E3C7 /* SecondaryNavigationBar.xib in Resources */,
+				26F8F4D725679E5500FC4AAC /* ProfileView.xib in Resources */,
 				265F9C912534097D00A2FD47 /* Assets.xcassets in Resources */,
 				260E45D9253EC24F00F76FBF /* DompetAccountInfoCollectionViewCell.xib in Resources */,
 				268204EA2538B60E00E3E542 /* CartItemsListOfMerchantsTableViewCell.xib in Resources */,
+				26F8F4E62567ACFF00FC4AAC /* WhishlistView.xib in Resources */,
 				260E45F5253F1A8E00F76FBF /* HeaderSectionTitleReusableView.xib in Resources */,
 				261648142535724100048425 /* ProductDetailView.xib in Resources */,
 				26121DC8253B558D00207D23 /* EmptyStateView.xib in Resources */,
@@ -1132,6 +1230,7 @@
 				2653A398253410C700F9F28B /* TagCellLayout.swift in Sources */,
 				2653A3A0253410C700F9F28B /* GridCollectionViewLayout.swift in Sources */,
 				260E45E8253F134E00F76FBF /* ProductCategoryCollectionViewCell.swift in Sources */,
+				26F8F4CB25679E3200FC4AAC /* ProfileViewCoordinator.swift in Sources */,
 				26121DC0253B558400207D23 /* EmptyStateView.swift in Sources */,
 				2653A39E253410C700F9F28B /* Extensions.swift in Sources */,
 				26121DE1253D4E3100207D23 /* HomeView.swift in Sources */,
@@ -1147,6 +1246,7 @@
 				2653A3A1253410C700F9F28B /* UITableView+Extension.swift in Sources */,
 				265F9C882534097800A2FD47 /* AppDelegate.swift in Sources */,
 				26F8253D2536D93A0016E3C7 /* Realm+Transaction.swift in Sources */,
+				26F8F4EB2567AD0900FC4AAC /* WhishlistViewModel.swift in Sources */,
 				268204CB253896A400E3E542 /* CartCoordinator.swift in Sources */,
 				26C45AA225397B0600EB82E0 /* UIButton+Extension.swift in Sources */,
 				260E45DF253ECD8D00F76FBF /* DompetAccountSections.swift in Sources */,
@@ -1154,6 +1254,7 @@
 				2653A394253410C700F9F28B /* Reusable.swift in Sources */,
 				268204E92538B60E00E3E542 /* CartItemsListOfMerchantsTableViewCell.swift in Sources */,
 				261648132535724100048425 /* ProductDetailView.swift in Sources */,
+				26F8F4D625679E5500FC4AAC /* ProfileView.swift in Sources */,
 				261648902535A76100048425 /* InformationProductMock.swift in Sources */,
 				2616487C2535A25D00048425 /* ProductCourierOptionsTableViewCell.swift in Sources */,
 				26121D9D253B0C8500207D23 /* PopupConfirmationView.swift in Sources */,
@@ -1170,11 +1271,14 @@
 				268204C62538967C00E3E542 /* CartViewModel.swift in Sources */,
 				26F825542536DF560016E3C7 /* SecondaryNavigationBar.swift in Sources */,
 				260E45EE253F171800F76FBF /* ProductListSections.swift in Sources */,
+				26F8F4F02567AD1300FC4AAC /* WhishlistViewCoordinator.swift in Sources */,
 				26A13A7225340E3B00A0CD0F /* ProductListViewModel.swift in Sources */,
 				26714D83253715B700E61961 /* ProductDetailView+SkeletonView.swift in Sources */,
 				26121E0C253DB0D300207D23 /* ZCycleViewCell.swift in Sources */,
+				26F8F4D025679E4300FC4AAC /* ProfileViewModel.swift in Sources */,
 				2616483C25359D0B00048425 /* NSMutableAttributedString+Extension.swift in Sources */,
 				26D0C6D825627A8F00BA86FE /* AppRootBarViewController.swift in Sources */,
+				26F8F4E52567ACFF00FC4AAC /* WhishlistView.swift in Sources */,
 				2653A399253410C700F9F28B /* LayoutInfo.swift in Sources */,
 				26121E16253DB90B00207D23 /* UIImageView+Extension.swift in Sources */,
 				2616480525356CA400048425 /* Refreshable.swift in Sources */,

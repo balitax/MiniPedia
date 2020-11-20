@@ -15,6 +15,7 @@ target 'MiniPedia' do
   pod 'Kingfisher'
   pod 'SkeletonView'
   pod 'BottomPopup'
+  pod 'FaveButton'
   
   target 'MiniPediaTests' do
     inherit! :search_paths

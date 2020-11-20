@@ -10,7 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-
 class HomeViewViewModel: BaseViewModel {
     
     private let repository = ProductListRepository()
@@ -18,7 +17,9 @@ class HomeViewViewModel: BaseViewModel {
     var gadgetQueryProduct = QueryProduct(query: "gadget")
     var promoQueryProduct = QueryProduct(query: "diskon")
     private var infoAccountFakeRequest: Bool?
-   
+    
+    var whishlistObservable = PublishSubject<Void>()
+    var cartObservable = PublishSubject<Void>()
     
     var getDetailProduct = PublishSubject<ProductListCellViewModel>()
     var showAllFashionProduct = PublishSubject<QueryProduct>()
@@ -118,14 +119,20 @@ extension HomeViewViewModel {
     func getDetailProduct(indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
-            self.getDetailProduct.onNext(
-                ProductListCellViewModel(product: self.popularFashion.value[indexPath.row]))
+            if !self.popularFashion.value.isEmpty {
+                self.getDetailProduct.onNext(
+                    ProductListCellViewModel(product: self.popularFashion.value[indexPath.row]))
+            }
         case 2:
-            self.getDetailProduct.onNext(
-                ProductListCellViewModel(product: self.gadgetProduct.value[indexPath.row]))
+            if !self.gadgetProduct.value.isEmpty {
+                self.getDetailProduct.onNext(
+                    ProductListCellViewModel(product: self.gadgetProduct.value[indexPath.row]))
+            }
         case 3:
-            self.getDetailProduct.onNext(
-                ProductListCellViewModel(product: self.promoProduct.value[indexPath.row]))
+            if !self.promoProduct.value.isEmpty {
+                self.getDetailProduct.onNext(
+                    ProductListCellViewModel(product: self.promoProduct.value[indexPath.row]))
+            }
         default:
             break
         }
