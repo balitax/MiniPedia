@@ -114,6 +114,7 @@ struct Status: Codable {
 
 // MARK: Query Product
 struct QueryProduct {
+    var titleProduct: String?
     var query: String
     var minPrice: Double?
     var maxPrice: Double?

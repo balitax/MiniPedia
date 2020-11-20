@@ -33,7 +33,7 @@ class ProductDetailView: UIViewController {
     @IBOutlet weak var navigationBarHeight: NSLayoutConstraint! {
         didSet {
             if let height = self.navigationController?.navigationBar.frame.height {
-                self.navigationBarHeight.constant = height + 60
+                self.navigationBarHeight.constant = height + 44
             }
         }
     }
@@ -96,26 +96,26 @@ class ProductDetailView: UIViewController {
         btnOpenToko.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.openTokopedia()
+                self.viewModel.openTokopedia()
             }).disposed(by: disposeBag)
         
         
         navigationBar.leftButtonObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] pip in
-                viewModel.backButtonDidTap.onNext(())
+                self.viewModel.backButtonDidTap.onNext(())
             }).disposed(by: disposeBag)
         
         navigationBar.cartButtonObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] pip in
-                viewModel.cartButtonDidTap.onNext(())
+                self.viewModel.cartButtonDidTap.onNext(())
             }).disposed(by: disposeBag)
         
         navigationBar.shareButtonObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] pip in
-                viewModel.shareProduct()
+                self.viewModel.shareProduct()
             }).disposed(by: disposeBag)
         
     }
@@ -124,15 +124,10 @@ class ProductDetailView: UIViewController {
         self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
         self.tableView.performBatchUpdates {
             self.tableView.layoutIfNeeded()
+        } completion: { _ in
+            
         }
-        
-        self.tableView.rx
-            .contentOffset
-            .subscribe { [unowned self] in
-                let getY = $0.element?.y ?? 0
-                let offset = CGFloat(round(10*getY / 280)/10)
-                self.navigationBar.alpaOffset(offset)
-            }.disposed(by: self.disposeBag)
+
         
     }
     

@@ -114,11 +114,14 @@ class ProductListSections: Sections {
             .subscribe(onNext: { [unowned self] _ in
                 switch self.category {
                 case .fashion:
-                    viewModel.showAllFashionProduct.onNext(viewModel.fashionQueryProduct)
+                    self.viewModel.fashionQueryProduct.titleProduct = category.getDescription()
+                    self.viewModel.showAllFashionProduct.onNext(self.viewModel.fashionQueryProduct)
                 case .gadget:
-                    break
+                    self.viewModel.gadgetQueryProduct.titleProduct = category.getDescription()
+                    self.viewModel.showAllGadgetProduct.onNext(self.viewModel.gadgetQueryProduct)
                 case .promo:
-                    break
+                    self.viewModel.gadgetQueryProduct.titleProduct = category.getDescription()
+                    self.viewModel.showAllPromoProduct.onNext(self.viewModel.promoQueryProduct)
                 default: break
                 }
             }).disposed(by: disposeBag)

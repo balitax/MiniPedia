@@ -35,6 +35,27 @@ class HomeViewCoordinator: ReactiveCoordinator<Void> {
             .subscribe()
             .disposed(by: disposeBag)
         
+        viewModel.showAllGadgetProduct
+            .flatMap( { [unowned self] query in
+                return self.coordinateToProductList(with: query)
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        viewModel.showAllPromoProduct
+            .flatMap( { [unowned self] query in
+                return self.coordinateToProductList(with: query)
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        viewModel.searchProductWithQuery
+            .flatMap( { [unowned self] _ in
+                return self.coordinateToProductList(with: nil)
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
         return Observable.never()
     }
     
@@ -45,10 +66,8 @@ class HomeViewCoordinator: ReactiveCoordinator<Void> {
             .map { _ in () }
     }
     
-    private func coordinateToProductList(with query: QueryProduct) -> Observable<Void> {
-        
-        print("KLIK KLIK")
-        let productListCoordinator = ProductListCoordinator(rootViewController: rootController)
+    private func coordinateToProductList(with query: QueryProduct?) -> Observable<Void> {
+        let productListCoordinator = ProductListCoordinator(rootViewController: rootController, query: query)
         return coordinate(to: productListCoordinator)
             .map { _ in () }
     }

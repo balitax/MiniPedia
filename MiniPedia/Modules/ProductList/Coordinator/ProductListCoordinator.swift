@@ -13,8 +13,11 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
     let rootViewController: UIViewController
     public var viewModel = ProductListViewModel()
     
-    init(rootViewController: UIViewController) {
+    init(rootViewController: UIViewController, query: QueryProduct?) {
         self.rootViewController = rootViewController
+        if let query = query {
+            viewModel.queryProduct = query
+        }
     }
     
     override func start() -> Observable<Void> {
@@ -37,6 +40,12 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
                 return self.coordinateToCart()
             })
             .subscribe()
+            .disposed(by: disposeBag)
+        
+        viewModel.backButtonDidTap
+            .subscribe(onNext: { [unowned self] _ in
+                self.rootViewController.navigationController?.popViewController(animated: true)
+            })
             .disposed(by: disposeBag)
         
         

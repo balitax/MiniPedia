@@ -16,6 +16,7 @@
                 <outlet property="navigationView" destination="7jx-jD-TLh" id="Yvx-hJ-HWs"/>
                 <outlet property="notificationButton" destination="TUY-Fx-wTh" id="TyW-Fk-qsA"/>
                 <outlet property="primaryContainerView" destination="KXB-8B-GGJ" id="wDw-ld-sJW"/>
+                <outlet property="searchBar" destination="RMk-My-Rd3" id="jof-jO-9Vz"/>
                 <outlet property="view" destination="iN0-l3-epB" id="oK4-nE-nkH"/>
             </connections>
         </placeholder>

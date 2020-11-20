@@ -77,7 +77,7 @@ open class Database: Databaseable {
     
     func rxget<T>(type: T.Type, predicate: String? = "") -> Single<Results<T>> where T : Object {
         return Single<Results<T>>.create(subscribe: { [unowned self] (emitter) -> Disposable in
-            let results = database.objects(type).filter(predicate ?? "")
+            let results = self.database.objects(type).filter(predicate ?? "")
             emitter(.success(results))
             return Disposables.create()
         })
@@ -85,7 +85,7 @@ open class Database: Databaseable {
     
     func rxget<T, K>(type: T.Type, key: K) -> Single<T> where T : Object {
         return Single<T>.create(subscribe: { [unowned self] (emitter) -> Disposable in
-            if let object = database.object(ofType: type, forPrimaryKey: key) {
+            if let object = self.database.object(ofType: type, forPrimaryKey: key) {
                 emitter(.success(object))
             } else {
                 emitter(.error(DatabaseError.emptyObject))
@@ -124,9 +124,9 @@ open class Database: Databaseable {
         return Single<T>.create(subscribe: { [unowned self] (emitter) -> Disposable in
             
             do {
-                try database.write {
+                try self.database.write {
                     debugPrint(object.description)
-                    database.add(object, update: .all)
+                    self.database.add(object, update: .all)
                     emitter(.success(object))
                 }
             } catch(let e) {
@@ -183,9 +183,9 @@ open class Database: Databaseable {
         return Single<T>.create(subscribe: { [unowned self] (emitter) -> Disposable in
             
             do {
-                try database.write {
+                try self.database.write {
                     debugPrint(object.description)
-                    database.delete(object)
+                    self.database.delete(object)
                     emitter(.success(object))
                 }
             } catch(let e) {
@@ -200,9 +200,9 @@ open class Database: Databaseable {
         return Single<S>.create(subscribe: { [unowned self] (emitter) -> Disposable in
             
             do {
-                try database.write {
+                try self.database.write {
                     debugPrint(Array(objects).description)
-                    database.delete(objects)
+                    self.database.delete(objects)
                     emitter(.success(objects))
                     print("success deleting")
                 }

@@ -24,13 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uF8-iP-TkH">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPa-kr-W3h" userLabel="navigationview" customClass="SecondaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -38,6 +31,13 @@
                         <constraint firstAttribute="height" constant="80" id="bQt-zj-rN6"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uF8-iP-TkH">
+                    <rect key="frame" x="0.0" y="80" width="414" height="718"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPe-YC-BXi">
                     <rect key="frame" x="0.0" y="798" width="414" height="64"/>
                     <subviews>
@@ -125,6 +125,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="GPa-kr-W3h" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9CW-Mm-jl4"/>
+                <constraint firstItem="uF8-iP-TkH" firstAttribute="top" secondItem="GPa-kr-W3h" secondAttribute="bottom" id="9Wa-da-KIr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GPe-YC-BXi" secondAttribute="trailing" id="IVO-2R-EFx"/>
                 <constraint firstItem="GPe-YC-BXi" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="JiU-d2-orn"/>
                 <constraint firstItem="GPe-YC-BXi" firstAttribute="top" secondItem="uF8-iP-TkH" secondAttribute="bottom" id="JjZ-Hz-XeE"/>
@@ -133,7 +134,6 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GPa-kr-W3h" secondAttribute="trailing" id="ORT-TB-T6a"/>
                 <constraint firstItem="GPa-kr-W3h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="d6s-Jl-nq1"/>
                 <constraint firstItem="uF8-iP-TkH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eRv-88-3BR"/>
-                <constraint firstItem="uF8-iP-TkH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="z3N-8D-NVX"/>
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>

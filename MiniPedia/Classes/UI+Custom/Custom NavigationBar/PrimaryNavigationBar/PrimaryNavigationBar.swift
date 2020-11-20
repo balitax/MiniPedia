@@ -21,11 +21,12 @@ final class PrimaryNavigationBar: UIView {
     @IBOutlet private var primaryContainerView: UIView!
     @IBOutlet private weak var cartButton: ACBadgeButton!
     @IBOutlet private weak var notificationButton: ACBadgeButton!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     private let disposeBag = DisposeBag()
     public let cartButtonObservable = PublishSubject<Void>()
     public let notifButtonObservable = PublishSubject<Void>()
-    
+    public let searchBarButtonObservable = PublishSubject<Void>()
     
     override func awakeFromNib() {
         initWithNib()
@@ -40,13 +41,18 @@ final class PrimaryNavigationBar: UIView {
     }
     
     private func setupUI() {
+       
         Observable.collection(from: ShoppingCart.shared.products)
             .asObservable()
             .subscribe(onNext: { [unowned self] badge in
                 if (badge.count != 0) {
-                    self.cartButton.badgeCount = badge.count
+                    Delay.wait(delay: 1) {
+                        self.cartButton.badgeCount = badge.count
+                    }
                 } else {
-                    self.cartButton.badgeCount = 0
+                    Delay.wait(delay: 1) {
+                        self.cartButton.badgeCount = ShoppingCart.shared.products.count
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -65,6 +71,7 @@ final class PrimaryNavigationBar: UIView {
                 self.notifButtonObservable.onNext(())
             }.disposed(by: disposeBag)
         
+        searchBar.delegate = self
         
     }
     
@@ -93,5 +100,22 @@ final class PrimaryNavigationBar: UIView {
         }
     }
     
+    
+}
+
+extension PrimaryNavigationBar: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        self.searchBar.endEditing(true)
+        self.searchBarButtonObservable.onNext(())
+        return false
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print("SIKAT")
+    }
     
 }

@@ -26,9 +26,10 @@ extension ProductSection: SectionModelType {
 class ProductListViewModel: BaseViewModel {
     
     let repository = ProductListRepository()
-    var queryProduct = QueryProduct(query: "baju")
+    var queryProduct = QueryProduct(query: "")
     let selectedProduct = PublishSubject<ProductListCellViewModel>()
     let cartButtonDidTap = PublishSubject<Void>()
+    let backButtonDidTap = PublishSubject<Void>()
     
     //MARK: - ViewModel DataSource
     var products = BehaviorSubject<[ProductSection]> (
@@ -38,6 +39,7 @@ class ProductListViewModel: BaseViewModel {
     func getProductList() {
         self.state.onNext(.loading)
         repository.getProductList(queryProduct)
+            .delay(.seconds(1), scheduler: MainScheduler.instance)
             .observeOn(MainScheduler.instance)
             .map({ product -> [ProductSection] in
                 

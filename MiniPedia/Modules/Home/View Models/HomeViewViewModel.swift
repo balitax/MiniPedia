@@ -15,13 +15,16 @@ class HomeViewViewModel: BaseViewModel {
     
     private let repository = ProductListRepository()
     var fashionQueryProduct = QueryProduct(query: "fashion wanita")
-    private var gadgetQueryProduct = QueryProduct(query: "gadget")
-    private var promoQueryProduct = QueryProduct(query: "diskon")
+    var gadgetQueryProduct = QueryProduct(query: "gadget")
+    var promoQueryProduct = QueryProduct(query: "diskon")
     private var infoAccountFakeRequest: Bool?
    
     
     var getDetailProduct = PublishSubject<ProductListCellViewModel>()
     var showAllFashionProduct = PublishSubject<QueryProduct>()
+    var showAllGadgetProduct = PublishSubject<QueryProduct>()
+    var showAllPromoProduct = PublishSubject<QueryProduct>()
+    var searchProductWithQuery = PublishSubject<Void>()
     
     //MARK: - ViewModel DataSource
     private var popularFashion = BehaviorRelay<[DataProducts]> (

@@ -73,6 +73,11 @@ class HomeView: UIViewController {
                 self.viewModel.getDetailProduct(indexPath: indexPath)
             }).disposed(by: disposeBag)
         
+        navigationBar.searchBarButtonObservable
+            .subscribe(onNext: { [unowned self] _ in
+                self.viewModel.searchProductWithQuery.onNext(())
+            }).disposed(by: disposeBag)
+        
         collectionView.rx.contentOffset
             .subscribe(onNext: { offset in
                 

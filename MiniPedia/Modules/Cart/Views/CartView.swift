@@ -29,7 +29,7 @@ class CartView: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @IBOutlet weak var navigationBar: PrimaryNavigationBar!
+    @IBOutlet weak var navigationBar: SecondaryNavigationBar!
     @IBOutlet weak var tableView: AutomaticDynamicTableView!
     @IBOutlet weak var selectedCart: UILabel!
     @IBOutlet weak var btnDeleteAll: UIButton!
@@ -48,6 +48,7 @@ class CartView: UIViewController {
     private func bindRx() {
         
         viewModel.getCartData()
+        enableBtnDeleteAll(false)
         
         viewModel.state
             .asObserver()
@@ -72,7 +73,7 @@ class CartView: UIViewController {
                 } else {
                     self.heightAllCartSelectContainer.constant = 0
                 }
-                viewModel.countCartSelectable()
+                self.viewModel.countCartSelectable()
             })
             .disposed(by: disposeBag)
         
@@ -87,14 +88,26 @@ class CartView: UIViewController {
         btnSelectAll.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.didSelectAllCart()
+                self.enableBtnDeleteAll(true)
+                self.viewModel.didSelectAllCart()
+            }).disposed(by: disposeBag)
+        
+        viewModel.isAllCartSelected
+            .asObservable()
+            .subscribe(onNext: { [unowned self] selected in
+                self.btnSelectAll.isCheckboxTapped(selected)
+                selected == false ? self.enableBtnDeleteAll(false) : self.enableBtnDeleteAll(true)
             }).disposed(by: disposeBag)
         
         btnDeleteAll.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.deleteAllCartObservable.onNext(())
+                self.viewModel.deleteAllCartObservable.onNext(())
             }).disposed(by: disposeBag)
+        
+        navigationBar.title = "Cart"
+        navigationBar.fontFize(20)
+        navigationBar.isLeftButtonHidden = true
         
     }
     
@@ -106,6 +119,16 @@ class CartView: UIViewController {
         }
     }
     
+    private func enableBtnDeleteAll(_ enable: Bool) {
+        if enable {
+            self.btnDeleteAll.setTitleColor(Colors.greenColor, for: .normal)
+            self.btnDeleteAll.isEnabled = true
+        } else {
+            self.btnDeleteAll.setTitleColor(UIColor.lightGray, for: .normal)
+            self.btnDeleteAll.isEnabled = false
+        }
+    }
+    
     private func setupTableView() {
         self.tableView.registerReusableCell(CartItemByMerchantsCell.self)
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -114,6 +137,8 @@ class CartView: UIViewController {
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .systemGroupedBackground
         self.tableView.contentInsetAdjustmentBehavior = .never
+        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        self.tableView.separatorStyle = .none
         
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
@@ -172,6 +197,8 @@ extension CartView: UITableViewDataSource, UITableViewDelegate, EmptyStateViewDe
         cell.merchant = viewModel.cart[indexPath.row]
         cell.section = indexPath.row
         cell.delegate = self
+        
+        cell.selectionStyle = .none
         return cell
     }
     

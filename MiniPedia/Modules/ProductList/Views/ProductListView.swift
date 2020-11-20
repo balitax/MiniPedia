@@ -28,7 +28,15 @@ class ProductListView: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var navigationBar: PrimaryNavigationBar!
+    @IBOutlet weak var navigationBar: SecondaryNavigationBar!
+    @IBOutlet weak var navigationBarHeight: NSLayoutConstraint! {
+        didSet {
+            if let height = self.navigationController?.navigationBar.frame.height {
+                self.navigationBarHeight.constant = height + 50
+            }
+        }
+    }
+    
     let disposeBag = DisposeBag()
     var viewModel: ProductListViewModel!
     var layout = GridCollectionViewLayout()
@@ -52,18 +60,22 @@ class ProductListView: UIViewController {
     }
     
     private func setupCollectionView() {
-        self.navigationItem.title = "My Product"
         self.collectionView.registerReusableCell(ProductListCell.self)
         self.layout.itemsPerRow = 2
         self.layout.itemSpacing = 0
         self.layout.itemHeightRatio = 1.5/1
         self.collectionView.collectionViewLayout = self.layout
+        self.collectionView.keyboardDismissMode = .onDrag
         self.collectionView.reloadData()
     }
     
     private func bindViewModel() {
         
-        viewModel.getProductList()
+        if !viewModel.queryProduct.query.isEmpty {
+            viewModel.getProductList()
+        } else {
+            navigationBar.setAutoFocus()
+        }
         
         viewModel.state
             .observeOn(MainScheduler.instance)
@@ -105,17 +117,38 @@ class ProductListView: UIViewController {
             .bind(to: viewModel.selectedProduct)
             .disposed(by: disposeBag)
         
-        refreshHandler.refresh
-            .startWith(())
-            .asObservable()
-            .subscribe(onNext: { [unowned self] in
-                self.viewModel.getProductList()
-            }).disposed(by: disposeBag)
+        if !viewModel.queryProduct.query.isEmpty {
+            refreshHandler.refresh
+                .startWith(())
+                .asObservable()
+                .subscribe(onNext: { [unowned self] in
+                    self.viewModel.getProductList()
+                }).disposed(by: disposeBag)
+            
+        }
         
-        navigationBar.cartButtonObservable
+        
+        
+        navigationBar.leftButtonObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] pip in
-                viewModel.cartButtonDidTap.onNext(())
+                self.viewModel.backButtonDidTap.onNext(())
+            }).disposed(by: disposeBag)
+        
+//        navigationBar.cartButtonObservable
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [unowned self] pip in
+//                self.viewModel.cartButtonDidTap.onNext(())
+//            }).disposed(by: disposeBag)
+        
+        
+        navigationBar.enableShareButton = false
+        navigationBar.titleOnSearchBar = viewModel.queryProduct.titleProduct ?? ""
+        
+        navigationBar.searchProductObservable
+            .subscribe(onNext: { [weak self] text in
+                self?.viewModel.queryProduct = QueryProduct(query: text)
+                self?.viewModel.getProductList()
             }).disposed(by: disposeBag)
         
     }

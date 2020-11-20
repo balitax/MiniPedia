@@ -12,8 +12,6 @@ import RxDataSources
 import Realm
 import RealmSwift
 
-
-
 class ProductDetailViewModel: BaseViewModel {
     
     deinit {
@@ -41,7 +39,7 @@ class ProductDetailViewModel: BaseViewModel {
             .compactMap { $0?.id }
             .asObservable()
             .subscribe(onNext: { [unowned self] idProduct in
-                isProductAlreadyOnCart(id: idProduct) ? updateQuantityCart(idProduct) : addToCart()
+                self.isProductAlreadyOnCart(id: idProduct) ? self.updateQuantityCart(idProduct) : self.addToCart()
             }).disposed(by: disposeBag)
         
     }
@@ -67,16 +65,13 @@ class ProductDetailViewModel: BaseViewModel {
             .map({ [unowned self] product -> CartStorage in
                 return self.saveCarts(product.shop!, product: product)
             })
-            .asObservable()
-            .flatMapLatest({ carts -> Single<CartStorage> in
-                //save into realm database
-                return Database.shared.rxsave(object: carts)
-            })
-            .subscribe { [unowned self] carts in
+        .flatMapLatest({ carts -> Single<CartStorage> in
+            return Database.shared.rxsave(object: carts)
+            }).subscribe(onNext: { [unowned self] cart in
                 self.cartState.onNext(.done)
-            } onError: { [unowned self] error in
-                self.cartState.onNext(.error)
-            }.disposed(by: disposeBag)
+                }, onError: { [unowned self] error in
+                    self.cartState.onNext(.error)
+            }).disposed(by: disposeBag)
         
     }
     

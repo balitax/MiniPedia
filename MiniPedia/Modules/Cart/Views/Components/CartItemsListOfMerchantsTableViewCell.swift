@@ -43,13 +43,13 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
     private var disposeBag = DisposeBag()
     weak var delegate: CartItemsListOfMerchantsDelegate?
     
-    lazy private var isItemSelected = false {
+    private var isItemSelected = false {
         didSet {
             self.btnCheckListItemCart.isCheckboxTapped(self.isItemSelected)
         }
     }
     
-    lazy private var quantity: Int = 1 {
+    private var quantity: Int = 1 {
         didSet {
             if quantity == cart.stock  {
                 self.btnAddQuantityItem.disabledButton()
@@ -123,7 +123,7 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
             .map { Int($0) }
             .compactMap { $0 }
             .subscribe(onNext: { [unowned self] qty in
-                self.delegate?.didUpdateQuantity(rows: rows, qty: qty)
+                self.delegate?.didUpdateQuantity(rows: self.rows, qty: qty)
             }).disposed(by: disposeBag)
     }
     

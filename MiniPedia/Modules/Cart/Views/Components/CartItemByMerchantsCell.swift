@@ -38,7 +38,7 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
     var section: Int = 0
     
     private var disposeBag = DisposeBag()
-    lazy private var isMerchantSelected = false {
+    private var isMerchantSelected = false {
         didSet {
             self.btnCheckListMerchant.isCheckboxTapped(self.isMerchantSelected)
         }
@@ -59,7 +59,7 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
                 self.isMerchantSelected.toggle()
                 self.delegate?.didSelectProductAllMerchant(
                     section: self.section,
-                    selected: isMerchantSelected)
+                    selected: self.isMerchantSelected)
             }).disposed(by: disposeBag)
     }
     
@@ -74,6 +74,7 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
         self.cartTableView.dataSource = self
         self.cartTableView.backgroundColor = .systemGroupedBackground
         self.cartTableView.contentInsetAdjustmentBehavior = .never
+        self.cartTableView.separatorStyle = .none
         
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude

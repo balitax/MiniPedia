@@ -51,7 +51,7 @@ class ProductDetailCoordinator: ReactiveCoordinator<Void> {
         
         detailViewModel.backButtonDidTap
             .subscribe(onNext: { [unowned self] _ in
-                rootViewController.navigationController?.popViewController(animated: true)
+                self.rootViewController.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
         

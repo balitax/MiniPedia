@@ -15,8 +15,9 @@
                 <outlet property="leftButton" destination="cdp-bo-TSc" id="vuM-qd-mT2"/>
                 <outlet property="navigationView" destination="FWO-wV-BS3" id="Y1p-0s-sWb"/>
                 <outlet property="primaryContainerView" destination="61P-yf-q4x" id="Ka2-p8-cg5"/>
+                <outlet property="searchBarLabel" destination="828-Mp-FFi" id="AjV-vy-ktG"/>
                 <outlet property="shareButton" destination="Kpx-3Q-5nb" id="QDb-r2-wRT"/>
-                <outlet property="titleLabel" destination="tl4-Qo-fur" id="Yz9-tk-ph2"/>
+                <outlet property="titleLabel" destination="tl4-Qo-fur" id="71L-nm-doi"/>
                 <outlet property="view" destination="iN0-l3-epB" id="pgf-rG-d62"/>
             </connections>
         </placeholder>
@@ -25,74 +26,89 @@
             <rect key="frame" x="0.0" y="0.0" width="491" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FWO-wV-BS3" userLabel="navigationview">
-                    <rect key="frame" x="0.0" y="44" width="491" height="56"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FWO-wV-BS3" userLabel="navigationview">
+                    <rect key="frame" x="0.0" y="44" width="491" height="54"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="61P-yf-q4x" userLabel="primaryNav">
-                    <rect key="frame" x="0.0" y="22" width="491" height="56"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61P-yf-q4x" userLabel="primaryNav">
+                    <rect key="frame" x="0.0" y="44" width="491" height="54"/>
                     <subviews>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdp-bo-TSc" userLabel="backBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                            <rect key="frame" x="16" y="10" width="36" height="36"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="36" id="HpR-LN-SVe"/>
-                                <constraint firstAttribute="height" constant="36" id="rtE-UC-5ut"/>
-                            </constraints>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal">
-                                <imageReference key="image" image="arrow" symbolScale="large" renderingMode="template"/>
-                            </state>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Produk yang sedang di lihat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tl4-Qo-fur">
-                            <rect key="frame" x="56" y="18" width="200.5" height="20"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-3Q-5nb" userLabel="shareBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                            <rect key="frame" x="260.5" y="8" width="36" height="36"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="36" id="SkQ-RB-cdO"/>
-                                <constraint firstAttribute="height" constant="36" id="qrv-9V-QpR"/>
-                            </constraints>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal">
-                                <imageReference key="image" image="square.and.arrow.up.fill" catalog="system" symbolScale="large" renderingMode="template"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNv-Da-uWN" userLabel="cartBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                            <rect key="frame" x="296.5" y="10" width="36" height="36"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="36" id="8rZ-19-69x"/>
-                                <constraint firstAttribute="width" constant="36" id="feh-Yw-5G7"/>
-                            </constraints>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal">
-                                <imageReference key="image" image="cart.fill" catalog="system" symbolScale="large" renderingMode="template"/>
-                            </state>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iR4-OS-toA">
+                            <rect key="frame" x="16" y="9" width="26" height="36"/>
+                            <subviews>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdp-bo-TSc" userLabel="backBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="26" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="26" id="HpR-LN-SVe"/>
+                                        <constraint firstAttribute="height" constant="36" id="rtE-UC-5ut"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="arrow" symbolScale="large" renderingMode="template"/>
+                                    </state>
+                                </button>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Produk yang sedang di lihat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tl4-Qo-fur">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="36"/>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <searchBar hidden="YES" contentMode="redraw" searchBarStyle="minimal" placeholder="Fashion Paling Laris" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="828-Mp-FFi">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="36"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-PA-RI7">
+                            <rect key="frame" x="46" y="14" width="429" height="26"/>
+                            <subviews>
+                                <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-3Q-5nb" userLabel="shareBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="26" height="26"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="26" id="SkQ-RB-cdO"/>
+                                        <constraint firstAttribute="height" constant="26" id="qrv-9V-QpR"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="square.and.arrow.up.fill" catalog="system" symbolScale="medium" renderingMode="template"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNv-Da-uWN" userLabel="cartBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="429" height="26"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="26" id="8rZ-19-69x"/>
+                                        <constraint firstAttribute="width" constant="26" id="feh-Yw-5G7"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="cart.fill" catalog="system" symbolScale="medium" renderingMode="template"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="BNv-Da-uWN" secondAttribute="trailing" constant="16" id="1dU-bV-AIH"/>
-                        <constraint firstItem="BNv-Da-uWN" firstAttribute="centerY" secondItem="cdp-bo-TSc" secondAttribute="centerY" id="2My-Du-AOz"/>
-                        <constraint firstItem="tl4-Qo-fur" firstAttribute="centerY" secondItem="cdp-bo-TSc" secondAttribute="centerY" id="2Pv-84-esU"/>
-                        <constraint firstItem="cdp-bo-TSc" firstAttribute="leading" secondItem="61P-yf-q4x" secondAttribute="leading" constant="16" id="NCy-2X-DvS"/>
-                        <constraint firstItem="BNv-Da-uWN" firstAttribute="leading" secondItem="Kpx-3Q-5nb" secondAttribute="trailing" id="NXn-TW-eTw"/>
-                        <constraint firstItem="cdp-bo-TSc" firstAttribute="centerY" secondItem="61P-yf-q4x" secondAttribute="centerY" id="PVe-in-YGa"/>
-                        <constraint firstItem="Kpx-3Q-5nb" firstAttribute="centerY" secondItem="BNv-Da-uWN" secondAttribute="centerY" constant="-2" id="XS2-Ib-Bbq"/>
-                        <constraint firstItem="Kpx-3Q-5nb" firstAttribute="leading" secondItem="tl4-Qo-fur" secondAttribute="trailing" constant="4" id="bk9-r8-HIg"/>
-                        <constraint firstItem="tl4-Qo-fur" firstAttribute="leading" secondItem="cdp-bo-TSc" secondAttribute="trailing" constant="4" id="e9R-i3-Kn5"/>
+                        <constraint firstAttribute="trailing" secondItem="Od9-PA-RI7" secondAttribute="trailing" constant="16" id="XeK-Ag-Ae2"/>
+                        <constraint firstItem="iR4-OS-toA" firstAttribute="centerY" secondItem="61P-yf-q4x" secondAttribute="centerY" id="iLt-YN-gCD"/>
+                        <constraint firstItem="Od9-PA-RI7" firstAttribute="leading" secondItem="iR4-OS-toA" secondAttribute="trailing" constant="4" id="k1E-QW-th1"/>
+                        <constraint firstItem="iR4-OS-toA" firstAttribute="leading" secondItem="61P-yf-q4x" secondAttribute="leading" constant="16" id="lzM-aQ-IRz"/>
+                        <constraint firstItem="Od9-PA-RI7" firstAttribute="centerY" secondItem="iR4-OS-toA" secondAttribute="centerY" id="srY-2s-Pjr"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXb-zn-epk"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="FWO-wV-BS3" secondAttribute="bottom" id="Ges-vR-25H"/>
+                <constraint firstAttribute="bottom" secondItem="FWO-wV-BS3" secondAttribute="bottom" constant="2" id="Ges-vR-25H"/>
+                <constraint firstItem="61P-yf-q4x" firstAttribute="top" secondItem="FWO-wV-BS3" secondAttribute="top" id="K03-5d-1uq"/>
                 <constraint firstItem="FWO-wV-BS3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OL3-7X-gwV"/>
                 <constraint firstAttribute="trailing" secondItem="FWO-wV-BS3" secondAttribute="trailing" id="Qqb-rM-rEn"/>
                 <constraint firstItem="VXb-zn-epk" firstAttribute="top" secondItem="FWO-wV-BS3" secondAttribute="top" id="SsC-g7-oRU"/>
+                <constraint firstItem="61P-yf-q4x" firstAttribute="trailing" secondItem="FWO-wV-BS3" secondAttribute="trailing" id="pbU-ax-6ry"/>
+                <constraint firstAttribute="bottom" secondItem="61P-yf-q4x" secondAttribute="bottom" constant="2" id="sla-Z0-Doe"/>
+                <constraint firstItem="61P-yf-q4x" firstAttribute="leading" secondItem="FWO-wV-BS3" secondAttribute="leading" id="uKA-k3-5b4"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="100.72463768115942" y="95.758928571428569"/>

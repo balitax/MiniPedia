@@ -17,6 +17,7 @@ final class SecondaryNavigationBar: UIView {
     @IBOutlet private var navigationView: UIView!
     @IBOutlet private var primaryContainerView: UIView!
     @IBOutlet private weak var leftButton: UIButton!
+    @IBOutlet private weak var searchBarLabel: UISearchBar!
     @IBOutlet private weak var titleLabel: UILabel!
     
     @IBOutlet private weak var shareButton: UIButton!
@@ -27,10 +28,25 @@ final class SecondaryNavigationBar: UIView {
     public let leftButtonObservable = PublishSubject<Void>()
     public let cartButtonObservable = PublishSubject<Void>()
     public let shareButtonObservable = PublishSubject<Void>()
+    public let searchProductObservable = PublishSubject<String>()
     
     var title: String = "" {
         didSet {
+            searchBarLabel.isHidden = true
             titleLabel.text = title
+            titleLabel.isHidden = title.isEmpty
+        }
+    }
+    
+    var titleOnSearchBar: String = "" {
+        didSet {
+            searchBarLabel.isHidden = false
+            titleLabel.isHidden = true
+            if titleOnSearchBar.isEmpty {
+                searchBarLabel.placeholder = "Cari produk disini..."
+            } else {
+                searchBarLabel.text = titleOnSearchBar
+            }
         }
     }
     
@@ -52,6 +68,15 @@ final class SecondaryNavigationBar: UIView {
         }
     }
     
+    var enableShareButton: Bool {
+        set {
+            self.shareButton.isHidden = !newValue
+        }
+        get {
+            return true
+        }
+    }
+    
     override func awakeFromNib() {
         initWithNib()
         setupUI()
@@ -66,11 +91,19 @@ final class SecondaryNavigationBar: UIView {
     
     private func setupUI() {
         
+        self.navigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor.clear, radius: 4, opacity: 0.8)
+        
         Observable.collection(from: ShoppingCart.shared.products)
             .asObservable()
             .subscribe(onNext: { [unowned self] badge in
                 if (badge.count != 0) {
-                    self.cartButton.badgeCount = badge.count
+                    Delay.wait(delay: 1) {
+                        self.cartButton.badgeCount = badge.count
+                    }
+                } else {
+                    Delay.wait(delay: 1) {
+                        self.cartButton.badgeCount = ShoppingCart.shared.products.count
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -92,6 +125,19 @@ final class SecondaryNavigationBar: UIView {
             .bind {
                 self.shareButtonObservable.onNext(())
             }.disposed(by: disposeBag)
+        
+        searchBarLabel.delegate = self
+        searchBarLabel.rx
+            .text
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] text in
+                guard let text = text else { return }
+                if !text.isEmpty {
+                    self?.searchProductObservable.onNext(text)
+                }
+            }).disposed(by: disposeBag)
+        
+        
     }
     
     private func setupLayout() {
@@ -105,13 +151,24 @@ final class SecondaryNavigationBar: UIView {
         )
     }
     
+    public func setAutoFocus() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.searchBarLabel.becomeFirstResponder()
+        }
+    }
+    
+    public func fontFize(_ size: CGFloat) {
+        self.titleLabel.font = UIFont.systemFont(ofSize: size)
+    }
+    
     public func alpaOffset(_ offset: CGFloat) {
         
+        
         self.view.backgroundColor = UIColor(white: 1, alpha: offset)
+        self.navigationView.alpha = offset
         
         if offset >= 1.0 {
             self.navigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor.clear, radius: 4, opacity: 0.8)
-            self.navigationView.backgroundColor = .white
         }  else {
             self.navigationView.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
         }
@@ -119,8 +176,12 @@ final class SecondaryNavigationBar: UIView {
         _ = [leftButton, shareButton, cartButton].map {
             $0?.tintColor = UIColor(red: 1 - (offset / 2), green: 1 - (offset / 2), blue: 1 - (offset / 2), alpha: 1)
         }
-        
-        titleLabel.textColor = UIColor(red: 1 - (offset / 2), green: 1 - (offset / 2), blue: 1 - (offset / 2), alpha: 1)
     }
     
+}
+
+extension SecondaryNavigationBar: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBarLabel.endEditing(true)
+    }
 }

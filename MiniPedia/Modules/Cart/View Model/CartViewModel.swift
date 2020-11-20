@@ -31,10 +31,12 @@ class CartViewModel: BaseViewModel {
     
     private var selectAllCart = false
     
+    var isAllCartSelected = BehaviorSubject<Bool>(value: false)
+    
     func getCartData() {
         self.state.onNext(.loading)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             Observable.collection(from: self.cart)
                 .map { $0 }
                 .subscribe { event in
@@ -56,6 +58,10 @@ class CartViewModel: BaseViewModel {
         
         if allCartSelected.count == self.cart.count {
             self.selectAllCart = true
+            self.isAllCartSelected.onNext(true)
+        } else {
+            self.selectAllCart = false
+            self.isAllCartSelected.onNext(false)
         }
     }
     
@@ -82,12 +88,15 @@ class CartViewModel: BaseViewModel {
                 .subscribe(Realm.rx.delete())
                 .disposed(by: self.disposeBag)
         }
+        
+        self.checkCartSelectable()
     }
     
     func updateProductQuantity(section: Int, rows: Int, qty: Int) {
         try! Database.shared.database.write {
             self.cart[section].products[rows].quantity = qty
         }
+        self.checkCartSelectable()
     }
     
     func didSelectProductItem(section: Int, rows: Int, isSelected: Bool) {
@@ -109,6 +118,7 @@ class CartViewModel: BaseViewModel {
             }
             
         }
+        self.checkCartSelectable()
     }
     
     func didSelectAllProductMerchant(section: Int, selected: Bool) {
@@ -116,6 +126,7 @@ class CartViewModel: BaseViewModel {
             self.cart[section].merchantSelected = selected
             self.cart[section].products.forEach { $0.productSelected = selected }
         }
+        self.checkCartSelectable()
     }
     
     func didSelectAllCart() {
@@ -129,6 +140,7 @@ class CartViewModel: BaseViewModel {
             }
             self.cartSelectObservable.onNext(selectAllCart)
         }
+        self.checkCartSelectable()
     }
     
     func didDeleteAllCart() {
