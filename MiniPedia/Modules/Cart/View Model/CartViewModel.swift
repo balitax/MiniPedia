@@ -24,6 +24,11 @@ class CartViewModel: BaseViewModel {
         return cart
     }
     
+    var whishlists: Results<WhishlistStorage> {
+        let whishlist = Database.shared.get(type: WhishlistStorage.self).sorted(byKeyPath: "id", ascending: false)
+        return whishlist
+    }
+    
     let cartSelectObservable = BehaviorSubject<Bool>(value: false)
     let cartCountSelectObservable = BehaviorSubject<String>(value: "")
     let deleteAllCartObservable = PublishSubject<Void>()
@@ -147,6 +152,33 @@ class CartViewModel: BaseViewModel {
         Observable.from([self.cart])
             .subscribe(Realm.rx.delete())
             .disposed(by: self.disposeBag)
+    }
+    
+    func deleteWhistlist() {
+//        Observable.from([self.whishlists])
+//            .subscribe(Realm.rx.delete())
+//            .disposed(by: self.disposeBag)
+        
+    }
+    
+    // MARK: -- WHISHLIST
+    func didMoveProductCartToWhishlist(_ product: ProductStorage, section: Int, rows: Int) {
+        
+        let whistList = WhishlistStorage()
+        Database.shared.save(object: whistList.copyFromCart(product), update: false)
+        
+        let productCheck = self.cart[section].products.count
+        if productCheck > 1 {
+            Observable.from([self.cart[section].products[rows]])
+                .subscribe(Realm.rx.delete())
+                .disposed(by: self.disposeBag)
+        }
+        else {
+            Observable.from([self.cart[section]])
+                .subscribe(Realm.rx.delete())
+                .disposed(by: self.disposeBag)
+        }
+        
     }
     
 }

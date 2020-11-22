@@ -97,7 +97,6 @@ open class Database: Databaseable {
 	func save(object: Object, update: Bool?) {
         do {
             try database.write {
-                debugPrint("instance not available")
 				if update == true {
 					database.add(object, update: .modified)
 				} else {
@@ -172,7 +171,6 @@ open class Database: Databaseable {
             try database.write {
                 debugPrint(Array(objects).description)
                 database.delete(objects)
-                print("success deleting")
             }
         } catch(let e) {
             debugPrint(e.localizedDescription)
@@ -204,7 +202,6 @@ open class Database: Databaseable {
                     debugPrint(Array(objects).description)
                     self.database.delete(objects)
                     emitter(.success(objects))
-                    print("success deleting")
                 }
             } catch(let e) {
                 debugPrint(e.localizedDescription)

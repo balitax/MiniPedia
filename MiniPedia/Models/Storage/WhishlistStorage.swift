@@ -1,8 +1,8 @@
 //
-//  ProductStorage.swift
+//  WhishlistStorage.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 14/10/20.
+//  Created by Agus RoomMe on 20/11/20.
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 
@@ -12,24 +12,7 @@ import RealmSwift
 import RxCocoa
 import RxDataSources
 
-
-final class CartStorage: Object {
-    
-    @objc dynamic var id: Int = -1
-    @objc dynamic var name: String?
-    @objc dynamic var location: String?
-    @objc dynamic var uri: String?
-    @objc dynamic var merchantSelected: Bool = false
-    
-    var products = List<ProductStorage>()
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
-    
-}
-
-final class ProductStorage: Object, NSCopying {
+final class WhishlistStorage: Object {
     
     @objc dynamic var id: Int = -1
     @objc dynamic var name: String?
@@ -42,9 +25,6 @@ final class ProductStorage: Object, NSCopying {
     @objc dynamic var quantity: Int = 0
     @objc dynamic var notes: String?
     @objc dynamic var productSelected: Bool = false
-    
-    // split product for whishlist
-    @objc dynamic var isWhishlist: Bool = false
     
     var getStock: NSMutableAttributedString? {
         var attributedString = NSMutableAttributedString()
@@ -64,8 +44,21 @@ final class ProductStorage: Object, NSCopying {
         return "id"
     }
     
-    func copy(with zone: NSZone? = nil) -> Any {
-        return ProductStorage(value: self)
+    func copyFromCart(_ cart: ProductStorage) -> WhishlistStorage {
+        let whishlist = WhishlistStorage()
+        whishlist.id = cart.id
+        whishlist.name = cart.name
+        whishlist.imageURI = cart.imageURI
+        whishlist.imageURI700 = cart.imageURI700
+        whishlist.price = cart.price
+        whishlist.rating = cart.rating
+        whishlist.countReview = cart.countReview
+        whishlist.countSold = cart.countSold
+        whishlist.stock = cart.stock
+        whishlist.quantity = cart.quantity
+        whishlist.notes = cart.notes
+        whishlist.productSelected = cart.productSelected
+        return whishlist
     }
     
 }

@@ -14,6 +14,7 @@ protocol CartItemsListOfMerchantsDelegate: class {
     func didRemoveCart(rows: Int)
     func didUpdateQuantity(rows: Int, qty: Int)
     func didSelectProduct(rows: Int, isSelected: Bool)
+    func didMoveToWhishlist(_ product: ProductStorage, rows: Int)
 }
 
 class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
@@ -28,6 +29,7 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
     @IBOutlet weak var btnDeleteItem: UIButton!
     @IBOutlet weak var btnAddQuantityItem: UIButton!
     
+    @IBOutlet weak var cartItemNote: UITextField!
     @IBOutlet weak var textfieldQuantityItem: UITextField!
     @IBOutlet weak var btnRemoveQuantityItem: UIButton!
     
@@ -105,6 +107,13 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
             .tap
             .subscribe(onNext: { [unowned self] _ in
                 self.delegate?.didRemoveCart(rows: self.rows)
+            }).disposed(by: disposeBag)
+        
+        self.btnMoveToWhishlist
+            .rx
+            .tap
+            .subscribe(onNext: { [unowned self] _ in
+                self.delegate?.didMoveToWhishlist(self.cart, rows: self.rows)
             }).disposed(by: disposeBag)
         
     }

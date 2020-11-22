@@ -9,6 +9,7 @@
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Kingfisher
 
 struct ProductSection {
     var header: String
@@ -32,7 +33,16 @@ class ProductListViewModel: BaseViewModel {
     let backButtonDidTap = PublishSubject<Void>()
     
     //MARK: - ViewModel DataSource
-    var products = BehaviorSubject<[ProductSection]> (
+    var products = BehaviorRelay<[DataProducts]> (
+        value: []
+    )
+    
+    private var _imageProducts = [UIImage]() {
+        didSet {
+            self.imageProducts.accept(_imageProducts)
+        }
+    }
+    var imageProducts = BehaviorRelay<[UIImage]> (
         value: []
     )
     
@@ -41,29 +51,28 @@ class ProductListViewModel: BaseViewModel {
         repository.getProductList(queryProduct)
             .delay(.seconds(1), scheduler: MainScheduler.instance)
             .observeOn(MainScheduler.instance)
-            .map({ product -> [ProductSection] in
-                
-                var sections: [ProductSection] = []
-                product.data.forEach({ category in
-                    let header = "\(category.id ?? 0)"
-                    
-                    if let index = sections.firstIndex(where: { $0.header == header }) {
-                        sections[index].items.append(contentsOf: product.data.compactMap { ProductListCellViewModel(product: $0) })
-                    } else {
-                        let section = ProductSection(header: header, items: product.data.compactMap { ProductListCellViewModel(product: $0) })
-                        sections.append(section)
-                    }
-                    
-                })
-                return sections
-            })
-            .subscribe(onSuccess: { section in
-                self.products.onNext(section)
+            .subscribe(onSuccess: { products in
+                self.products.accept(products.data)
                 self.state.onNext(.finish)
             }, onError: { error in
                 self.state.onNext(.error)
-                self.products.onError(error)
             }).disposed(by: disposeBag)
+    }
+    
+    func imageDownloadFromURL(_ url: String) {
+        guard let toURL = URL(string: url) else { return }
+        let downloader = ImageDownloader.default
+        downloader.downloadImage(with: toURL, completionHandler:  { [weak self] result in
+            guard let self = `self` else { return }
+            switch result {
+            case .success(let value):
+                let img = value.image
+                self._imageProducts.append(img)
+            case .failure(let error):
+                print("ERROR ", error.localizedDescription)
+            }
+        })
+            
     }
     
 }

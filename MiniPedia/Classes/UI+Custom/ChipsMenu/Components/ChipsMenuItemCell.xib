@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="ChipsMenuItemCell" customModule="MiniPedia" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="144" height="69"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="144" height="69"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmu-O2-VkI">
+                        <rect key="frame" x="0.0" y="21.5" width="144" height="26"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DKI Jakarta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXE-jR-gyQ">
+                                <rect key="frame" x="16" y="4" width="112" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <color key="textColor" name="BlackRoomMe"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="EXE-jR-gyQ" secondAttribute="bottom" constant="4" id="35M-CY-nDf"/>
+                            <constraint firstAttribute="height" constant="26" id="5OH-Bf-YoJ"/>
+                            <constraint firstAttribute="trailing" secondItem="EXE-jR-gyQ" secondAttribute="trailing" constant="16" id="XwE-FS-KmW"/>
+                            <constraint firstItem="EXE-jR-gyQ" firstAttribute="top" secondItem="nmu-O2-VkI" secondAttribute="top" constant="4" id="eJi-uP-fa3"/>
+                            <constraint firstItem="EXE-jR-gyQ" firstAttribute="leading" secondItem="nmu-O2-VkI" secondAttribute="leading" constant="16" id="f05-sd-a2M"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="nmu-O2-VkI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0hO-Vy-oCT"/>
+                <constraint firstAttribute="trailing" secondItem="nmu-O2-VkI" secondAttribute="trailing" id="UGr-S0-I5a"/>
+                <constraint firstItem="nmu-O2-VkI" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="igq-hx-BDR"/>
+            </constraints>
+            <size key="customSize" width="144" height="69"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="tagContainer" destination="nmu-O2-VkI" id="Q3n-X4-PZx"/>
+                <outlet property="tagLabel" destination="EXE-jR-gyQ" id="N8X-MO-UaX"/>
+            </connections>
+            <point key="canvasLocation" x="198.55072463768118" y="194.53125"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="BlackRoomMe">
+            <color red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

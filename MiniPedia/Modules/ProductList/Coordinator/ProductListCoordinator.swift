@@ -61,9 +61,11 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
     }
     
     private func coordinateToCart() -> Observable<Void> {
-        let cartCoordinator = CartCoordinator(rootViewController: rootViewController)
-        return coordinate(to: cartCoordinator)
-            .map { _ in () }
+        self.rootViewController.navigationController?.popViewController(animated: true)
+        Delay.wait(delay: 1) {
+            self.rootViewController.tabBarController?.selectedIndex = 1
+        }
+        return Observable.never().take(1)
     }
     
 }

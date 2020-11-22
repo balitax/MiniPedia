@@ -30,4 +30,8 @@ class ShoppingCart {
         return Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false)
     }
     
+    var whishlists: Results<WhishlistStorage> {
+        return Database.shared.get(type: WhishlistStorage.self).sorted(byKeyPath: "id", ascending: false)
+    }
+    
 }

@@ -27,6 +27,7 @@ class APIClient {
                     return
                 }
                 
+                print("RESPONSE => URL : \(endPoint.urlRequest)")
                 if 200..<300 ~= httpResponse.statusCode {
                     guard let data = data else {
                         single(.error(ApiError.invalidData))

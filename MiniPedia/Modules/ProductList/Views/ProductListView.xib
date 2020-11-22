@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductListView" customModule="MiniPedia" customModuleProvider="target">
             <connections>
+                <outlet property="chipsMenu" destination="QoK-Xb-O1Z" id="eLL-yO-JZG"/>
                 <outlet property="collectionView" destination="9x2-Io-wP7" id="FpQ-LC-SPB"/>
                 <outlet property="navigationBar" destination="amC-YX-KDz" id="ehO-5F-hxu"/>
                 <outlet property="navigationBarHeight" destination="xf2-gk-wej" id="xfW-n4-Xiw"/>
@@ -29,10 +30,17 @@
                         <constraint firstAttribute="height" constant="100" id="xf2-gk-wej"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9x2-Io-wP7">
-                    <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoK-Xb-O1Z" userLabel="CipsMenu" customClass="ChipsMenuView" customModule="MiniPedia" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="100" width="414" height="50"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LO1-6B-Rah">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="PhN-MM-4C5"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9x2-Io-wP7">
+                    <rect key="frame" x="0.0" y="150" width="414" height="746"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LO1-6B-Rah" customClass="WaterfallFlowLayout" customModule="MiniPedia" customModuleProvider="target">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -45,12 +53,15 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="9x2-Io-wP7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3fc-Ua-ayc"/>
+                <constraint firstItem="QoK-Xb-O1Z" firstAttribute="trailing" secondItem="amC-YX-KDz" secondAttribute="trailing" id="4jf-pf-z6U"/>
                 <constraint firstAttribute="bottom" secondItem="9x2-Io-wP7" secondAttribute="bottom" id="Byd-4b-ztS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9x2-Io-wP7" secondAttribute="trailing" id="EQ2-KI-wTI"/>
                 <constraint firstItem="amC-YX-KDz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QJ3-3a-Kuh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="amC-YX-KDz" secondAttribute="trailing" id="UTF-Cn-Ot2"/>
+                <constraint firstItem="QoK-Xb-O1Z" firstAttribute="leading" secondItem="amC-YX-KDz" secondAttribute="leading" id="Znj-au-tMr"/>
                 <constraint firstItem="amC-YX-KDz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="auK-Gc-WE2"/>
-                <constraint firstItem="9x2-Io-wP7" firstAttribute="top" secondItem="amC-YX-KDz" secondAttribute="bottom" id="txt-9S-8Na"/>
+                <constraint firstItem="9x2-Io-wP7" firstAttribute="top" secondItem="QoK-Xb-O1Z" secondAttribute="bottom" id="rFV-Mk-jub"/>
+                <constraint firstItem="QoK-Xb-O1Z" firstAttribute="top" secondItem="amC-YX-KDz" secondAttribute="bottom" id="wZc-zP-Otu"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <point key="canvasLocation" x="82.608695652173921" y="95.758928571428569"/>

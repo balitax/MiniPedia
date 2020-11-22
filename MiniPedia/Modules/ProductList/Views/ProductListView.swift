@@ -18,6 +18,10 @@ enum ListStyle {
 
 class ProductListView: UIViewController {
     
+    deinit {
+        print("#\(self)")
+    }
+    
     init() {
         super.init(nibName: "ProductListView", bundle: nil)
     }
@@ -28,6 +32,7 @@ class ProductListView: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var chipsMenu: ChipsMenuView!
     @IBOutlet weak var navigationBar: SecondaryNavigationBar!
     @IBOutlet weak var navigationBarHeight: NSLayoutConstraint! {
         didSet {
@@ -39,19 +44,8 @@ class ProductListView: UIViewController {
     
     let disposeBag = DisposeBag()
     var viewModel: ProductListViewModel!
-    var layout = GridCollectionViewLayout()
     var listStyle = ListStyle.column
     lazy var refreshHandler = RefreshHandler(view: collectionView)
-    
-    lazy var dataSource: RxCollectionViewSectionedReloadDataSource<ProductSection> = {
-        let dataSource = RxCollectionViewSectionedReloadDataSource<ProductSection>(configureCell: { (_, collectionView, indexPath, viewModel) -> UICollectionViewCell in
-            let cell: ProductListCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-            cell.viewModel = viewModel
-            cell.customUI(indexPath.row, collectionView: self.collectionView)
-            return cell
-        })
-        return dataSource
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,16 +54,26 @@ class ProductListView: UIViewController {
     }
     
     private func setupCollectionView() {
-        self.collectionView.registerReusableCell(ProductListCell.self)
-        self.layout.itemsPerRow = 2
-        self.layout.itemSpacing = 0
-        self.layout.itemHeightRatio = 1.5/1
-        self.collectionView.collectionViewLayout = self.layout
+        self.collectionView.registerReusableCell(ProductListGridViewCell.self)
+        
+        if let layout = collectionView?.collectionViewLayout as? WaterfallFlowLayout {
+            layout.delegate = self
+        }
+        
+        self.collectionView.backgroundColor = .clear
+        self.collectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         self.collectionView.keyboardDismissMode = .onDrag
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        
         self.collectionView.reloadData()
+        self.collectionView.layoutIfNeeded()
     }
     
     private func bindViewModel() {
+        
+        let menu = ["DKI Jakarta", "Surabaya", "Elektronik", "Kebutuhan Rumah", "Kesehatan", "Makanan & Minuman", "Fashion Pria", "Fashion Wanita"]
+        self.chipsMenu.items = menu
         
         if !viewModel.queryProduct.query.isEmpty {
             viewModel.getProductList()
@@ -84,6 +88,7 @@ class ProductListView: UIViewController {
                 case .loading:
                     self.showLoading()
                 case .finish:
+                    self.collectionView.reloadData()
                     self.hideLoading()
                 default:
                     self.hideLoading()
@@ -91,31 +96,53 @@ class ProductListView: UIViewController {
             }).disposed(by: disposeBag)
         
         viewModel.products
-            .asObserver()
-            .catchErrorJustReturn([])
-            .observeOn(MainScheduler.instance)
-            .bind(to: collectionView.rx.items(dataSource: self.dataSource))
-            .disposed(by: self.disposeBag)
-        
-        viewModel.products
-            .asObserver()
-            .subscribe(onNext: {[unowned self] _ in
-                self.refreshHandler.end()
-            }, onError: { error in
-                self.refreshHandler.end()
-                self.showAlert(error.localizedDescription, type: .error)
+            .asObservable()
+            .subscribe(onNext: { [weak self] products in
+                guard let self = self else { return }
+                for img in products {
+                    if let imgProduct = img.imageURI700 {
+                        self.viewModel.imageDownloadFromURL(imgProduct)
+                    }
+                }
             }).disposed(by: disposeBag)
         
-        collectionView.rx.itemSelected
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] indexPath in
-                self.collectionView.deselectItem(at: indexPath, animated: true)
+        viewModel.imageProducts
+            .asObservable()
+            .subscribe(onNext: { [weak self] products in
+                print("GAMBARE ", products.map { $0.size.height })
+                self?.collectionView.performBatchUpdates({
+                    self?.collectionView.reloadData()
+                }, completion: { _ in
+                    
+                })
             }).disposed(by: disposeBag)
         
-        collectionView.rx.modelSelected(ProductListCellViewModel.self)
-            .observeOn(MainScheduler.instance)
-            .bind(to: viewModel.selectedProduct)
-            .disposed(by: disposeBag)
+        //        viewModel.products
+        //            .asObserver()
+        //            .catchErrorJustReturn([])
+        //            .observeOn(MainScheduler.instance)
+        //            .bind(to: collectionView.rx.items(dataSource: self.dataSource))
+        //            .disposed(by: self.disposeBag)
+        
+        //        viewModel.products
+        //            .asObserver()
+        //            .subscribe(onNext: {[unowned self] _ in
+        //                self.refreshHandler.end()
+        //            }, onError: { error in
+        //                self.refreshHandler.end()
+        //                self.showAlert(error.localizedDescription, type: .error)
+        //            }).disposed(by: disposeBag)
+        
+//        collectionView.rx.itemSelected
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [unowned self] indexPath in
+//                self.collectionView.deselectItem(at: indexPath, animated: true)
+//            }).disposed(by: disposeBag)
+        
+//        collectionView.rx.modelSelected(ProductListCellViewModel.self)
+//            .observeOn(MainScheduler.instance)
+//            .bind(to: viewModel.selectedProduct)
+//            .disposed(by: disposeBag)
         
         if !viewModel.queryProduct.query.isEmpty {
             refreshHandler.refresh
@@ -124,10 +151,7 @@ class ProductListView: UIViewController {
                 .subscribe(onNext: { [unowned self] in
                     self.viewModel.getProductList()
                 }).disposed(by: disposeBag)
-            
         }
-        
-        
         
         navigationBar.leftButtonObservable
             .observeOn(MainScheduler.instance)
@@ -135,15 +159,22 @@ class ProductListView: UIViewController {
                 self.viewModel.backButtonDidTap.onNext(())
             }).disposed(by: disposeBag)
         
-//        navigationBar.cartButtonObservable
-//            .observeOn(MainScheduler.instance)
-//            .subscribe(onNext: { [unowned self] pip in
-//                self.viewModel.cartButtonDidTap.onNext(())
-//            }).disposed(by: disposeBag)
+        navigationBar.cartButtonObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] pip in
+                self.viewModel.cartButtonDidTap.onNext(())
+            }).disposed(by: disposeBag)
         
         
         navigationBar.enableShareButton = false
-        navigationBar.titleOnSearchBar = viewModel.queryProduct.titleProduct ?? ""
+        
+        if let title = viewModel.queryProduct.titleProduct {
+            if !title.isEmpty {
+                navigationBar.titleOnSearchBar = title
+            } else {
+                navigationBar.title = "All Products"
+            }
+        }
         
         navigationBar.searchProductObservable
             .subscribe(onNext: { [weak self] text in
@@ -151,6 +182,40 @@ class ProductListView: UIViewController {
                 self?.viewModel.getProductList()
             }).disposed(by: disposeBag)
         
+        navigationBar.alpaOffset(1)
+        
     }
     
+}
+
+extension ProductListView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.products.value.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell: ProductListGridViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        cell.bindProductData(viewModel.products.value[indexPath.row])
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 20)) / 2
+      return CGSize(width: itemSize, height: itemSize)
+    }
+    
+}
+
+extension ProductListView: WaterfallFlowLayoutDelegate {
+  func collectionView(_ collectionView: UICollectionView,
+                      heightForImageAtIndexPath indexPath:IndexPath) -> CGFloat {
+    if viewModel.imageProducts.value.isEmpty {
+        return 0
+    } else {
+        return viewModel.imageProducts.value[indexPath.row].size.height
+    }
+  }
 }

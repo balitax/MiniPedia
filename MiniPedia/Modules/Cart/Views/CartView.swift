@@ -43,6 +43,10 @@ class CartView: UIViewController {
         super.viewDidLoad()
         setupTableView()
         bindRx()
+       
+        Delay.wait {
+            self.viewModel.deleteWhistlist()
+        }
     }
     
     private func bindRx() {
@@ -108,7 +112,9 @@ class CartView: UIViewController {
         navigationBar.title = "Cart"
         navigationBar.fontFize(20)
         navigationBar.isLeftButtonHidden = true
+        navigationBar.enableRightButtonItems = false
         navigationBar.isEnableShadow = false
+        navigationBar.alpaOffset(1)
         
     }
     
@@ -168,6 +174,10 @@ extension CartView: CartItemByMerchantsDelegate {
     
     func didSelectProductAllMerchant(section: Int, selected: Bool) {
         viewModel.didSelectAllProductMerchant(section: section, selected: selected)
+    }
+    
+    func didMoveToWhishlist(_ product: ProductStorage, section: Int, rows: Int) {
+        viewModel.didMoveProductCartToWhishlist(product, section: section, rows: rows)
     }
     
 }

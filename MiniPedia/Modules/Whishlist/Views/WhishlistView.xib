@@ -29,8 +29,26 @@
                         <constraint firstAttribute="height" constant="60" id="ALD-WA-pWx"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LzI-Xz-hec">
+                    <rect key="frame" x="16" y="60" width="382" height="56"/>
+                    <subviews>
+                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Cari whishlist anda" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JV-sS-Fjx">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="56"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="4JV-sS-Fjx" secondAttribute="bottom" id="AXp-YN-ELp"/>
+                        <constraint firstAttribute="height" secondItem="4JV-sS-Fjx" secondAttribute="height" id="CS8-6r-xpL"/>
+                        <constraint firstItem="4JV-sS-Fjx" firstAttribute="height" secondItem="LzI-Xz-hec" secondAttribute="height" id="R0Y-y6-PWm"/>
+                        <constraint firstItem="4JV-sS-Fjx" firstAttribute="top" secondItem="LzI-Xz-hec" secondAttribute="top" id="SOS-PJ-x6c"/>
+                        <constraint firstAttribute="trailing" secondItem="4JV-sS-Fjx" secondAttribute="trailing" id="eRY-FJ-37N"/>
+                        <constraint firstItem="4JV-sS-Fjx" firstAttribute="leading" secondItem="LzI-Xz-hec" secondAttribute="leading" id="qAe-xg-msc"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YDE-Sa-btw" customClass="AutomaticDynamicTableView" customModule="MiniPedia" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="60" width="414" height="836"/>
+                    <rect key="frame" x="0.0" y="116" width="414" height="780"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -40,12 +58,15 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="0BR-qn-Gs8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7LE-tF-dhW"/>
-                <constraint firstItem="YDE-Sa-btw" firstAttribute="top" secondItem="0BR-qn-Gs8" secondAttribute="bottom" id="7q6-ah-cNX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0BR-qn-Gs8" secondAttribute="trailing" id="9zx-CJ-OPY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YDE-Sa-btw" secondAttribute="trailing" id="Khc-82-4MX"/>
+                <constraint firstItem="LzI-Xz-hec" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Kiy-GY-pex"/>
                 <constraint firstItem="YDE-Sa-btw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PuP-Un-Mdt"/>
+                <constraint firstItem="YDE-Sa-btw" firstAttribute="top" secondItem="LzI-Xz-hec" secondAttribute="bottom" id="WM5-bl-V9b"/>
                 <constraint firstAttribute="bottom" secondItem="YDE-Sa-btw" secondAttribute="bottom" id="dhp-oE-Fgg"/>
+                <constraint firstItem="LzI-Xz-hec" firstAttribute="top" secondItem="0BR-qn-Gs8" secondAttribute="bottom" id="hWX-7c-V7I"/>
                 <constraint firstItem="0BR-qn-Gs8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pUy-wA-eck"/>
+                <constraint firstAttribute="trailing" secondItem="LzI-Xz-hec" secondAttribute="trailing" constant="16" id="pzu-TV-kSu"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="103.79464285714285"/>
         </view>

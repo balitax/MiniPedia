@@ -19,6 +19,7 @@ class ProductDetailViewModel: BaseViewModel {
     }
     
     var cartState = PublishSubject<ShoppingState>()
+    var whistlistState = PublishSubject<ShoppingState>()
     let cartButtonDidTap = PublishSubject<Void>()
     let backButtonDidTap = PublishSubject<Void>()
     let urlToko = PublishSubject<URL>()
@@ -42,6 +43,19 @@ class ProductDetailViewModel: BaseViewModel {
                 self.isProductAlreadyOnCart(id: idProduct) ? self.updateQuantityCart(idProduct) : self.addToCart()
             }).disposed(by: disposeBag)
         
+    }
+    
+    func saveWhishlist() {
+        self.whistlistState.onNext(.initial)
+        Delay.wait(delay: 1) {
+            self.whistlistState.onNext(.update)
+        }
+//        products
+//            .compactMap { $0?.id }
+//            .asObservable()
+//            .subscribe(onNext: { [unowned self] idProduct in
+//                self.isProductAlreadyOnCart(id: idProduct) ? self.updateQuantityCart(idProduct) : self.addToCart()
+//            }).disposed(by: disposeBag)
     }
     
     func openTokopedia() {
@@ -102,6 +116,23 @@ class ProductDetailViewModel: BaseViewModel {
         return getMerchant
         
     }
+    
+//    private func saveCarts(carts: CartStorage) -> WhishlistStorage {
+        
+//        let getWhishlist          = WhishlistStorage()
+//        getWhishlist.id           = product.id ?? 0
+//        getWhishlist.name         = product.name ?? ""
+//        getWhishlist.imageURI     = product.imageURI ?? ""
+//        getWhishlist.imageURI700  = product.name ?? ""
+//        getWhishlist.price        = product.price ?? ""
+//        getWhishlist.countReview  = product.countReview ?? 0
+//        getWhishlist.countSold    = product.countSold ?? 0
+//        getWhishlist.stock        = product.stock ?? 0
+//        getWhishlist.quantity     = products
+//
+//        return getWhishlist
+        
+//    }
     
     private func isProductAlreadyOnCart(id: Int) -> Bool {
         let cart = Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false)

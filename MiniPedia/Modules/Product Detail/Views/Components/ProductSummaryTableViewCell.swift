@@ -11,6 +11,10 @@ import Kingfisher
 import RxSwift
 import FaveButton
 
+protocol ProductSummaryDelegate: class {
+    func didAddWhishlist()
+}
+
 class ProductSummaryTableViewCell: UITableViewCell, Reusable {
     
     @IBOutlet weak var productImage: UIImageView!
@@ -37,9 +41,20 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
     }
     
     private var disposeBag = DisposeBag()
+    private let gradient: CAGradientLayer = CAGradientLayer()
+    weak var delegate: ProductSummaryDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let colors = [
+            UIColor.darkGray.cgColor,
+            UIColor.clear.cgColor]
+        gradient.frame = bounds
+        gradient.colors = colors
+        gradient.locations = [0.0, 0.6]
+        productImage.layer.insertSublayer(gradient, at: 0)
+        
         self.productTitle.setLineHeight(lineHeight: 4.0)
         
         _ = [
@@ -57,6 +72,12 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
         self.btnFavorite?.setSelected(selected: true, animated: false)
         self.btnFavorite?.setSelected(selected: false, animated: false)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradient.frame = bounds
+    }
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -84,6 +105,12 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
                 self.soldCount.text = data.getCountSold
                 self.merchantName.text = data.shop?.name
                 
+            }).disposed(by: disposeBag)
+        
+        self.btnFavorite.rx
+            .tap
+            .subscribe(onNext: { [unowned self] _ in
+                self.delegate?.didAddWhishlist()
             }).disposed(by: disposeBag)
         
         self.stackViewContainer.layoutIfNeeded()

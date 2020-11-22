@@ -92,7 +92,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuQ-4F-cLj">
@@ -262,6 +262,7 @@
                 <outlet property="btnDeleteItem" destination="Bq6-00-L3m" id="BPo-tP-3rh"/>
                 <outlet property="btnMoveToWhishlist" destination="wuQ-4F-cLj" id="qo1-tI-YfG"/>
                 <outlet property="btnRemoveQuantityItem" destination="4dE-dl-S8Z" id="SoG-V6-vAK"/>
+                <outlet property="cartItemNote" destination="dxG-3m-xJt" id="X8F-1D-nTC"/>
                 <outlet property="productImage" destination="YtU-dv-13G" id="JLl-fH-8N4"/>
                 <outlet property="productName" destination="iJh-4o-H18" id="c0n-3V-p12"/>
                 <outlet property="productPrice" destination="8L7-sd-5vv" id="Xez-sG-nGh"/>

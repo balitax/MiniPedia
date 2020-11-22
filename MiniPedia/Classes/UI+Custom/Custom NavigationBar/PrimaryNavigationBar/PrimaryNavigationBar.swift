@@ -74,6 +74,21 @@ final class PrimaryNavigationBar: UIView {
             })
             .disposed(by: disposeBag)
         
+        Observable.collection(from: ShoppingCart.shared.whishlists)
+            .asObservable()
+            .subscribe(onNext: { [unowned self] badge in
+                if (badge.count != 0) {
+                    Delay.wait(delay: 1) {
+                        self.whishlistButton.badgeCount = badge.count
+                    }
+                } else {
+                    Delay.wait(delay: 1) {
+                        self.whishlistButton.badgeCount = ShoppingCart.shared.whishlists.count
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+        
         cartButton.rx
             .tap
             .bind {
@@ -105,9 +120,9 @@ final class PrimaryNavigationBar: UIView {
         self.mainNavigationView.alpha = offset
         
         if offset >= 1.0 {
-            self.navigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor.clear, radius: 4, opacity: 0.8)
+            self.mainNavigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor.clear, radius: 4, opacity: 0.8)
         } else {
-            self.navigationView.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
+            self.mainNavigationView.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
         }
         
         _ = [cartButton, whishlistButton].map {
@@ -130,7 +145,7 @@ extension PrimaryNavigationBar: UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("SIKAT")
+       
     }
     
 }

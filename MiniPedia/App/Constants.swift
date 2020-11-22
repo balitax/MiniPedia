@@ -48,8 +48,8 @@ enum RequestParams {
 
 struct Delay {
     
-    static func wait(delay: Int = 3, completion: @escaping() -> ()) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay)) {
+    static func wait(delay: Double = 3, completion: @escaping() -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             completion()
         }
     }

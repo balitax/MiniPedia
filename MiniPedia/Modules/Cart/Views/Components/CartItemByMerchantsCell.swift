@@ -16,6 +16,7 @@ protocol CartItemByMerchantsDelegate: class {
     func didUpdateQuantity(section: Int, rows: Int, qty: Int)
     func didSelectProductItem(section: Int, rows: Int, isSelected: Bool)
     func didSelectProductAllMerchant(section: Int, selected: Bool)
+    func didMoveToWhishlist(_ product: ProductStorage, section: Int, rows: Int)
 }
 
 class CartItemByMerchantsCell: UITableViewCell, Reusable {
@@ -109,6 +110,10 @@ extension CartItemByMerchantsCell: CartItemsListOfMerchantsDelegate {
     
     func didSelectProduct(rows: Int, isSelected: Bool) {
         self.delegate?.didSelectProductItem(section: section, rows: rows, isSelected: isSelected)
+    }
+    
+    func didMoveToWhishlist(_ product: ProductStorage, rows: Int) {
+        self.delegate?.didMoveToWhishlist(product, section: section, rows: rows)
     }
     
 }

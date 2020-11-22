@@ -33,6 +33,7 @@ class ProfileView: UIViewController, EmptyStateViewDelegate {
         navigationBar.enableRightButtonItems = false
         navigationBar.title = "Profile"
         navigationBar.fontFize(20)
+        navigationBar.alpaOffset(1)
         navigationBar.isLeftButtonHidden = true
         tableView.setEmptyView(stateType: .profile, delegate: self)
     }

@@ -76,11 +76,26 @@ class ProductDetailView: UIViewController {
             .subscribe(onNext: { [unowned self] state in
                 switch state {
                 case .done:
-                    self.showAlert("Produk ditambahkan ke keranjang Anda")
+                    self.showAlert("Produk telah ditambahkan")
                 case .error:
                     self.showAlert("Terjadi kesalahan!", type: .error)
                 case .update:
                     self.showAlert("Jumlah produk di perbarui", type: .success)
+                default:
+                    return
+                }
+            }).disposed(by: disposeBag)
+        
+        viewModel.whistlistState
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] state in
+                switch state {
+                case .done:
+                    self.showAlert("Whishlist telah ditambahkan")
+                case .error:
+                    self.showAlert("Terjadi kesalahan!", type: .error)
+                case .update:
+                    self.showAlert("Whishlist telah dihapus", type: .success)
                 default:
                     return
                 }
@@ -118,6 +133,7 @@ class ProductDetailView: UIViewController {
                 self.viewModel.shareProduct()
             }).disposed(by: disposeBag)
         
+        
     }
     
     private func onDataReloaded() {
@@ -127,7 +143,14 @@ class ProductDetailView: UIViewController {
         } completion: { _ in
             
         }
-
+        
+        self.tableView.rx
+            .contentOffset
+            .subscribe { [unowned self] in
+                let getY = $0.element?.y ?? 0
+                let offset = CGFloat(round(10*getY / 280)/10)
+                self.navigationBar.alpaOffset(offset)
+            }.disposed(by: self.disposeBag)
         
     }
     
@@ -167,6 +190,7 @@ extension ProductDetailView: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let cell: ProductSummaryTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
             cell.viewModel = viewModel
+            cell.delegate = self
             cell.selectionStyle = .none
             return cell
         case 1:
@@ -195,7 +219,11 @@ extension ProductDetailView: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension ProductDetailView: DescriptionProductDelegate {
+extension ProductDetailView: DescriptionProductDelegate, ProductSummaryDelegate {
+    
+    func didAddWhishlist() {
+        viewModel.saveWhishlist()
+    }
     
     func didReadmoreDescription(_ readmore: Bool) {
         self.tableView.beginUpdates()
