@@ -102,7 +102,7 @@ class HomeView: UIViewController {
     fileprivate func setupCollectionView() {
         collectionView.collectionViewLayout = self.collectionViewLayout()
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemGroupedBackground
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false

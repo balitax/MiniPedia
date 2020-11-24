@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import SkeletonView
 
 class ProductListGridViewCell: UICollectionViewCell, Reusable {
     
@@ -16,38 +17,41 @@ class ProductListGridViewCell: UICollectionViewCell, Reusable {
     @IBOutlet weak var productTitle: UILabel!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var productStarCount: UILabel!
+    @IBOutlet weak var stackStarContainer: UIStackView!
     @IBOutlet var imgStar: [UIImageView]!
     
     private var disposeBag = DisposeBag()
     
-    override func layoutSubviews() {
-        let rectShape = CAShapeLayer()
-        rectShape.frame = self.productImage.bounds
-        rectShape.path = UIBezierPath(roundedRect: self.productImage.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 8, height: 8)).cgPath
-        self.productImage.layer.mask = rectShape
+    var viewModel: ProductListCellViewModel! {
+        didSet {
+            self.bindData()
+        }
+    }
+    
+    override func prepareForReuse() {
+        
+        self.containerView.clipsToBounds = true
+        self.containerView.cornerRadius = 8
+        
+        self.productImage.layoutIfNeeded()
+        self.productImage.clipsToBounds = true
+        self.productImage.roundCorners(corners: [.topLeft, .topRight], radius: 8)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.showAnimatedGradientSkeleton()
-        self.containerView.clipsToBounds = true
-        self.containerView.cornerRadius = 8
+        self.containerView.layoutIfNeeded()
         self.containerView.addShadow(offset: CGSize(width: 1, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor(hexString: "#ededed"), radius: 2, opacity: 0.8)
         
     }
     
-    func bindProductData(_ data: DataProducts) {
-        
-        Delay.wait(delay: 0.5) {
-            self.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
-        }
-        
-        self.productTitle.text = data.name
-        self.productPrice.text = data.price
-        if let img_url = URL(string: data.imageURI ?? "") {
+    func bindData() {
+        self.productTitle.text = viewModel.productName
+        self.productPrice.text = viewModel.productPrice
+        if let img_url = URL(string: viewModel.productImage ?? "") {
             self.productImage.kf.setImage(with: img_url)
         }
-        self.productStarCount.text = data.getCountStar
+        self.productStarCount.text = viewModel.productStarCount
     }
     
 }

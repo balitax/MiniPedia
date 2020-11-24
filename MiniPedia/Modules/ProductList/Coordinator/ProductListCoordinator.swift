@@ -48,6 +48,13 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
             })
             .disposed(by: disposeBag)
         
+        viewModel.filterButtonDidTap
+            .flatMap( { [unowned self] bind in
+                return self.coordinateToProductFilter(bind)
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
         
         return Observable.never()
         
@@ -66,6 +73,12 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
             self.rootViewController.tabBarController?.selectedIndex = 1
         }
         return Observable.never().take(1)
+    }
+    
+    private func coordinateToProductFilter(_ binding: ProductFilterBinding) -> Observable<Void> {
+        let filterCoordinator = ProductFilterViewCoordinator(rootViewController: rootViewController, delegate: binding.delegate, filter: binding.filter)
+        return coordinate(to: filterCoordinator)
+            .map { _ in () }
     }
     
 }

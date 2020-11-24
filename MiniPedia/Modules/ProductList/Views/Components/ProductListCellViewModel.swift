@@ -15,11 +15,13 @@ struct ProductListCellViewModel {
     var productName: String?
     var productPrice: String?
     var productImage: String?
+    var productStarCount: String?
     
     init(product: DataProducts) {
         self.productName = product.name ?? ""
         self.productPrice = product.price ?? ""
         self.productImage = product.imageURI ?? ""
+        self.productStarCount = product.getCountStar
         self.product = product
     }
     

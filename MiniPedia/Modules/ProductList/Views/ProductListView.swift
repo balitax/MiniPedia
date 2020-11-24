@@ -10,25 +10,12 @@ import UIKit
 import RxSwift
 import RxDataSources
 import RxCocoa
-
-enum ListStyle {
-    case list
-    case column
-}
+import SkeletonView
 
 class ProductListView: UIViewController {
     
     deinit {
         print("#\(self)")
-    }
-    
-    init() {
-        super.init(nibName: "ProductListView", bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        fatalError("init(coder:) has not been implemented")
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -41,11 +28,16 @@ class ProductListView: UIViewController {
             }
         }
     }
+    @IBOutlet weak var filterContainer: UIView!
+    @IBOutlet weak var filterContainerMarginBottom: NSLayoutConstraint!
+    @IBOutlet weak var filterButton: UIButton!
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     var viewModel: ProductListViewModel!
-    var listStyle = ListStyle.column
+    var sections : [Sections] = []
+    private var filterData: ProductFilterRequest?
     lazy var refreshHandler = RefreshHandler(view: collectionView)
+    lazy var productListSection = ProductListSection(viewModel: self.viewModel)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,21 +45,36 @@ class ProductListView: UIViewController {
         bindViewModel()
     }
     
+    override func viewDidLayoutSubviews() {
+        view.layoutSkeletonIfNeeded()
+    }
+    
     private func setupCollectionView() {
+        self.collectionView.collectionViewLayout = self.collectionViewLayout()
         self.collectionView.registerReusableCell(ProductListGridViewCell.self)
-        
-        if let layout = collectionView?.collectionViewLayout as? WaterfallFlowLayout {
-            layout.delegate = self
-        }
-        
-        self.collectionView.backgroundColor = .clear
-        self.collectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        self.collectionView.backgroundColor = .systemGroupedBackground
         self.collectionView.keyboardDismissMode = .onDrag
         self.collectionView.dataSource = self
-        self.collectionView.delegate = self
+        self.collectionView.contentInsetAdjustmentBehavior = .never
+        self.collectionView.reloadData()
+        
+        self.sections = [
+            self.productListSection
+        ]
         
         self.collectionView.reloadData()
         self.collectionView.layoutIfNeeded()
+        
+        self.filterContainer.clipsToBounds = true
+        self.filterContainer.cornerRadius = 24
+    }
+    
+    private func reloadOnFinish() {
+        Delay.wait(delay: 1) {
+            self.refreshHandler.end()
+            self.collectionView.reloadData()
+            self.collectionView.layoutIfNeeded()
+        }
     }
     
     private func bindViewModel() {
@@ -75,75 +82,40 @@ class ProductListView: UIViewController {
         let menu = ["DKI Jakarta", "Surabaya", "Elektronik", "Kebutuhan Rumah", "Kesehatan", "Makanan & Minuman", "Fashion Pria", "Fashion Wanita"]
         self.chipsMenu.items = menu
         
-        if !viewModel.queryProduct.query.isEmpty {
-            viewModel.getProductList()
-        } else {
+        viewModel
+            .state
+            .asObserver()
+            .subscribe (onNext: { load in
+                switch load {
+                case .loading:
+                    self.collectionView.showAnimatedGradientSkeleton()
+                case .finish:
+                    self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+                default:
+                    return
+                }
+            }).disposed(by: disposeBag)
+        
+        viewModel.productDriver
+            .asObservable()
+            .subscribe(onNext: { [unowned self] product in
+                self.reloadOnFinish()
+                if !product.isEmpty {
+                    self.showFilterContainer(true)
+                }
+            }).disposed(by: disposeBag)
+        
+        if viewModel.queryProduct.query.isEmpty {
             navigationBar.setAutoFocus()
         }
         
-        viewModel.state
+        collectionView.rx.itemSelected
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] state in
-                switch state {
-                case .loading:
-                    self.showLoading()
-                case .finish:
-                    self.collectionView.reloadData()
-                    self.hideLoading()
-                default:
-                    self.hideLoading()
-                }
+            .subscribe(onNext: { [unowned self] indexPath in
+                self.viewModel.selectedItem(at: indexPath)
+                self.collectionView.deselectItem(at: indexPath, animated: true)
             }).disposed(by: disposeBag)
-        
-        viewModel.products
-            .asObservable()
-            .subscribe(onNext: { [weak self] products in
-                guard let self = self else { return }
-                for img in products {
-                    if let imgProduct = img.imageURI700 {
-                        self.viewModel.imageDownloadFromURL(imgProduct)
-                    }
-                }
-            }).disposed(by: disposeBag)
-        
-        viewModel.imageProducts
-            .asObservable()
-            .subscribe(onNext: { [weak self] products in
-                print("GAMBARE ", products.map { $0.size.height })
-                self?.collectionView.performBatchUpdates({
-                    self?.collectionView.reloadData()
-                }, completion: { _ in
-                    
-                })
-            }).disposed(by: disposeBag)
-        
-        //        viewModel.products
-        //            .asObserver()
-        //            .catchErrorJustReturn([])
-        //            .observeOn(MainScheduler.instance)
-        //            .bind(to: collectionView.rx.items(dataSource: self.dataSource))
-        //            .disposed(by: self.disposeBag)
-        
-        //        viewModel.products
-        //            .asObserver()
-        //            .subscribe(onNext: {[unowned self] _ in
-        //                self.refreshHandler.end()
-        //            }, onError: { error in
-        //                self.refreshHandler.end()
-        //                self.showAlert(error.localizedDescription, type: .error)
-        //            }).disposed(by: disposeBag)
-        
-//        collectionView.rx.itemSelected
-//            .observeOn(MainScheduler.instance)
-//            .subscribe(onNext: { [unowned self] indexPath in
-//                self.collectionView.deselectItem(at: indexPath, animated: true)
-//            }).disposed(by: disposeBag)
-        
-//        collectionView.rx.modelSelected(ProductListCellViewModel.self)
-//            .observeOn(MainScheduler.instance)
-//            .bind(to: viewModel.selectedProduct)
-//            .disposed(by: disposeBag)
-        
+
         if !viewModel.queryProduct.query.isEmpty {
             refreshHandler.refresh
                 .startWith(())
@@ -184,38 +156,85 @@ class ProductListView: UIViewController {
         
         navigationBar.alpaOffset(1)
         
+        filterButton
+            .rx
+            .tap
+            .subscribe(onNext: { [unowned self] _ in
+                let filter = ProductFilterBinding(delegate: self, filter: filterData)
+                self.viewModel.filterButtonDidTap.onNext(filter)
+            }).disposed(by: disposeBag)
+        
+    }
+    
+    private func collectionViewLayout() -> UICollectionViewCompositionalLayout {
+        let layout = UICollectionViewCompositionalLayout{(sectionIndex, environment) -> NSCollectionLayoutSection? in
+            
+            let section = self.sections[sectionIndex].layoutSection()
+            section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
+            return section
+        }
+        return layout
+    }
+    
+    private func showFilterContainer(_ show: Bool) {
+        let valueHide: CGFloat = -100
+        let valueShow: CGFloat = 24
+        self.view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 1.0,
+                       delay: 0.5,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 10,
+                       options: [.curveEaseOut],
+                       animations: {
+                        self.filterContainerMarginBottom.constant = show ? valueShow : valueHide
+                        self.view.layoutIfNeeded()
+                       }, completion: nil)
     }
     
 }
 
-extension ProductListView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension ProductListView: ProductFilterDelegate {
+    
+    func didApplyFilter(_ filter: ProductFilterRequest?) {
+        if let request = filter {
+            self.filterData = filter
+            viewModel.queryProduct.store(request)
+            viewModel.getProductList()
+        }
+    }
+    
+}
+
+extension ProductListView: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        sections.count
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.products.value.count
+        sections[section].numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell: ProductListGridViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        cell.bindProductData(viewModel.products.value[indexPath.row])
-        return cell
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 20)) / 2
-      return CGSize(width: itemSize, height: itemSize)
+        sections[indexPath.section].configureCell(collectionView, indexPath: indexPath)
     }
     
 }
 
-extension ProductListView: WaterfallFlowLayoutDelegate {
-  func collectionView(_ collectionView: UICollectionView,
-                      heightForImageAtIndexPath indexPath:IndexPath) -> CGFloat {
-    if viewModel.imageProducts.value.isEmpty {
-        return 0
-    } else {
-        return viewModel.imageProducts.value[indexPath.row].size.height
+
+extension ProductListView: SkeletonCollectionViewDataSource {
+    
+    func numSections(in collectionSkeletonView: UICollectionView) -> Int {
+        return 1
     }
-  }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return ProductListGridViewCell.reuseIdentifier
+    }
+    
 }

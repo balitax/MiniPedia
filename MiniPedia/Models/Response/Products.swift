@@ -114,6 +114,7 @@ struct Status: Codable {
 
 // MARK: Query Product
 struct QueryProduct {
+    
     var titleProduct: String?
     var query: String
     var minPrice: Double?
@@ -123,6 +124,15 @@ struct QueryProduct {
     var goldMerchant: Bool?
     var start: Int = 0
     var rows: Int = 20
+    
+    mutating func store(_ request: ProductFilterRequest) {
+        self.minPrice = request.lowerPrice
+        self.maxPrice = request.upperPrice
+        self.isWholeStore = request.isWholeStore
+        self.isOfficial = request.isOfficial
+        self.goldMerchant = request.isGoldSeller
+    }
+    
 }
 
 extension QueryProduct {
