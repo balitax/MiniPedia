@@ -2,7 +2,7 @@
 //  ProductDetailViewModel.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 13/10/20.
+//  Created by Agus Cahyono on 13/10/20.
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 
@@ -36,9 +36,7 @@ class ProductDetailViewModel: BaseViewModel {
     }
     
     func isAlreadyWhishlisted(_ id: Int) -> Bool {
-        let product = Database.shared.get(type: ProductStorage.self).filter("id == \(id)").first
-        guard let isWhishlist = product?.isWhishlist else { return false }
-        return isWhishlist
+       return isProductAlreadyOnWhishlist(id: id)
     }
     
     func saveCart() {

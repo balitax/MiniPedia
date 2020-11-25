@@ -2,7 +2,7 @@
 //  WaterfallFlowLayout.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 22/11/20.
+//  Created by Agus Cahyono on 22/11/20.
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 

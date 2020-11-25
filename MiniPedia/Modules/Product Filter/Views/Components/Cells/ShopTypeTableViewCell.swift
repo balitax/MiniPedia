@@ -2,7 +2,7 @@
 //  ShopTypeTableViewCell.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 08/09/20.
+//  Created by Agus Cahyono on 08/09/20.
 //
 
 import UIKit

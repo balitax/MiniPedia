@@ -2,7 +2,7 @@
 //  Products.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 07/09/20.
+//  Created by Agus Cahyono on 07/09/20.
 //
 
 import Foundation

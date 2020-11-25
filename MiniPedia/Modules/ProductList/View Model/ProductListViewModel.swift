@@ -2,7 +2,7 @@
 //  ProductListViewModel.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 12/10/20.
+//  Created by Agus Cahyono on 12/10/20.
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 
