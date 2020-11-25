@@ -2,7 +2,7 @@
 //  ChipsMenuItemCell.swift
 //  tenantapp
 //
-//  Created by Agus RoomMe on 21/10/20.
+//  Created by Agus Cahyono on 21/10/20.
 //  Copyright © 2020 RoomMe. All rights reserved.
 //
 

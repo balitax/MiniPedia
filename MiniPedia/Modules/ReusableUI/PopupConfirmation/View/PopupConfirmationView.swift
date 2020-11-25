@@ -2,7 +2,7 @@
 //  PopupConfirmationView.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 17/10/20.
+//  Created by Agus Cahyono on 17/10/20.
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  ShopTyleListCollectionViewCell.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 09/09/20.
+//  Created by Agus Cahyono on 09/09/20.
 //
 
 import UIKit

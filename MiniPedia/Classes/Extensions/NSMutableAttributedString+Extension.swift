@@ -2,7 +2,7 @@
 //  NSMutableAttributedString+Extension.swift
 //  MiniPedia
 //
-//  Created by Agus RoomMe on 13/10/20.
+//  Created by Agus Cahyono on 13/10/20.
 //  Copyright © 2020 Agus Cahyono. All rights reserved.
 //
 
