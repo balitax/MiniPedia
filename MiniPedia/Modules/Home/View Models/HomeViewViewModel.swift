@@ -27,6 +27,13 @@ class HomeViewViewModel: BaseViewModel {
     var showAllPromoProduct = PublishSubject<QueryProduct>()
     var searchProductWithQuery = PublishSubject<Void>()
     
+    
+    // MARK: -- Number Of Rows
+    var numberOfFashionRows = BehaviorRelay<Int>(value: 0)
+    var numberOfGadgetRows = BehaviorRelay<Int>(value: 0)
+    var numberOfPromoRows = BehaviorRelay<Int>(value: 0)
+    
+    
     //MARK: - ViewModel DataSource
     private var popularFashion = BehaviorRelay<[DataProducts]> (
         value: []
@@ -51,6 +58,7 @@ class HomeViewViewModel: BaseViewModel {
             .observeOn(MainScheduler.instance)
             .subscribe(onSuccess: { products in
                 self.popularFashion.accept(products.data)
+                self.numberOfFashionRows.accept(products.data.count)
                 self.state.onNext(.finish)
             }, onError: { error in
                 self.state.onNext(.error)
@@ -64,6 +72,7 @@ class HomeViewViewModel: BaseViewModel {
             .observeOn(MainScheduler.instance)
             .subscribe(onSuccess: { products in
                 self.gadgetProduct.accept(products.data)
+                self.numberOfGadgetRows.accept(products.data.count)
                 self.state.onNext(.finish)
             }, onError: { error in
                 self.state.onNext(.error)
@@ -77,6 +86,7 @@ class HomeViewViewModel: BaseViewModel {
             .observeOn(MainScheduler.instance)
             .subscribe(onSuccess: { products in
                 self.promoProduct.accept(products.data)
+                self.numberOfPromoRows.accept(products.data.count)
                 self.state.onNext(.finish)
             }, onError: { error in
                 self.state.onNext(.error)
@@ -104,6 +114,7 @@ class HomeViewViewModel: BaseViewModel {
 
 // MARK: -- Product Info
 extension HomeViewViewModel {
+    
     func fashionProduct(at indexPath: IndexPath) -> DataProducts? {
         self.popularFashion.value.isEmpty ? nil : self.popularFashion.value[indexPath.row]
     }

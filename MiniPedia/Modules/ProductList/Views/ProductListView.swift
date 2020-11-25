@@ -79,8 +79,16 @@ class ProductListView: UIViewController {
     
     private func bindViewModel() {
         
-        let menu = ["DKI Jakarta", "Surabaya", "Elektronik", "Kebutuhan Rumah", "Kesehatan", "Makanan & Minuman", "Fashion Pria", "Fashion Wanita"]
+        var menu = ["iPhone 12", "Daster Wanita", "Elektronik", "Kebutuhan Rumah", "Kesehatan", "Makanan & Minuman", "Fashion Pria", "Fashion Wanita"]
+        
+        if let title = viewModel.queryProduct.titleProduct {
+            if !title.isEmpty {
+                menu.insert(title, at: 0)
+            }
+        }
+        
         self.chipsMenu.items = menu
+        self.chipsMenu.delegate = self
         
         viewModel
             .state
@@ -194,7 +202,12 @@ class ProductListView: UIViewController {
     
 }
 
-extension ProductListView: ProductFilterDelegate {
+extension ProductListView: ProductFilterDelegate, ChipsMenuDelegate {
+    
+    func didSelectedMenu(name: String) {
+        viewModel.queryProduct.query = name 
+        viewModel.getProductList()
+    }
     
     func didApplyFilter(_ filter: ProductFilterRequest?) {
         if let request = filter {
@@ -203,6 +216,8 @@ extension ProductListView: ProductFilterDelegate {
             viewModel.getProductList()
         }
     }
+    
+    
     
 }
 

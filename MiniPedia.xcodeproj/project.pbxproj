@@ -146,7 +146,6 @@
 		26F8F4F02567AD1300FC4AAC /* WhishlistViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4EF2567AD1300FC4AAC /* WhishlistViewCoordinator.swift */; };
 		26F8F4F72567B6CC00FC4AAC /* WhishlistItemsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4F52567B6CC00FC4AAC /* WhishlistItemsViewCell.swift */; };
 		26F8F4F82567B6CC00FC4AAC /* WhishlistItemsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F8F4F62567B6CC00FC4AAC /* WhishlistItemsViewCell.xib */; };
-		26F8F4FD2567C14500FC4AAC /* WhishlistStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F4FC2567C14500FC4AAC /* WhishlistStorage.swift */; };
 		26F8F5022567C2E500FC4AAC /* HasApply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F8F5012567C2E500FC4AAC /* HasApply.swift */; };
 		5C9E162F9619675A0A65CE56 /* Pods_MiniPedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB443E392430910E3EBB405 /* Pods_MiniPedia.framework */; };
 		B5C0B384FD6505704AD45493 /* Pods_MiniPediaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D3CDD3DC85F42CC941A49C /* Pods_MiniPediaTests.framework */; };
@@ -317,7 +316,6 @@
 		26F8F4EF2567AD1300FC4AAC /* WhishlistViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhishlistViewCoordinator.swift; sourceTree = "<group>"; };
 		26F8F4F52567B6CC00FC4AAC /* WhishlistItemsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhishlistItemsViewCell.swift; sourceTree = "<group>"; };
 		26F8F4F62567B6CC00FC4AAC /* WhishlistItemsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WhishlistItemsViewCell.xib; sourceTree = "<group>"; };
-		26F8F4FC2567C14500FC4AAC /* WhishlistStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhishlistStorage.swift; sourceTree = "<group>"; };
 		26F8F5012567C2E500FC4AAC /* HasApply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasApply.swift; sourceTree = "<group>"; };
 		273899347C2C624699E56379 /* Pods-MiniPedia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPedia.debug.xcconfig"; path = "Target Support Files/Pods-MiniPedia/Pods-MiniPedia.debug.xcconfig"; sourceTree = "<group>"; };
 		67D3CDD3DC85F42CC941A49C /* Pods_MiniPediaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniPediaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -854,7 +852,6 @@
 			isa = PBXGroup;
 			children = (
 				26F825322536D3030016E3C7 /* ProductStorage.swift */,
-				26F8F4FC2567C14500FC4AAC /* WhishlistStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -1477,7 +1474,6 @@
 				2616480525356CA400048425 /* Refreshable.swift in Sources */,
 				26A13A5025340B3D00A0CD0F /* ReactiveCoordinator.swift in Sources */,
 				2653A39F253410C700F9F28B /* RubberTrackLayer.swift in Sources */,
-				26F8F4FD2567C14500FC4AAC /* WhishlistStorage.swift in Sources */,
 				26A13A6A25340DB800A0CD0F /* ProductListCoordinator.swift in Sources */,
 				26F8252B2536C3380016E3C7 /* ShoppingCart.swift in Sources */,
 				268204D42538ADC000E3E542 /* CartItemByMerchantsCell.swift in Sources */,

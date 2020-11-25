@@ -11,10 +11,11 @@ import RxCocoa
 import RxSwift
 
 protocol CartItemsListOfMerchantsDelegate: class {
+    func didAddNoteItemCart(rows: Int, note: String)
     func didRemoveCart(rows: Int)
     func didUpdateQuantity(rows: Int, qty: Int)
     func didSelectProduct(rows: Int, isSelected: Bool)
-    func didMoveToWhishlist(_ product: ProductStorage, rows: Int)
+    func didMoveToWhishlist(rows: Int)
 }
 
 class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
@@ -70,6 +71,7 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
         super.awakeFromNib()
         // Initialization code
         bindRx()
+        self.cartItemNote.delegate = self
     }
     
     private func bindRx() {
@@ -113,7 +115,14 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
             .rx
             .tap
             .subscribe(onNext: { [unowned self] _ in
-                self.delegate?.didMoveToWhishlist(self.cart, rows: self.rows)
+                self.delegate?.didMoveToWhishlist(rows: self.rows)
+            }).disposed(by: disposeBag)
+        
+        self.cartItemNote
+            .rx
+            .controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                self.getNoteText()
             }).disposed(by: disposeBag)
         
     }
@@ -136,6 +145,18 @@ class CartItemsListOfMerchantsTableViewCell: UITableViewCell, Reusable {
             }).disposed(by: disposeBag)
     }
     
+    private func getNoteText() {
+        self.cartItemNote.rx
+            .text
+            .orEmpty
+            .compactMap { $0 }
+            .subscribe(onNext: { [unowned self] note in
+                if !note.isEmpty {
+                    self.delegate?.didAddNoteItemCart(rows: self.rows, note: note)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
 }
 
 extension CartItemsListOfMerchantsTableViewCell {
@@ -152,6 +173,29 @@ extension CartItemsListOfMerchantsTableViewCell {
         self.quantity = cart.quantity
         self.isItemSelected = cart.productSelected
         
+        if let notes = cart.notes {
+            if notes.isEmpty {
+                self.cartItemNote.placeholder = "Tulis catatan untuk barang ini"
+            } else {
+                self.cartItemNote.text = notes
+            }
+        } else {
+            self.cartItemNote.placeholder = "Tulis catatan untuk barang ini"
+        }
+        
+    }
+    
+}
+
+extension CartItemsListOfMerchantsTableViewCell: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.cartItemNote.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.cartItemNote.resignFirstResponder()
+        return true
     }
     
 }

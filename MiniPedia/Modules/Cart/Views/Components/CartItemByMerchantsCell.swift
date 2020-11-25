@@ -12,11 +12,13 @@ import RxSwift
 import RxCocoa
 
 protocol CartItemByMerchantsDelegate: class {
+    func didAddNoteItemCart(section: Int, rows: Int, note: String)
     func didRemoveCartItem(section: Int, rows: Int)
     func didUpdateQuantity(section: Int, rows: Int, qty: Int)
     func didSelectProductItem(section: Int, rows: Int, isSelected: Bool)
     func didSelectProductAllMerchant(section: Int, selected: Bool)
-    func didMoveToWhishlist(_ product: ProductStorage, section: Int, rows: Int)
+    func didMoveToWhishlist(section: Int, rows: Int)
+    func didSelectProductForDetail(section: Int, rows: Int)
 }
 
 class CartItemByMerchantsCell: UITableViewCell, Reusable {
@@ -45,6 +47,7 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
         }
     }
     weak var delegate: CartItemByMerchantsDelegate?
+    private var getMerchantLocation: String = ""
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -73,6 +76,7 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
         self.cartTableView.rowHeight = UITableView.automaticDimension
         self.cartTableView.estimatedRowHeight = UITableView.automaticDimension
         self.cartTableView.dataSource = self
+        self.cartTableView.delegate = self
         self.cartTableView.backgroundColor = .systemGroupedBackground
         self.cartTableView.contentInsetAdjustmentBehavior = .never
         self.cartTableView.separatorStyle = .none
@@ -94,11 +98,16 @@ class CartItemByMerchantsCell: UITableViewCell, Reusable {
     func bindCell() {
         self.merchantName.text = self.merchant?.name
         self.merchantLocation.text = self.merchant?.location
+        self.getMerchantLocation = self.merchant?.location ?? ""
     }
     
 }
 
 extension CartItemByMerchantsCell: CartItemsListOfMerchantsDelegate {
+    
+    func didAddNoteItemCart(rows: Int, note: String) {
+        self.delegate?.didAddNoteItemCart(section: section, rows: rows, note: note)
+    }
     
     func didUpdateQuantity(rows: Int, qty: Int) {
         self.delegate?.didUpdateQuantity(section: section, rows: rows, qty: qty)
@@ -112,13 +121,13 @@ extension CartItemByMerchantsCell: CartItemsListOfMerchantsDelegate {
         self.delegate?.didSelectProductItem(section: section, rows: rows, isSelected: isSelected)
     }
     
-    func didMoveToWhishlist(_ product: ProductStorage, rows: Int) {
-        self.delegate?.didMoveToWhishlist(product, section: section, rows: rows)
+    func didMoveToWhishlist(rows: Int) {
+        self.delegate?.didMoveToWhishlist(section: section, rows: rows)
     }
     
 }
 
-extension CartItemByMerchantsCell: UITableViewDataSource {
+extension CartItemByMerchantsCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return merchant?.products.count ?? 0
@@ -140,6 +149,10 @@ extension CartItemByMerchantsCell: UITableViewDataSource {
         cell.delegate = self
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.didSelectProductForDetail(section: self.section, rows: indexPath.row)
     }
     
 }

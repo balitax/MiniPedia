@@ -27,7 +27,7 @@ enum ProductCategory: String, CaseIterable {
 
 class ProductListSections: Sections {
     
-    internal var numberOfItems: Int = 10
+    internal var numberOfItems: Int = 4
     private var viewModel: HomeViewViewModel!
     var category: ProductCategory!
     
@@ -39,6 +39,7 @@ class ProductListSections: Sections {
         self.viewModel.getPopularFashionProductList()
         self.viewModel.getGadgetProductList()
         self.viewModel.getPromoProductList()
+        
     }
     
     

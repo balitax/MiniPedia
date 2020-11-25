@@ -86,22 +86,6 @@ class ProductDetailView: UIViewController {
                 }
             }).disposed(by: disposeBag)
         
-        viewModel.whistlistState
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] state in
-                switch state {
-                case .done:
-                    self.showAlert("Whishlist telah ditambahkan")
-                case .error:
-                    self.showAlert("Terjadi kesalahan!", type: .error)
-                case .update:
-                    self.showAlert("Whishlist telah dihapus", type: .success)
-                default:
-                    return
-                }
-            }).disposed(by: disposeBag)
-        
-        
         btnAddKeranjang.rx
             .tap
             .subscribe(onNext: { [unowned self] _ in

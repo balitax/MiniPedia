@@ -174,7 +174,7 @@ final class SecondaryNavigationBar: UIView {
         self.mainNavigationView.alpha = offset
         
         if offset >= 1.0 {
-            self.mainNavigationView.addShadow(offset: CGSize(width: 0, height: 2), color: UIColor(hexString: "#ededed"), borderColor: UIColor.clear, radius: 4, opacity: 0.8)
+            self.mainNavigationView.addShadow(offset: CGSize(width: 0, height: 2), color: isEnableShadow ? UIColor(hexString: "#ededed") : UIColor.clear, borderColor: UIColor.clear, radius: 4, opacity: 0.8)
         }  else {
             self.mainNavigationView.addShadow(offset: CGSize(width: 0, height: 0), color: UIColor.clear, borderColor: UIColor.clear, radius: 0, opacity: 0.0)
         }

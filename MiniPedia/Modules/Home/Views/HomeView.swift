@@ -28,13 +28,13 @@ class HomeView: UIViewController {
     var sections : [Sections] = []
     lazy var dompetSection = DompetAccountSections(viewModel: self.viewModel)
     
-    lazy var gadgetSection:  ProductListSections = {
+    lazy var fashionSection:  ProductListSections = {
         var product = ProductListSections(viewModel: self.viewModel)
         product.category = .fashion
         return product
     }()
     
-    lazy var fashionSection: ProductListSections = {
+    lazy var gadgetSection: ProductListSections = {
         var product = ProductListSections(viewModel: self.viewModel)
         product.category = .gadget
         return product
@@ -66,6 +66,24 @@ class HomeView: UIViewController {
                 default:
                     return
                 }
+            }).disposed(by: disposeBag)
+        
+        Observable.combineLatest(viewModel.numberOfFashionRows, viewModel.numberOfGadgetRows, viewModel.numberOfPromoRows)
+            .subscribe(onNext: { [unowned self] fashionRow,gadgetRow,promoRow in
+                
+                if fashionRow != 0 {
+                    self.fashionSection.numberOfItems = fashionRow
+                }
+                
+                if gadgetRow != 0 {
+                    self.gadgetSection.numberOfItems = gadgetRow
+                }
+                
+                if promoRow != 0 {
+                    self.promoSection.numberOfItems = promoRow
+                }
+                
+                self.collectionView.reloadData()
             }).disposed(by: disposeBag)
         
         collectionView.rx.itemSelected
@@ -114,8 +132,8 @@ class HomeView: UIViewController {
         
         self.sections = [
             self.dompetSection,
-            self.gadgetSection,
             self.fashionSection,
+            self.gadgetSection,
             self.promoSection
         ]
         

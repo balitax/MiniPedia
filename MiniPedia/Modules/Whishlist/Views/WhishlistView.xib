@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="navigationBar" destination="0BR-qn-Gs8" id="Dvt-9a-vrc"/>
                 <outlet property="navigationBarHeight" destination="ALD-WA-pWx" id="oks-oP-Ihc"/>
+                <outlet property="searchBar" destination="4JV-sS-Fjx" id="YhT-hL-GHp"/>
                 <outlet property="tableView" destination="YDE-Sa-btw" id="TJM-aN-Nqw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,21 +35,24 @@
                     <subviews>
                         <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Cari whishlist anda" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JV-sS-Fjx">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="56"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            <scopeButtonTitles>
+                                <string>Title</string>
+                                <string>Title</string>
+                            </scopeButtonTitles>
                         </searchBar>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="4JV-sS-Fjx" secondAttribute="bottom" id="AXp-YN-ELp"/>
-                        <constraint firstAttribute="height" secondItem="4JV-sS-Fjx" secondAttribute="height" id="CS8-6r-xpL"/>
-                        <constraint firstItem="4JV-sS-Fjx" firstAttribute="height" secondItem="LzI-Xz-hec" secondAttribute="height" id="R0Y-y6-PWm"/>
                         <constraint firstItem="4JV-sS-Fjx" firstAttribute="top" secondItem="LzI-Xz-hec" secondAttribute="top" id="SOS-PJ-x6c"/>
                         <constraint firstAttribute="trailing" secondItem="4JV-sS-Fjx" secondAttribute="trailing" id="eRY-FJ-37N"/>
                         <constraint firstItem="4JV-sS-Fjx" firstAttribute="leading" secondItem="LzI-Xz-hec" secondAttribute="leading" id="qAe-xg-msc"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YDE-Sa-btw" customClass="AutomaticDynamicTableView" customModule="MiniPedia" customModuleProvider="target">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="YDE-Sa-btw">
                     <rect key="frame" x="0.0" y="116" width="414" height="780"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                     </userDefinedRuntimeAttributes>

@@ -35,8 +35,22 @@ class CartCoordinator: ReactiveCoordinator<Void> {
             })
             .disposed(by: disposeBag)
         
+        viewModel.viewDetailProduct
+            .flatMapLatest({ [unowned self] storage in
+                return self.coordinateToProductDetail(with: storage)
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
         return Observable.never()
         
+    }
+    
+    private func coordinateToProductDetail(with productViewModel: ProductListCellViewModel) -> Observable<Void> {
+        let productDetailCoordinator = ProductDetailCoordinator(rootViewController: rootViewController)
+        productDetailCoordinator.viewModel = productViewModel
+        return coordinate(to: productDetailCoordinator)
+            .map { _ in () }
     }
     
     private func coordinatePopupConfirmUI() -> Observable<Void> {

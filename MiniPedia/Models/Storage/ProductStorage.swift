@@ -43,8 +43,19 @@ final class ProductStorage: Object, NSCopying {
     @objc dynamic var notes: String?
     @objc dynamic var productSelected: Bool = false
     
+    let objects = LinkingObjects(fromType: CartStorage.self, property: "products")
+    
     // split product for whishlist
+    @objc dynamic var shopLocation: String?
     @objc dynamic var isWhishlist: Bool = false
+    
+    func getShopLocation(id: Int) -> String {
+        if let location = Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false).filter("ANY products.id == \(id) ").first {
+            return location.location ?? ""
+        } else {
+            return ""
+        }
+    }
     
     var getStock: NSMutableAttributedString? {
         var attributedString = NSMutableAttributedString()
@@ -66,6 +77,20 @@ final class ProductStorage: Object, NSCopying {
     
     func copy(with zone: NSZone? = nil) -> Any {
         return ProductStorage(value: self)
+    }
+    
+    func toDataProduct() -> DataProducts {
+        var product         = DataProducts()
+        product.id          = self.id
+        product.name        = self.name
+        product.imageURI    = self.imageURI
+        product.imageURI700 = self.imageURI700
+        product.price       = self.price
+        product.rating      = self.rating
+        product.countReview = self.countReview
+        product.countSold   = self.countSold
+        product.stock       = self.stock
+        return product
     }
     
 }

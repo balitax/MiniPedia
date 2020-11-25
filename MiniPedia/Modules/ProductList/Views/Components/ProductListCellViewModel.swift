@@ -11,7 +11,6 @@ import RxSwift
 struct ProductListCellViewModel {
     
     var product: DataProducts?
-    
     var productName: String?
     var productPrice: String?
     var productImage: String?
@@ -23,6 +22,14 @@ struct ProductListCellViewModel {
         self.productImage = product.imageURI ?? ""
         self.productStarCount = product.getCountStar
         self.product = product
+    }
+    
+    init(storage: ProductStorage) {
+        self.productName = storage.name
+        self.productPrice = storage.price
+        self.productImage = storage.imageURI
+        self.productStarCount = "\(storage.rating)"
+        self.product = storage.toDataProduct()
     }
     
     init() {

@@ -12,7 +12,7 @@ import RxCocoa
 import SkeletonView
 
 protocol ChipsMenuDelegate: class {
-    func didSelectedMenu(id: Int?, name: String?, slug: String?)
+    func didSelectedMenu(name: String)
 }
 
 class ChipsMenuView: UIView {
@@ -73,7 +73,7 @@ class ChipsMenuView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.showAnimatedSkeleton()
+        collectionView.showAnimatedGradientSkeleton()
         collectionView.reloadData()
         
         if let layout = collectionViewFlowLayout {
@@ -83,21 +83,18 @@ class ChipsMenuView: UIView {
         }
         
         // ----
-//        collectionView.rx.itemSelected
-//            .subscribe(onNext: { [unowned self] indexPath in
-//
-//                let data = self.items[indexPath.row]
-//                self.delegate?.didSelectedMenu(
-//                    id: data.arcatID,
-//                    name: data.arcatName,
-//                    slug: data.arcatSlug)
-//
-//                let cell = self.collectionView.cellForItem(at:
-//                    indexPath) as? ChipsMenuItemCell
-//                cell?.setSelected()
-//                self.collectionView.scrollToItem(at: indexPath,
-//                                                 at: .centeredHorizontally, animated: true)
-//            }).disposed(by: disposeBag)
+        collectionView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] indexPath in
+
+                let data = self.items[indexPath.row]
+                self.delegate?.didSelectedMenu(name: data)
+
+                let cell = self.collectionView.cellForItem(at:
+                    indexPath) as? ChipsMenuItemCell
+                cell?.setSelected()
+                self.collectionView.scrollToItem(at: indexPath,
+                                                 at: .centeredHorizontally, animated: true)
+            }).disposed(by: disposeBag)
         
         // ----
         collectionView.rx.itemDeselected

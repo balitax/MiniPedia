@@ -68,7 +68,7 @@ class ProductListCoordinator: ReactiveCoordinator<Void> {
     }
     
     private func coordinateToCart() -> Observable<Void> {
-        self.rootViewController.navigationController?.popViewController(animated: true)
+        self.rootViewController.navigationController?.popToRootViewController(animated: true)
         Delay.wait(delay: 1) {
             self.rootViewController.tabBarController?.selectedIndex = 1
         }

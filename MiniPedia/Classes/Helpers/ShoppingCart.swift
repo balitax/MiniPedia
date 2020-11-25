@@ -27,11 +27,11 @@ class ShoppingCart {
     static let shared = ShoppingCart()
     
     var products: Results<CartStorage> {
-        return Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false)
+        return Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false).filter("ANY products.isWhishlist == false ")
     }
     
-    var whishlists: Results<WhishlistStorage> {
-        return Database.shared.get(type: WhishlistStorage.self).sorted(byKeyPath: "id", ascending: false)
+    var whishlists: Results<CartStorage> {
+        return Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false).filter("ANY products.isWhishlist == true ")
     }
     
 }

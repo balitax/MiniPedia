@@ -20,19 +20,15 @@ class CartViewModel: BaseViewModel {
     }
     
     var cart: Results<CartStorage> {
-        let cart = Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false)
+        let cart = Database.shared.get(type: CartStorage.self).sorted(byKeyPath: "id", ascending: false).filter("ANY products.isWhishlist == false ")
         return cart
-    }
-    
-    var whishlists: Results<WhishlistStorage> {
-        let whishlist = Database.shared.get(type: WhishlistStorage.self).sorted(byKeyPath: "id", ascending: false)
-        return whishlist
     }
     
     let cartSelectObservable = BehaviorSubject<Bool>(value: false)
     let cartCountSelectObservable = BehaviorSubject<String>(value: "")
     let deleteAllCartObservable = PublishSubject<Void>()
     let buyNowObservable = PublishSubject<Void>()
+    let viewDetailProduct = PublishSubject<ProductListCellViewModel>()
     
     private var selectAllCart = false
     
@@ -53,6 +49,12 @@ class CartViewModel: BaseViewModel {
                 .disposed(by: self.disposeBag)
         }
         
+    }
+    
+    func getDetailProduct(section: Int, rows: Int) {
+        let product = self.cart[section].products[rows]
+        let viewModel = ProductListCellViewModel(storage: product)
+        self.viewDetailProduct.onNext(viewModel)
     }
     
     private func checkCartSelectable() {
@@ -87,6 +89,10 @@ class CartViewModel: BaseViewModel {
             Observable.from([self.cart[section].products[rows]])
                 .subscribe(Realm.rx.delete())
                 .disposed(by: self.disposeBag)
+            
+            Observable.from([self.cart[section].products[rows]])
+                .subscribe(Realm.rx.delete())
+                .disposed(by: self.disposeBag)
         }
         else {
             Observable.from([self.cart[section]])
@@ -100,6 +106,13 @@ class CartViewModel: BaseViewModel {
     func updateProductQuantity(section: Int, rows: Int, qty: Int) {
         try! Database.shared.database.write {
             self.cart[section].products[rows].quantity = qty
+        }
+        self.checkCartSelectable()
+    }
+    
+    func addNoteProductToCartItem(section: Int, rows: Int, note: String) {
+        try! Database.shared.database.write {
+            self.cart[section].products[rows].notes = note
         }
         self.checkCartSelectable()
     }
@@ -154,30 +167,13 @@ class CartViewModel: BaseViewModel {
             .disposed(by: self.disposeBag)
     }
     
-    func deleteWhistlist() {
-//        Observable.from([self.whishlists])
-//            .subscribe(Realm.rx.delete())
-//            .disposed(by: self.disposeBag)
-        
-    }
-    
     // MARK: -- WHISHLIST
-    func didMoveProductCartToWhishlist(_ product: ProductStorage, section: Int, rows: Int) {
+    func didMoveProductCartToWhishlist(section: Int, rows: Int) {
         
-        let whistList = WhishlistStorage()
-        Database.shared.save(object: whistList.copyFromCart(product), update: false)
-        
-        let productCheck = self.cart[section].products.count
-        if productCheck > 1 {
-            Observable.from([self.cart[section].products[rows]])
-                .subscribe(Realm.rx.delete())
-                .disposed(by: self.disposeBag)
+        try! Database.shared.database.write {
+            self.cart[section].products[rows].isWhishlist = true
         }
-        else {
-            Observable.from([self.cart[section]])
-                .subscribe(Realm.rx.delete())
-                .disposed(by: self.disposeBag)
-        }
+        self.checkCartSelectable()
         
     }
     

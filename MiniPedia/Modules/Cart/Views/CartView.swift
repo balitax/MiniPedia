@@ -43,10 +43,6 @@ class CartView: UIViewController {
         super.viewDidLoad()
         setupTableView()
         bindRx()
-       
-        Delay.wait {
-            self.viewModel.deleteWhistlist()
-        }
     }
     
     private func bindRx() {
@@ -146,19 +142,24 @@ class CartView: UIViewController {
         self.tableView.contentInsetAdjustmentBehavior = .never
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         self.tableView.separatorStyle = .none
+        self.tableView.keyboardDismissMode = .onDrag
         
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
         self.tableView.tableHeaderView = UIView(frame: frame)
         self.tableView.tableFooterView = UIView(frame: frame)
         
-        self.view.showAnimatedSkeleton()
+        self.view.showAnimatedGradientSkeleton()
     }
     
     
 }
 
 extension CartView: CartItemByMerchantsDelegate {
+    
+    func didAddNoteItemCart(section: Int, rows: Int, note: String) {
+        viewModel.addNoteProductToCartItem(section: section, rows: rows, note: note)
+    }
     
     func didUpdateQuantity(section: Int, rows: Int, qty: Int) {
         viewModel.updateProductQuantity(section: section, rows: rows, qty: qty)
@@ -176,8 +177,12 @@ extension CartView: CartItemByMerchantsDelegate {
         viewModel.didSelectAllProductMerchant(section: section, selected: selected)
     }
     
-    func didMoveToWhishlist(_ product: ProductStorage, section: Int, rows: Int) {
-        viewModel.didMoveProductCartToWhishlist(product, section: section, rows: rows)
+    func didMoveToWhishlist(section: Int, rows: Int) {
+        viewModel.didMoveProductCartToWhishlist(section: section, rows: rows)
+    }
+    
+    func didSelectProductForDetail(section: Int, rows: Int) {
+        viewModel.getDetailProduct(section: section, rows: rows)
     }
     
 }

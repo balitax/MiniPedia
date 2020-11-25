@@ -95,7 +95,7 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
                 
                 self.productTitle.text = data.name
                 self.productPrice.text = data.price
-                if let imgProduct = data.imageURI700, let imgURL = URL(string: imgProduct) {
+                if let imgProduct = data.imageURI, let imgURL = URL(string: imgProduct) {
                     self.productImage.kf.setImage(with: imgURL)
                 }
                 
@@ -105,6 +105,9 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
                 self.soldCount.text = data.getCountSold
                 self.merchantName.text = data.shop?.name
                 
+                self.btnFavorite.setSelected(selected: self.viewModel.isAlreadyWhishlisted(data.id ?? 0), animated: false)
+                    
+                
             }).disposed(by: disposeBag)
         
         self.btnFavorite.rx
@@ -112,6 +115,7 @@ class ProductSummaryTableViewCell: UITableViewCell, Reusable {
             .subscribe(onNext: { [unowned self] _ in
                 self.delegate?.didAddWhishlist()
             }).disposed(by: disposeBag)
+        
         
         self.stackViewContainer.layoutIfNeeded()
     }
