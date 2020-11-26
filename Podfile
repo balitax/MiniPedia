@@ -8,7 +8,6 @@ target 'MiniPedia' do
   
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'RxDataSources'
   pod 'RxRealm'
   
   pod 'SVProgressHUD'
@@ -16,6 +15,7 @@ target 'MiniPedia' do
   pod 'SkeletonView'
   pod 'BottomPopup'
   pod 'FaveButton'
+  pod 'IQKeyboardManagerSwift'
   
   target 'MiniPediaTests' do
     inherit! :search_paths

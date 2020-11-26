@@ -39,7 +39,7 @@
                     <rect key="frame" x="0.0" y="44" width="491" height="121"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iR4-OS-toA">
-                            <rect key="frame" x="16" y="42.5" width="425" height="36"/>
+                            <rect key="frame" x="16" y="42.5" width="415" height="36"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdp-bo-TSc" userLabel="backBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="26" height="36"/>
@@ -52,40 +52,40 @@
                                         <imageReference key="image" image="arrow" symbolScale="large" renderingMode="template"/>
                                     </state>
                                 </button>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Produk yang sedang di lihat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tl4-Qo-fur">
+                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Produk yang sedang di lihat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tl4-Qo-fur">
                                     <rect key="frame" x="26" y="0.0" width="0.0" height="36"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Fashion Paling Laris" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="828-Mp-FFi">
-                                    <rect key="frame" x="26" y="0.0" width="399" height="36"/>
+                                <searchBar clipsSubviews="YES" contentMode="redraw" searchBarStyle="minimal" placeholder="Fashion Paling Laris" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="828-Mp-FFi">
+                                    <rect key="frame" x="26" y="0.0" width="389" height="36"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-PA-RI7">
-                            <rect key="frame" x="449" y="47.5" width="26" height="26"/>
+                            <rect key="frame" x="439" y="49.5" width="36" height="22"/>
                             <subviews>
-                                <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-3Q-5nb" userLabel="shareBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="26" height="26"/>
+                                <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-3Q-5nb" userLabel="shareBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="36" height="22"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="26" id="SkQ-RB-cdO"/>
-                                        <constraint firstAttribute="height" constant="26" id="qrv-9V-QpR"/>
+                                        <constraint firstAttribute="height" constant="22" id="bq7-Gx-gc9"/>
+                                        <constraint firstAttribute="width" constant="36" id="oic-8u-eKS"/>
                                     </constraints>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal">
                                         <imageReference key="image" image="square.and.arrow.up.fill" catalog="system" symbolScale="medium" renderingMode="template"/>
                                     </state>
                                 </button>
-                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNv-Da-uWN" userLabel="cartBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="26" height="26"/>
+                                <button opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNv-Da-uWN" userLabel="cartBtn" customClass="ACBadgeButton" customModule="MiniPedia" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="36" height="22"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="26" id="8rZ-19-69x"/>
-                                        <constraint firstAttribute="width" constant="26" id="feh-Yw-5G7"/>
+                                        <constraint firstAttribute="width" constant="36" id="0ZQ-8M-Ija"/>
+                                        <constraint firstAttribute="height" constant="22" id="FWZ-Ne-rtw"/>
                                     </constraints>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal">
                                         <imageReference key="image" image="cart.fill" catalog="system" symbolScale="medium" renderingMode="template"/>
                                     </state>

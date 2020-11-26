@@ -8,7 +8,6 @@
 
 import RxSwift
 import RxCocoa
-import RxDataSources
 import Kingfisher
 
 struct ProductFilterBinding {
