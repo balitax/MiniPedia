@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptyStateView" customModule="MiniPedia">
+            <connections>
+                <outlet property="btnState" destination="axs-yk-Gwk" id="5e6-75-x1G"/>
+                <outlet property="containerView" destination="Ban-Ke-CMS" id="Ukn-xD-o6b"/>
+                <outlet property="imgIconState" destination="9Wa-Re-eVt" id="pwg-IY-Hjy"/>
+                <outlet property="messageState" destination="w48-cR-TKo" id="WEd-h9-E3w"/>
+                <outlet property="titleState" destination="Gue-Cb-YPx" id="AYE-Gq-EW4"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Lo7-U7-YRT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ban-Ke-CMS">
+                    <rect key="frame" x="0.0" y="303.5" width="414" height="289"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="klP-Lw-rX2">
+                            <rect key="frame" x="16" y="0.0" width="382" height="213"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_state_icon" translatesAutoresizingMaskIntoConstraints="NO" id="9Wa-Re-eVt">
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="126"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wah, keranjang belanjamu kosong" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gue-Cb-YPx">
+                                    <rect key="frame" x="0.0" y="142" width="382" height="21.5"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daripada dianggurin, mending isi dengan barang-barang impianmu. Yuk, cek sekarang!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w48-cR-TKo">
+                                    <rect key="frame" x="0.0" y="179.5" width="382" height="33.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axs-yk-Gwk">
+                            <rect key="frame" x="48" y="241" width="318" height="48"/>
+                            <color key="backgroundColor" red="0.039215686274509803" green="0.6705882352941176" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="BO7-Kf-zRN"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <state key="normal" title="Mulai Belanja">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="klP-Lw-rX2" secondAttribute="trailing" constant="16" id="5ds-Yp-tgy"/>
+                        <constraint firstAttribute="trailing" secondItem="axs-yk-Gwk" secondAttribute="trailing" constant="48" id="J8G-ru-pNX"/>
+                        <constraint firstItem="klP-Lw-rX2" firstAttribute="top" secondItem="Ban-Ke-CMS" secondAttribute="top" id="PF9-Lk-pAr"/>
+                        <constraint firstItem="klP-Lw-rX2" firstAttribute="leading" secondItem="Ban-Ke-CMS" secondAttribute="leading" constant="16" id="c2v-Ic-6Yf"/>
+                        <constraint firstItem="axs-yk-Gwk" firstAttribute="top" secondItem="klP-Lw-rX2" secondAttribute="bottom" constant="28" id="eec-0O-E2D"/>
+                        <constraint firstAttribute="bottom" secondItem="axs-yk-Gwk" secondAttribute="bottom" id="gLp-eO-s9i"/>
+                        <constraint firstItem="axs-yk-Gwk" firstAttribute="leading" secondItem="Ban-Ke-CMS" secondAttribute="leading" constant="48" id="vKn-yy-nGH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Zdn-vx-vxQ"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Ban-Ke-CMS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2kH-36-a5b"/>
+                <constraint firstAttribute="leading" secondItem="Ban-Ke-CMS" secondAttribute="leading" id="6xJ-R4-c3X"/>
+                <constraint firstItem="Ban-Ke-CMS" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="B7L-gc-8Ey"/>
+                <constraint firstItem="Ban-Ke-CMS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zJe-Bg-0g3"/>
+            </constraints>
+            <point key="canvasLocation" x="42.028985507246382" y="95.758928571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="empty_state_icon" width="216" height="126"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

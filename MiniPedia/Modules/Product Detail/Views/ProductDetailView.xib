@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailView" customModule="MiniPedia" customModuleProvider="target">
+            <connections>
+                <outlet property="btnAddKeranjang" destination="QvP-k2-tnS" id="HOw-a9-Xtt"/>
+                <outlet property="btnOpenToko" destination="gc1-Kb-huK" id="tNy-PW-4Jr"/>
+                <outlet property="navigationBar" destination="GPa-kr-W3h" id="TIB-fo-dMT"/>
+                <outlet property="navigationBarHeight" destination="bQt-zj-rN6" id="2qx-3k-Lhp"/>
+                <outlet property="tableView" destination="uF8-iP-TkH" id="jEe-qb-Seq"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uF8-iP-TkH">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPa-kr-W3h" userLabel="navigationview" customClass="SecondaryNavigationBar" customModule="MiniPedia" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="bQt-zj-rN6"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPe-YC-BXi">
+                    <rect key="frame" x="0.0" y="798" width="414" height="64"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wt-Xy-lUO">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                            <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="gx0-FC-2Tu"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="azW-ty-5mj">
+                            <rect key="frame" x="16" y="16" width="382" height="48"/>
+                            <subviews>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gc1-Kb-huK">
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="48"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="d2S-9H-LhC"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                    <state key="normal" title="Buka Tokopedia">
+                                        <color key="titleColor" red="0.01176470588" green="0.67450980390000004" blue="0.054901960780000002" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.01176470588" green="0.67450980390000004" blue="0.054901960780000002" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvP-k2-tnS">
+                                    <rect key="frame" x="195" y="0.0" width="187" height="48"/>
+                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="9oT-ie-LGk"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                    <state key="normal" title="+ Keranjang">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="azW-ty-5mj" firstAttribute="top" secondItem="GPe-YC-BXi" secondAttribute="top" constant="16" id="G1P-w6-UkO"/>
+                        <constraint firstAttribute="trailing" secondItem="azW-ty-5mj" secondAttribute="trailing" constant="16" id="YCf-JL-FdW"/>
+                        <constraint firstItem="2wt-Xy-lUO" firstAttribute="leading" secondItem="GPe-YC-BXi" secondAttribute="leading" id="kI0-so-ZUr"/>
+                        <constraint firstAttribute="trailing" secondItem="2wt-Xy-lUO" secondAttribute="trailing" id="kVE-Qk-bPz"/>
+                        <constraint firstItem="azW-ty-5mj" firstAttribute="leading" secondItem="GPe-YC-BXi" secondAttribute="leading" constant="16" id="u7G-X7-NhW"/>
+                        <constraint firstItem="2wt-Xy-lUO" firstAttribute="top" secondItem="GPe-YC-BXi" secondAttribute="top" id="yDa-cE-kng"/>
+                        <constraint firstAttribute="bottom" secondItem="azW-ty-5mj" secondAttribute="bottom" id="yPg-xU-Trr"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="GPa-kr-W3h" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9CW-Mm-jl4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GPe-YC-BXi" secondAttribute="trailing" id="IVO-2R-EFx"/>
+                <constraint firstItem="GPe-YC-BXi" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="JiU-d2-orn"/>
+                <constraint firstItem="GPe-YC-BXi" firstAttribute="top" secondItem="uF8-iP-TkH" secondAttribute="bottom" id="JjZ-Hz-XeE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uF8-iP-TkH" secondAttribute="trailing" id="KHk-1T-bIO"/>
+                <constraint firstItem="GPe-YC-BXi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="OER-KP-DYZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GPa-kr-W3h" secondAttribute="trailing" id="ORT-TB-T6a"/>
+                <constraint firstItem="uF8-iP-TkH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XK2-98-7Zp"/>
+                <constraint firstItem="GPa-kr-W3h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="d6s-Jl-nq1"/>
+                <constraint firstItem="uF8-iP-TkH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eRv-88-3BR"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="82.608695652173921" y="95.758928571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
