@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MerchantTypeView" customModule="MiniPedia" customModuleProvider="target">
+            <connections>
+                <outlet property="btnApplyFilter" destination="phB-Tc-8AA" id="yQX-d8-BlD"/>
+                <outlet property="tableView" destination="PKM-aR-t45" id="hIw-p3-4dy"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="PKM-aR-t45">
+                    <rect key="frame" x="0.0" y="88" width="414" height="702"/>
+                    <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                    <color key="separatorColor" systemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phB-Tc-8AA">
+                    <rect key="frame" x="16" y="798" width="382" height="48"/>
+                    <color key="backgroundColor" red="0.0" green="0.54901960780000003" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="0E5-ts-7Hr"/>
+                    </constraints>
+                    <state key="normal" title="APPLY">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="phB-Tc-8AA" secondAttribute="trailing" constant="16" id="0CN-ug-TVR"/>
+                <constraint firstAttribute="trailing" secondItem="PKM-aR-t45" secondAttribute="trailing" id="8Cr-SX-qLi"/>
+                <constraint firstItem="phB-Tc-8AA" firstAttribute="top" secondItem="PKM-aR-t45" secondAttribute="bottom" constant="8" id="nnQ-bf-L6H"/>
+                <constraint firstItem="phB-Tc-8AA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="rrd-hf-Iqy"/>
+                <constraint firstItem="PKM-aR-t45" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ss6-TT-9wa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="phB-Tc-8AA" secondAttribute="bottom" constant="16" id="uHE-AF-3C7"/>
+                <constraint firstItem="PKM-aR-t45" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wyp-GH-Yhi"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="28.985507246376812" y="103.79464285714285"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

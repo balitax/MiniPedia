@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Bauletto",
+        "repositoryURL": "https://github.com/gianpispi/Bauletto",
+        "state": {
+          "branch": null,
+          "revision": "c9455af1037cc1cfd8c506761e6d33665412e4b1",
+          "version": "1.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
